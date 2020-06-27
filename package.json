@@ -1,7 +1,6 @@
 {
-  "name": "Merntutorial",
+  "name": "fla-covid-tracking",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +12,7 @@
     "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client\""
   },
   "keywords": [],
-  "author": "",
+  "author": "Tu Le",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
@@ -22,6 +21,25 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.20",
     "morgan": "^1.10.0",
+<<<<<<< HEAD
     "nodemon": "^2.0.4"
   }
+=======
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "^3.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/POOS-Group-10/fla-covid-tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/POOS-Group-10/fla-covid-tracker/issues"
+  },
+  "homepage": "https://github.com/POOS-Group-10/fla-covid-tracker#readme",
+  "description": ""
+>>>>>>> master
 }
