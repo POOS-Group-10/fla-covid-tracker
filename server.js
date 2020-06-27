@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 
 const routes = require('./routes/api');
 
-const MONGODB_URI = 'mongodb+srv://John:testgroup10@cluster0.ekvs5.mongodb.net/db1?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
 
 mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/merntutorial', {
   useNewUrlParser: true,
