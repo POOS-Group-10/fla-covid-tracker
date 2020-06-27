@@ -1,3 +1,4 @@
+// Hey John
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -10,7 +11,7 @@ const routes = require('./routes/api');
 
 const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
 
-mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/merntutorial', {
+mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
