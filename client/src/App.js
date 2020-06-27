@@ -22,8 +22,8 @@ class App extends React.Component {
         this.setState({ posts: data});
         console.log('Data has been received');
       })
-      .catch(() => {
-        alert('Error retrieving data'); // Don't alert in real world apps, fool.
+      .catch((e) => {
+        alert('Error retrieving data ' + e); // Don't alert in real world apps, fool.
       });
   };
 
