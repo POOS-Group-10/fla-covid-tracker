@@ -6,8 +6,9 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    title: '',
-    body: '',
+    name: '',
+    email: '',
+    password: '',
     posts: []
   };
 
@@ -37,8 +38,9 @@ class App extends React.Component {
     event.preventDefault(); // Stops the browser from refreshing
 
     const payload = {
-      title: this.state.title,
-      body: this.state.body
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
     };
 
     axios({
@@ -59,8 +61,10 @@ class App extends React.Component {
 
   resetUserInputs = () => {
     this.setState({
-      title: '',
-      body: ''
+      name: '',
+      email: '',
+      password: '',
+      posts: []
     });
   };
 
@@ -69,8 +73,9 @@ class App extends React.Component {
 
     return posts.map((post, index) => (
       <div key={index} className="blog-post__display">
-        <h3>{post.title}</h3>
-        <p>{post.body}</p>
+        <h3>{post.name}</h3>
+        <h3>{post.email}</h3>
+        <h3>{post.password}</h3>
       </div>
     ));
   };
@@ -87,24 +92,32 @@ class App extends React.Component {
           <div className = "form-input">
             <input
               type="text"
-              name="title"
-              placeholder="Title"
-              value={this.state.title}
+              name="name"
+              placeholder="Full Name"
+              value={this.state.name}
               onChange={this.handleChange}
             />
           </div>
           <div className = "form-input">
             <textarea
-              placeholder="body"
-              name="body"
-              cols="30"
-              rows="10"
+              type="text"
+              placeholder="Email"
+              name="email"
               value={this.state.body}
               onChange={this.handleChange}
             >
             </textarea>
           </div>
-
+          <div className = "form-input">
+            <textarea
+              type="text"
+              placeholder="Password"
+              name="password"
+              value={this.state.body}
+              onChange={this.handleChange}
+            >
+            </textarea>
+          </div>
           <button>Submit</button>
         </form>
 
