@@ -3,42 +3,43 @@ import '../App.css';
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function Login() 
+function SignUp() 
 {   
     // Not optimized. It's possible to create a single state object
     // but the entire object is replaced upon every change instead
     // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
 
     const doLogin = async event => 
     {    
         event.preventDefault(); // Stops the browser from refreshing
         
-        
         const payload = {
             userName: userName,
             password: password,
+            firstName: firstName,
+            lastName: lastName,
+            email: email
         };
-        console.log('payload is ' + payload.userName + ' ' + payload.password);
+
+        console.log('payload is ' + payload);
         axios({
-            url: '../api/Login', // React app is communicating with the server by this route
+            url: '../api/SignUp', // React app is communicating with the server by this route
             method: 'POST', // GET is used by default
             data: payload
         })
-            // These are promises
+        // These are promises
             .then((response) => {
-              console.log('Data has been received ' + response.data);
-              if (response)
-                window.location.href='/Home';
-              else {
-
-              }
+              console.log('Data has been received');
+              
             })
             .catch(() => {
               console.log('Internal server error');
             });
-           
     };
 
         return(
@@ -60,13 +61,37 @@ function Login()
                     onChange={e => setPassword(e.target.value)}
                     />
                 </div>
+                <div className = "form-input">
+                    <input
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    onChange={e => setFirstName(e.target.value)}
+                    />
+                </div>
+                <div className = "form-input">
+                    <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    onChange={e => setLastName(e.target.value)}
+                    />
+                </div>
+                <div className = "form-input">
+                    <input
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
                 <button>Submit</button>
             </form>
 
-            <a href="/SignUp">Don't have an account? Sign up.</a>
+            <a href="/">Already have an account? Log in.</a>
             </div>
         );
 
 }
 
-export default Login;
+export default SignUp;
