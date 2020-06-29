@@ -1,8 +1,34 @@
 import React from 'react';
-import axios from 'axios';
+
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+
+import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
+import HomePage from './pages/HomePage';
 
 import './App.css';
 
+function App() {
+  return (
+    <Router >
+      <Switch>
+        <Route path="/" exact>
+          <LoginPage />
+        </Route>
+        <Route path="/Registration" exact>
+          <RegistrationPage />
+        </Route>
+        <Route path='/Home' exact>
+          <HomePage />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </Router>
+  );
+}
+
+export default App;
+/*
 class App extends React.Component {
 
   state = {
@@ -130,3 +156,4 @@ class App extends React.Component {
 }
 
 export default App;
+*/
