@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage';
+import RegistrationPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 
 import './App.css';
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" exact>
           <LoginPage />
         </Route>
-        <Route path="/Registration" exact>
+        <Route path="/SignUp" exact>
           <RegistrationPage />
         </Route>
         <Route path='/Home' exact>
@@ -28,6 +28,7 @@ function App() {
 }
 
 export default App;
+
 /*
 class App extends React.Component {
 

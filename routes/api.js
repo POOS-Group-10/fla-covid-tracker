@@ -4,12 +4,18 @@ const router = express.Router();
 
 const Users = require('../models/user');
 
-// Routes
-router.get('/:id', (req, res) => {
+// Login
+router.post('/Login', (req, res) => {
 
-  Users.find({email: "clown"})
+  console.log('we are actually here ' + req.body.userName);
+
+  Users.find({ userName: req.body.userName, password: req.body.password})
     .then((data) => {
       console.log('Data ', data);
+      if (data.length < 1)
+        return res.status(401).json({
+          message: "Auth failed."
+        })
       res.json(data);
     })
     .catch((error) => {
@@ -17,9 +23,11 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-  console.log("attempted to send data! " + req.body.userName + ' ' + req.body.password
-   + ' ' + req.body.firstName + ' ' + req.body.lastName + ' ' + req.body.email);
+// SignUp API
+router.post('/SignUp', (req, res) => {
+  
+  // console.log("attempted to send data! " + req.body.userName + ' ' + req.body.password
+  // + ' ' + req.body.firstName + ' ' + req.body.lastName + ' ' + req.body.email);
 
   const data = req.body;
   const user = new Users(data);

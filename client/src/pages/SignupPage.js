@@ -7,7 +7,7 @@ const RegistrationPage = () =>
     return(
         <div>
             <PageTitle />
-                <Login />
+                <SignUp />
         </div>
     );
 }
