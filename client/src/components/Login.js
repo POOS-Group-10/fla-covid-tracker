@@ -5,6 +5,10 @@ import axios from 'axios';
 
 function Login() 
 {   
+    // Not optimized. It's possible to create a single state variable
+    // as an object that holds related code, but instead of merging to the object
+    // when it updates, it will replace the object entirely, and I don't know which
+    // one is more optimal yet.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
