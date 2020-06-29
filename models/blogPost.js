@@ -3,14 +3,8 @@ const mongoose = require('mongoose');
 // Schema
 const Schema = mongoose.Schema;
 const BlogPostSchema = new Schema({
-  title: {
-    String,
-    require: true 
-  },
-  body: {
-    String,
-    require: true
-  },
+  title: String,
+  body: String,
   date: {
     type: String,
     default: Date.now()
@@ -18,6 +12,6 @@ const BlogPostSchema = new Schema({
 });
 
 // Model
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
+const BlogPost = mongoose.model('Users', BlogPostSchema);
 
 module.exports = BlogPost;

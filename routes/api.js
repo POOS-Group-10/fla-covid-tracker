@@ -17,6 +17,8 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// Saves a New User
 router.post('/save', (req, res) => {
   const data = req.body;
 
@@ -32,14 +34,6 @@ router.post('/save', (req, res) => {
         msg: 'Your data has been saved!'
       });
     });
-});
-
-router.get('/name', (req, res) => {
-  const data = {
-    username: 'peterson',
-    age: 5
-  };
-  res.json(data);
 });
 
 module.exports = router;
