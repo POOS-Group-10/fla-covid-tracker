@@ -2,7 +2,7 @@ import React from 'react';
 import SignUp from '../components/SignUp';
 import PageTitle from '../components/PageTitle';
 
-const RegistrationPage = () =>
+const SignupPage = () =>
 {
     return(
         <div>
@@ -12,4 +12,4 @@ const RegistrationPage = () =>
     );
 }
 
-export default RegistrationPage;
+export default SignupPage;
