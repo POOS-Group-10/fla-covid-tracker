@@ -1,8 +1,9 @@
 import React from 'react';
-import SignUp from '../components/SignUp';
+// import RegistrationPage from '../components/SignUp';
 import PageTitle from '../components/PageTitle';
+import SignUp from '../components/SignUp';
 
-const SignupPage = () =>
+const SignUpPage = () =>
 {
     return(
         <div>
@@ -12,4 +13,4 @@ const SignupPage = () =>
     );
 }
 
-export default SignupPage;
+export default SignUpPage;
