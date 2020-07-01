@@ -2,11 +2,17 @@ import React from 'react';
 
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
+// Pages
 import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/SignupPage';
+import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
+// Components
 import './App.css';
+import SignUp from './components/SignUp';
+import PageTitle from './components/PageTitle';
+import Login from './components/Login';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -16,7 +22,7 @@ function App() {
           <LoginPage />
         </Route>
         <Route path="/SignUp" exact>
-          <RegistrationPage />
+          <SignUpPage />
         </Route>
         <Route path='/Home' exact>
           <HomePage />
