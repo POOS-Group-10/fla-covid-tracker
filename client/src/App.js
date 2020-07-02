@@ -18,7 +18,7 @@ function App() {
         <Route path="/SignUp" exact>
           <SignUpPage />
         </Route>
-        <Route path='/Home' exact>
+        <Route path="/Home" exact>
           <HomePage />
         </Route>
         <Redirect to="/" />
