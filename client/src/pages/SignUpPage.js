@@ -1,17 +1,15 @@
 import React from 'react';
-// import RegistrationPage from '../components/SignUp';
-import PageTitle from '../components/PageTitle';
 import SignUp from '../components/SignUp';
+import PageTitle from '../components/PageTitle';
 
 const SignUpPage = () =>
 {
     return(
         <div>
-            <PageTitle />
+            {/* <PageTitle /> */}
                 <SignUp />
         </div>
     );
 }
 
 export default SignUpPage;
-//

@@ -40,13 +40,18 @@ router.post('/SignUp', (req, res) => {
       res.status(500).json({ msg: 'Sorry, internal server errors'});
       return;
     }
+    else {
+      alert("Has been Saved! " + user)
+    }
     return res.json({
-      msg: 'Your data has been saved!'
+      msg: 'Your data has been saved!' + user
     });
   });
 });
 
+// Testing 
 router.post('/test', (req, res) => {
+
   const data = req.body;
 
   const user = new Users(data);
