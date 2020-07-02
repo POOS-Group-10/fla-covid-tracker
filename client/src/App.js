@@ -7,12 +7,6 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
-// Components
-import './App.css';
-import SignUp from './components/SignUp';
-import PageTitle from './components/PageTitle';
-import Login from './components/Login';
-import Home from './components/Home';
 
 function App() {
   return (
