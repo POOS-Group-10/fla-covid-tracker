@@ -1,7 +1,6 @@
 import React from 'react';
-// import RegistrationPage from '../components/SignUp';
-import PageTitle from '../components/PageTitle';
 import SignUp from '../components/SignUp';
+import PageTitle from '../components/PageTitle';
 
 const SignUpPage = () =>
 {
@@ -14,4 +13,3 @@ const SignUpPage = () =>
 }
 
 export default SignUpPage;
-//

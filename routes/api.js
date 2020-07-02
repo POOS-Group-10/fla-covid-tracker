@@ -31,6 +31,7 @@ router.post('/SignUp', (req, res) => {
 
   const data = req.body;
   const user = new Users(data);
+  res.send("Entered Sign Up");
 
   console.log("data converted properly: " + user);
 
@@ -47,6 +48,7 @@ router.post('/SignUp', (req, res) => {
 });
 
 router.post('/test', (req, res) => {
+
   const data = req.body;
 
   const user = new Users(data);
