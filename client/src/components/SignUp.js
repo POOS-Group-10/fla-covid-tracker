@@ -1,8 +1,9 @@
 import '../App.css';
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function SignUp() 
+const SignUp = () => 
 {   
     // Not optimized. It's possible to create a single state object
     // but the entire object is replaced upon every change instead
@@ -87,7 +88,7 @@ function SignUp()
                 <button>Submit</button>
             </form>
 
-            <a href="/">Already have an account? Log in.</a>
+            <Link to="/">Already have an account? Log in.</Link>
             </div>
         );
 
