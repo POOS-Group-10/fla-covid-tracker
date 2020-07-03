@@ -1,6 +1,6 @@
 import '../App.css';
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() 
@@ -30,7 +30,7 @@ function Login()
             .then((response) => {
               console.log('Data has been received ' + response.data);
               if (response)
-                window.location.href='/Home';
+                return <Redirect to='/Home'>;
               else {
                 console.log('Username/password combination not found');
               }
