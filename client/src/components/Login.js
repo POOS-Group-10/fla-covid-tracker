@@ -30,7 +30,7 @@ function Login()
             .then((response) => {
               console.log('Data has been received ' + response.data);
               if (response)
-                return <Redirect to='/Home'>;
+                return <Redirect to='/Home' />;
               else {
                 console.log('Username/password combination not found');
               }
