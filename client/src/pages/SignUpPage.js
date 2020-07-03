@@ -6,7 +6,7 @@ const SignUpPage = () =>
 {
     return(
         <div>
-            {/* <PageTitle /> */}
+            <PageTitle /> 
                 <SignUp />
         </div>
     );
