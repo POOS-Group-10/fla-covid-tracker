@@ -14,7 +14,7 @@ function Login()
     const [redirect, setRedirect] = useState('');
 
     useEffect(() => {
-        if (this.state.redirect == 'true')
+        if (redirect == 'true')
             document.href = '/Home';
     });
     
