@@ -15,6 +15,7 @@ function Login()
     {    
         event.preventDefault(); // Stops the browser from refreshing
         
+        var loginSuccessful = false;
         
         const payload = {
             userName: userName,
@@ -29,11 +30,14 @@ function Login()
             // These are promises
             .then((response) => {
               console.log('Data has been received ' + response.data);
-              return <Redirect to='/Home' />;
+              loginSuccessful = true;
             })
             .catch(() => {
               console.log('Internal server error');
             });
+        
+        if (loginSuccessful)
+            return <Redirect to='/Home' />;
            
     };
 
