@@ -1,10 +1,9 @@
 import "../App.css";
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const history = useHistory();
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        history.push("/Home");
+        window.location.href='/Home';
       })
       .catch((e) => {
         console.log("Internal server error " + e);
