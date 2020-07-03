@@ -1,6 +1,6 @@
 import '../App.css';
-import React, {useState, useEffect} from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() 
@@ -10,13 +10,8 @@ function Login()
     // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    
-    const [redirect, setRedirect] = useState('');
 
-    useEffect(() => {
-        if (redirect == 'true')
-            document.href = '/Home';
-    });
+    const history = useHistory();
     
     const doLogin = async event => 
     {    
@@ -35,7 +30,7 @@ function Login()
             // These are promises
             .then((response) => {
               console.log('Data has been received ' + response.data);
-              setRedirect('true');
+              history.push('/Home');
               
             })
             .catch(() => {
