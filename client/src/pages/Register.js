@@ -8,7 +8,7 @@ const SignUpPage = () =>
     return(
         <div>
             {/* <Header /> */}
-            <SignUpUi />
+            <SignUp />
         </div>
     );
 }
