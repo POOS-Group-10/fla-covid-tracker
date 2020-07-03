@@ -4,6 +4,8 @@ import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const history = useHistory();
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,10 +24,10 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        window.location.href = "/Home";
+        history.push("/Home");
       })
-      .catch(() => {
-        console.log("Internal server error");
+      .catch((e) => {
+        console.log("Internal server error " + e);
       });
   };
 
