@@ -1,5 +1,5 @@
 import '../App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,7 +10,14 @@ function Login()
     // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+    
+    const [redirect, setRedirect] = useState('');
 
+    useEffect(() => {
+        if (this.state.redirect == 'true')
+            document.href = '/Home';
+    });
+    
     const doLogin = async event => 
     {    
         event.preventDefault(); // Stops the browser from refreshing
@@ -28,6 +35,7 @@ function Login()
             // These are promises
             .then((response) => {
               console.log('Data has been received ' + response.data);
+              setRedirect('true');
               
             })
             .catch(() => {
