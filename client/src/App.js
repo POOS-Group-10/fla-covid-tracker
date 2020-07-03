@@ -1,16 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 
 // Pages
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
+import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <Router >
+    <Router>
       <Switch>
         <Route path="/" exact>
           <LoginPage />
@@ -25,7 +31,7 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;
 

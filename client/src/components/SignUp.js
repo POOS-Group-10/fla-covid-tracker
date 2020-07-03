@@ -1,12 +1,10 @@
 import '../App.css';
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function SignUp() 
+const SignUp = () => 
 {   
-    // Not optimized. It's possible to create a single state object
-    // but the entire object is replaced upon every change instead
-    // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -87,7 +85,7 @@ function SignUp()
                 <button>Submit</button>
             </form>
 
-            <a href="/">Already have an account? Log in.</a>
+            <Link to="/">Already have an account? Log in.</Link>
             </div>
         );
 
