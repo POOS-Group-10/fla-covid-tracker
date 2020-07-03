@@ -31,7 +31,7 @@ function Login()
               if (response)
                 window.location.href='/Home';
               else {
-
+                console.log('Username/password combination not found');
               }
             })
             .catch(() => {
