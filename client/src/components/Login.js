@@ -3,15 +3,12 @@ import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
-function Login() 
+const Login = () =>
 {   
-    // Not optimized. It's possible to create a single state object
-    // but the entire object is replaced upon every change instead
-    // of being merged into. Not sure which is better.
+    const history = useHistory();
+
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-
-    const history = useHistory();
     
     const doLogin = async event => 
     {    

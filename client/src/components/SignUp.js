@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-function SignUp() 
+const SignUp = () => 
 {   
     // Not optimized. It's possible to create a single state object
     // but the entire object is replaced upon every change instead
