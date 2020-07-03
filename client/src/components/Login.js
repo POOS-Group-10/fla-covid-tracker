@@ -63,7 +63,7 @@ function Login()
                 <button>Submit</button>
             </form>
 
-            <a href="/SignUp">Don't have an account? Sign up.</a>
+            {/* <a href="/SignUp">Don't have an account? Sign up.</a> */}
             </div>
         );
 

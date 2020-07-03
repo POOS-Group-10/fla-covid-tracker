@@ -87,7 +87,7 @@ function SignUp()
                 <button>Submit</button>
             </form>
 
-            <a href="/">Already have an account? Log in.</a>
+            {/* <a href="/">Already have an account? Log in.</a> */}
             </div>
         );
 
