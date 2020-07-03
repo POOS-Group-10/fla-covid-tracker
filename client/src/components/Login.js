@@ -24,8 +24,8 @@ const Login = () => {
       .then((response) => {
         window.location.href = "/Home";
       })
-      .catch(() => {
-        console.log("Internal server error");
+      .catch((e) => {
+        console.log("Internal server error " + e);
       });
   };
 
