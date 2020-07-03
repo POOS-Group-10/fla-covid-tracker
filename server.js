@@ -23,6 +23,14 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
 
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 // HTTP request logger
 app.use(morgan('tiny'));
 app.use('/api', routes);
