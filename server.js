@@ -6,6 +6,14 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
 const routes = require('./routes/api');
 
 const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
@@ -23,13 +31,6 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
 
 // HTTP request logger
 app.use(morgan('tiny'));
