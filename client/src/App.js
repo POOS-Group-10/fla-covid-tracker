@@ -8,11 +8,15 @@ import {
 } from "react-router-dom";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d7ceeb02e859d66cef6f23241c5ad19c43698264
 // Pages
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 
+<<<<<<< HEAD
 =======
 import LoginPage from "./pages/LoginPage";
 import RegistrationPage from "./pages/SignUpPage";
@@ -20,6 +24,9 @@ import HomePage from "./pages/HomePage";
 
 import "./App.css";
 >>>>>>> john_init
+=======
+import './App.css';
+>>>>>>> d7ceeb02e859d66cef6f23241c5ad19c43698264
 
 const App = () => {
   return (

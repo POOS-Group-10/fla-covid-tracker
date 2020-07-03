@@ -5,9 +5,6 @@ import axios from 'axios';
 
 const SignUp = () => 
 {   
-    // Not optimized. It's possible to create a single state object
-    // but the entire object is replaced upon every change instead
-    // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
