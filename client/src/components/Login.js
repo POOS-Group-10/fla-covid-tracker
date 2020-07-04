@@ -25,7 +25,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        console.log('we made it here');
+        console.log(response);
         setLoggedIn(true);
       })
       .catch((e) => {
@@ -59,8 +59,8 @@ const Login = () => {
         <button>Submit</button>
       </form>
 
-      <Link to="/SignUp">Don't have an account? Sign up.</Link>
-      <Link to="/Home">Don't have an account? Sign up.</Link>
+      <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
+      <Link to="/Home">Go to the dashboard</Link>
     </div>
   );
 };

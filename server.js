@@ -6,7 +6,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 
-const routes = require('./routes/api');
+require('dotenv').config();
+
+const Users = require('./models/user');
+// const routes = require('./routes/api');
 
 const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
 
@@ -25,11 +28,101 @@ app.use(express.urlencoded({ extended: false })); // extended: false means we do
 
 // HTTP request logger
 app.use(morgan('tiny'));
-app.use('/api', routes);
+
+// app.use('/api', routes);
 
 // Testing if the application is on heroku
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
+
+// Create email functionality
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+});
+
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
+
+// Login
+app.post('/api/login', (req, res) => {
+
+  console.log('we are actually here ' + req.body.userName);
+
+  Users.find({ userName: req.body.userName, password: req.body.password})
+    .then((data) => {
+      console.log('Data ', data);
+      if (data.length < 1)
+        return res.status(401).json({
+          message: "Auth failed."
+        })
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log('Error: ', daerrorta);
+    });
+});
+
+app.post('/api/signUp', (req, res) => {
+
+  const data = req.body;
+  const user = new Users(data);
+
+  console.log("data converted properly: " + user);
+
+  try
+  {
+    const output = `
+      <p>Hi ${req.body.firstName},</p></ br>
+      <p>Welcome to fla-covid-tracking.</p>
+      <h1>Please verify your email below:</h1>
+      <a href="https://florida-covid-tracking.herokuapp.com>Click here</a>
+      `;
+
+    const emailVerificationData = {
+      from: process.env.EMAIL,
+      to: 'johnstoner318@gmail.com',
+      subject: 'Please verify your email',
+      text: 'text',
+      html: output
+    };
+
+    transporter.sendMail(emailVerificationData, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log('Success!!');
+    });
+  }
+  catch(e)
+  {
+    console.log('failure: ' + e);
+  }
+
+  user.save((error) => {
+    if (error) {
+      // console.log(error);
+      res.status(500).json({ msg: 'Sorry, internal server errors'});
+      return;
+    }
+    else {
+      console.log("Has been Saved! " + user)
+    }
+    return res.json({
+      msg: 'Your data has been saved!' + user
+    });
+  });
+});
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));

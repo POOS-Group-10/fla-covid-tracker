@@ -10,6 +10,7 @@ const SignUp = () =>
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
     const doLogin = async event => 
     {    
@@ -32,7 +33,7 @@ const SignUp = () =>
         // These are promises
             .then((response) => {
               console.log('Data has been received');
-              
+              setMessage('Sign up successful. Please check your email and verify your account.');
             })
             .catch(() => {
               console.log('Internal server error');
@@ -85,7 +86,8 @@ const SignUp = () =>
                 <button>Submit</button>
             </form>
 
-            <Link to="/">Already have an account? Log in.</Link>
+            <Link to="/">Already have an account? Log in.</Link><br />
+            <p>{message}</p>
             </div>
         );
 
