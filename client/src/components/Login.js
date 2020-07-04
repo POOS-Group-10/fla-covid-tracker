@@ -2,6 +2,7 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import  { Redirect } from 'react-router-dom'
 
 const Login = () => {
 
@@ -23,7 +24,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        window.location.href='/Home';
+        return <Redirect to='/Home'  />
       })
       .catch((e) => {
         console.log("Internal server error " + e);

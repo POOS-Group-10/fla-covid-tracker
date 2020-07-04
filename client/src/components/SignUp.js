@@ -22,8 +22,8 @@ const SignUp = () =>
             lastName: lastName,
             email: email
         };
-
-        console.log('payload is ' + payload);
+        var payloadJson = JSON.stringify(payload)
+        console.log('payload is ' + payloadJson);
         axios({
             url: '../api/SignUp', // React app is communicating with the server by this route
             method: 'POST', // GET is used by default
