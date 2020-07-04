@@ -2,12 +2,13 @@ import "../App.css";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import  { Redirect } from 'react-router-dom'
+import { Redirect } from "react-router-dom";
 
 const Login = () => {
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
 
   const doLogin = async (event) => {
     event.preventDefault(); // Stops the browser from refreshing
@@ -24,12 +25,17 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        this.props.history.push('/path');
+        console.log('we made it here');
+        setLoggedIn(true);
       })
       .catch((e) => {
         console.log("Internal server error " + e);
       });
   };
+
+  if (isLoggedIn) {
+    return <Redirect to='/Home' />;
+  }
 
   return (
     <div className="app">
