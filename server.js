@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const routes = require('./routes/api');
 
 const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
-
-mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
+// ||'mongodb://localhost/fla-covid-tracking'
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
