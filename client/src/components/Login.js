@@ -23,7 +23,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        <Link to="/Home"></Link>
+        return <Redirect to='/Home'  />
       })
       .catch((e) => {
         console.log("Internal server error " + e);
