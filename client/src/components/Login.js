@@ -24,7 +24,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        return <Redirect to='/Home'  />
+        this.props.history.push('/path');
       })
       .catch((e) => {
         console.log("Internal server error " + e);
