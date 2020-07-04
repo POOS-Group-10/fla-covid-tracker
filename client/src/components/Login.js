@@ -23,7 +23,7 @@ const Login = () => {
     })
       // These are promises
       .then((response) => {
-        window.location.href='/Home';
+        <Link to="/Home"></Link>
       })
       .catch((e) => {
         console.log("Internal server error " + e);
@@ -53,7 +53,6 @@ const Login = () => {
       </form>
 
       <Link to="/SignUp">Don't have an account? Sign up.</Link>
-      <Link to="/Home">Don't have an account? Sign up.</Link>
 
     </div>
   );
