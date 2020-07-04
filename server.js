@@ -92,7 +92,7 @@ app.post('/api/signUp', (req, res) => {
 
     const emailVerificationData = {
       from: process.env.EMAIL,
-      to: 'johnstoner318@gmail.com',
+      to: req.body.email,
       subject: 'Please verify your email',
       text: 'text',
       html: output
