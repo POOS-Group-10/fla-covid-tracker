@@ -34,6 +34,11 @@ app.use(morgan('tiny'));
 // Testing if the application is on heroku
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+  {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'))
+  });
 }
 
 // Create email functionality
@@ -86,7 +91,7 @@ app.post('/api/signUp', (req, res) => {
     const output = `
       <p>Hi ${req.body.firstName},</p></ br>
       <p>Welcome to fla-covid-tracking.</p>
-      <h1>Please verify your email below:</h1>
+      <h1>Please click the link below to verify your email address:</h1>
       <a href="https://florida-covid-tracking.herokuapp.com>Click here</a>
       `;
 
