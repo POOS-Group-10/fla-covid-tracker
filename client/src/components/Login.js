@@ -17,7 +17,7 @@ const Login = () => {
       userName: userName,
       password: password,
     };
-    console.log("payload is " + payload.userName + " " + payload.password);
+    
     axios({
       url: "../api/Login", // React app is communicating with the server by this route
       method: "POST", // GET is used by default
@@ -60,7 +60,9 @@ const Login = () => {
       </form>
 
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
-      <Link to="/Home">Go to the dashboard</Link>
+      <Link to="/Home">Go to the dashboard</Link><br />
+      <Link to="/PasswordRecovery">Forgot your password?</Link><br />
+      <Link to="/PasswordReset">Go to the Password Reset page</Link>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const SignUp = () =>
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    const doLogin = async event => 
+    const doSignUp = async event => 
     {    
         event.preventDefault(); // Stops the browser from refreshing
         
@@ -23,26 +23,41 @@ const SignUp = () =>
             lastName: lastName,
             email: email
         };
-        var payloadJson = JSON.stringify(payload)
-        console.log('payload is ' + payloadJson);
+        
         axios({
-            url: '../api/SignUp', // React app is communicating with the server by this route
-            method: 'POST', // GET is used by default
-            data: payload
+            url: '../api/findUser',
+            method: 'POST',
+            data: {userName: payload.userName}
         })
-        // These are promises
-            .then((response) => {
-              console.log('Data has been received');
-              setMessage('Sign up successful. Please check your email and verify your account.');
-            })
-            .catch(() => {
-              console.log('Internal server error');
-            });
+        .then((response) => {
+            console.log(response.data.taken);
+            if (response.data.taken === "1") {
+                setMessage(response.data.msg);
+                return;
+            }
+            else {
+                axios({
+                    url: '../api/SignUp', // React app is communicating with the server by this route
+                    method: 'POST', // GET is used by default
+                    data: payload
+                })
+                // These are promises
+                    .then(() => {
+                      setMessage(response.data.msg);
+                    })
+                    .catch(() => {
+                      console.log('Internal server error');
+                    });
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     };
 
         return(
             <div className="app">
-            <form onSubmit={doLogin}>
+            <form onSubmit={doSignUp}>
                 <div className = "form-input">
                     <input
                     type="text"
@@ -86,8 +101,8 @@ const SignUp = () =>
                 <button>Submit</button>
             </form>
 
-            <Link to="/">Already have an account? Log in.</Link><br />
-            <p>{message}</p>
+                <Link to="/">Already have an account? Log in.</Link><br />
+                <p>{message}</p>
             </div>
         );
 

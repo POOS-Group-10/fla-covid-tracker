@@ -43,6 +43,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // Create email functionality
 const nodemailer = require('nodemailer');
+const User = require('./models/user');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -60,10 +61,7 @@ transporter.verify(function(error, success) {
   }
 });
 
-// Login
-app.post('/api/login', (req, res) => {
-
-  console.log('we are actually here ' + req.body.userName);
+app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName, password: req.body.password})
     .then((data) => {
@@ -75,16 +73,33 @@ app.post('/api/login', (req, res) => {
       res.json(data);
     })
     .catch((error) => {
-      console.log('Error: ', daerrorta);
+      console.log('Error: ', error);
     });
 });
 
-app.post('/api/signUp', (req, res) => {
+app.post('/api/findUser', (req, res) => {
+  
+  Users.find({userName: req.body.userName})
+    .then((data) => {
+      if (data.length > 0)
+        return res.json({
+          msg: "That username is taken",
+          taken: "1"
+        })
+      else 
+          return res.json({
+            taken: "0"
+          });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
+app.post('/api/SignUp', (req, res) => {
 
   const data = req.body;
   const user = new Users(data);
-
-  console.log("data converted properly: " + user);
 
   try
   {
@@ -92,7 +107,7 @@ app.post('/api/signUp', (req, res) => {
       <p>Hi ${req.body.firstName},</p></ br>
       <p>Welcome to fla-covid-tracking.</p>
       <h1>Please click the link below to verify your email address:</h1>
-      <a href="https://florida-covid-tracking.herokuapp.com>Click here</a>
+      <p>https://florida-covid-tracking.herokuapp.com/Home</p>
       `;
 
     const emailVerificationData = {
@@ -105,9 +120,13 @@ app.post('/api/signUp', (req, res) => {
 
     transporter.sendMail(emailVerificationData, (error, info) => {
       if (error) {
-        return console.log(error);
+        return res.json({
+          msg: "Something broke. Did you enter your email correctly?"
+        });
       }
-      console.log('Success!!');
+      return res.json({
+        msg: "Check your email to verify your account and log in."
+      });
     });
   }
   catch(e)
@@ -115,6 +134,8 @@ app.post('/api/signUp', (req, res) => {
     console.log('failure: ' + e);
   }
 
+  // Saves the user into the database. Will hook this up to 
+  // the link in the email later.
   user.save((error) => {
     if (error) {
       // console.log(error);
@@ -124,10 +145,52 @@ app.post('/api/signUp', (req, res) => {
     else {
       console.log("Has been Saved! " + user)
     }
+    
     return res.json({
-      msg: 'Your data has been saved!' + user
+      msg: 'Your data has been saved!'
     });
   });
+});
+
+app.post('/api/PasswordRecovery', (req, res) => 
+{
+  console.log("The email is " + req.body.email);
+  Users.find({email: req.body.email})
+    .then((data) => {
+      if (data.length > 1)
+      {
+        try
+        {
+          const passwordResetData = {
+            from: process.env.EMAIL,
+            to: req.body.email,
+            subject: 'Reset your password',
+            text: 'text',
+            html: `<a href="https://localhost:3000/PasswordReset">Click here to reset your password</a>`
+          };
+
+          transporter.sendMail(passwordResetData, (error, info) => {
+            if (error) {
+              return console.log(error);
+            }
+            console.log('Success!!');
+          });
+        }
+        catch(e)
+        {
+          console.log('failure: ' + e);
+        }
+      }
+      else {
+        return res.json({
+          msg: "That email is not linked to a fla-covid-tracking account"
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
 });
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
