@@ -81,9 +81,10 @@ app.post('/api/findUser', (req, res) => {
   
   Users.find({userName: req.body.userName})
     .then((data) => {
+      console.log(data);
       if (data.length > 0)
         return res.json({
-          msg: "That username is taken",
+          msg: "That username and/or email is taken",
           taken: "1"
         })
       else 
@@ -190,6 +191,23 @@ app.post('/api/PasswordRecovery', (req, res) =>
     .catch((error) => {
       console.log(error);
     });
+
+});
+
+app.post('/api/PasswordReset', (req, res) => {
+
+  Users.findOneAndUpdate({userName: req.body.userName},
+                         {password: req.body.password}
+  )
+  .then((data) => {
+    console.log(data);
+    return res.json({
+      msg: "Password changed."
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 });
 

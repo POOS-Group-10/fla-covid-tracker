@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 import "../App.css";
 
@@ -12,7 +12,29 @@ const PasswordReset = () =>
     const resetPassword = async event =>
     {
         event.preventDefault();
-        setMessage('no.');
+
+        if (password !== confirmPassword) {
+          setMessage("Passwords do not match!");
+        }
+        else {
+          const payload = {
+            userName: 'Plotinus',
+            password: password
+          };
+
+          axios({
+            url: "../api/PasswordReset", // React app is communicating with the server by this route
+            method: "POST", // GET is used by default
+            data: payload,
+          })
+            // These are promises
+            .then((response) => {
+              setMessage(response.data.msg);
+            })
+            .catch((e) => {
+              console.log("Internal server error " + e);
+            });
+        }
 
     }
 
@@ -25,7 +47,7 @@ const PasswordReset = () =>
                 type="password"
                 placeholder="Password"
                 name="email"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {setPassword(e.target.value, 1)}}
               />
             </div>
             <div className="form-input">
@@ -33,7 +55,7 @@ const PasswordReset = () =>
                 type="password"
                 placeholder="Confirm Password"
                 name="email"
-                onChange={(e) => {setConfirmPassword(e.target.value)}}
+                onChange={(e) => {setConfirmPassword(e.target.value, 0)}}
               />
             </div>
             <button>Submit</button>
