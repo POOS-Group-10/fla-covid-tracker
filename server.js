@@ -35,6 +35,7 @@ app.use(morgan('tiny'));
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
+  // This prevents "CANNOT GET /" errors when directly accessing pages from the web.
   app.get('*', (req, res) =>
   {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))

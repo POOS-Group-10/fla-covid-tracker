@@ -11,8 +11,7 @@ const PasswordReset = () =>
 
     const resetPassword = async event =>
     {
-        event.preventDefault();
-        setMessage('no.');
+        
 
     }
 
