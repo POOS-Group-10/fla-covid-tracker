@@ -2,10 +2,10 @@ import React from 'react';
 
 import '../App.css'
 
-function PageTitle()
+const PageTitle = () =>
 {
   return(
-    <h1 id="title">Test</h1>
+    <h1 id="title">Test1</h1>
   );
 };
 

@@ -1,19 +1,21 @@
 import React, {useState} from 'react';
+<<<<<<< HEAD
 import '../App.css';
+=======
+import { Link } from 'react-router-dom';
+>>>>>>> master
 import axios from 'axios';
 
-function SignUp() 
+const SignUp = () => 
 {   
-    // Not optimized. It's possible to create a single state object
-    // but the entire object is replaced upon every change instead
-    // of being merged into. Not sure which is better.
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
-    const doLogin = async event => 
+    const doSignUp = async event => 
     {    
         event.preventDefault(); // Stops the browser from refreshing
         
@@ -24,26 +26,41 @@ function SignUp()
             lastName: lastName,
             email: email
         };
-
-        console.log('payload is ' + payload);
+        
         axios({
-            url: '../api/SignUp', // React app is communicating with the server by this route
-            method: 'POST', // GET is used by default
-            data: payload
+            url: '../api/findUser',
+            method: 'POST',
+            data: {userName: payload.userName}
         })
-        // These are promises
-            .then((response) => {
-              console.log('Data has been received');
-              
-            })
-            .catch(() => {
-              console.log('Internal server error');
-            });
+        .then((response) => {
+            console.log(response.data.taken);
+            if (response.data.taken === "1") {
+                setMessage(response.data.msg);
+                return;
+            }
+            else {
+                axios({
+                    url: '../api/SignUp', // React app is communicating with the server by this route
+                    method: 'POST', // GET is used by default
+                    data: payload
+                })
+                // These are promises
+                    .then(() => {
+                      setMessage(response.data.msg);
+                    })
+                    .catch(() => {
+                      console.log('Internal server error');
+                    });
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     };
 
         return(
             <div className="app">
-            <form onSubmit={doLogin}>
+            <form onSubmit={doSignUp}>
                 <div className = "form-input">
                     <input
                     type="text"
@@ -87,7 +104,12 @@ function SignUp()
                 <button>Submit</button>
             </form>
 
+<<<<<<< HEAD
             {/* <a href="/">Already have an account? Log in.</a> */}
+=======
+                <Link to="/">Already have an account? Log in.</Link><br />
+                <p>{message}</p>
+>>>>>>> master
             </div>
         );
 
