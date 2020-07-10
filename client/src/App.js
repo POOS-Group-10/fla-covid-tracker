@@ -15,11 +15,6 @@ import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
 
 import './App.css';
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 
 const App = () => {
   return (

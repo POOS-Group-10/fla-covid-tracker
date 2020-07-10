@@ -36,12 +36,7 @@ const Login = () => {
   if (isLoggedIn) {
     return <Redirect to='/Home' />;
   }
-
-<<<<<<< HEAD
-            {/* <a href="/SignUp">Don't have an account? Sign up.</a> */}
-            </div>
-        );
-=======
+  
   return (
     <div className="app">
       <form onSubmit={doLogin}>
@@ -63,7 +58,6 @@ const Login = () => {
         </div>
         <button>Submit</button>
       </form>
->>>>>>> master
 
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
       <Link to="/Home">Go to the dashboard</Link><br />

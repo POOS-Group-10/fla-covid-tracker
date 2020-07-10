@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 
-<<<<<<< HEAD
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
     if (err) {
@@ -16,12 +16,11 @@ app.get('/', function(req, res) {
 })
 
 const routes = require('./routes/api');
-=======
+
 require('dotenv').config();
 
 const Users = require('./models/user');
 // const routes = require('./routes/api');
->>>>>>> master
 
 const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
 
@@ -37,7 +36,6 @@ mongoose.connection.on('connected', () => {
 // This is a middleware in express that will parse every json
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
-
 
 // HTTP request logger
 app.use(morgan('tiny'));
@@ -75,6 +73,7 @@ transporter.verify(function(error, success) {
   }
 });
 
+// Login API
 app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName, password: req.body.password})
@@ -91,6 +90,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
+// 
 app.post('/api/findUser', (req, res) => {
   
   Users.find({userName: req.body.userName})
