@@ -33,8 +33,8 @@
   },
   "devServer": {
     "compress": true,
-    "disableHostCheck": true 
-  },    
+    "disableHostCheck": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/POOS-Group-10/fla-covid-tracker.git"
@@ -45,4 +45,3 @@
   "homepage": "https://github.com/POOS-Group-10/fla-covid-tracker#readme",
   "description": ""
 }
-

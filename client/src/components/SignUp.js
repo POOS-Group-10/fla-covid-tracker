@@ -1,9 +1,5 @@
 import React, {useState} from 'react';
-<<<<<<< HEAD
-import '../App.css';
-=======
 import { Link } from 'react-router-dom';
->>>>>>> master
 import axios from 'axios';
 
 const SignUp = () => 
@@ -104,12 +100,8 @@ const SignUp = () =>
                 <button>Submit</button>
             </form>
 
-<<<<<<< HEAD
-            {/* <a href="/">Already have an account? Log in.</a> */}
-=======
                 <Link to="/">Already have an account? Log in.</Link><br />
                 <p>{message}</p>
->>>>>>> master
             </div>
         );
 
