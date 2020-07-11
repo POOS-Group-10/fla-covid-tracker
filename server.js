@@ -43,24 +43,24 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Create email functionality
-const nodemailer = require('nodemailer');
-const User = require('./models/user');
+// const nodemailer = require('nodemailer');
+const Users = require('./models/user');
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD
-  }
-});
-
-transporter.verify(function(error, success) {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log("Server is ready to take our messages");
-  }
-});
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.EMAIL,
+//     pass: process.env.PASSWORD
+//   }
+// });
+//
+// transporter.verify(function(error, success) {
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log("Server is ready to take our messages");
+//   }
+// });
 
 app.post('/api/Login', (req, res) => {
 
@@ -102,38 +102,38 @@ app.post('/api/SignUp', (req, res) => {
   const data = req.body;
   const user = new Users(data);
 
-  try
-  {
-    const output = `
-      <p>Hi ${req.body.firstName},</p></ br>
-      <p>Welcome to fla-covid-tracking.</p>
-      <h1>Please click the link below to verify your email address:</h1>
-      <p>https://florida-covid-tracking.herokuapp.com/Home</p>
-      `;
+  // try
+  // {
+  //   const output = `
+  //     <p>Hi ${req.body.firstName},</p></ br>
+  //     <p>Welcome to fla-covid-tracking.</p>
+  //     <h1>Please click the link below to verify your email address:</h1>
+  //     <p>https://florida-covid-tracking.herokuapp.com/Home</p>
+  //     `;
 
-    const emailVerificationData = {
-      from: process.env.EMAIL,
-      to: req.body.email,
-      subject: 'Please verify your email',
-      text: 'text',
-      html: output
-    };
+  //   const emailVerificationData = {
+  //     from: process.env.EMAIL,
+  //     to: req.body.email,
+  //     subject: 'Please verify your email',
+  //     text: 'text',
+  //     html: output
+  //   };
 
-    transporter.sendMail(emailVerificationData, (error, info) => {
-      if (error) {
-        return res.json({
-          msg: "Something broke. Did you enter your email correctly?"
-        });
-      }
-      return res.json({
-        msg: "Check your email to verify your account and log in."
-      });
-    });
-  }
-  catch(e)
-  {
-    console.log('failure: ' + e);
-  }
+  //   transporter.sendMail(emailVerificationData, (error, info) => {
+  //     if (error) {
+  //       return res.json({
+  //         msg: "Something broke. Did you enter your email correctly?"
+  //       });
+  //     }
+  //     return res.json({
+  //       msg: "Check your email to verify your account and log in."
+  //     });
+  //   });
+  // }
+  // catch(e)
+  // {
+  //   console.log('failure: ' + e);
+  // }
 
   // Saves the user into the database. Will hook this up to 
   // the link in the email later.
@@ -160,27 +160,30 @@ app.post('/api/PasswordRecovery', (req, res) =>
     .then((data) => {
       if (data.length > 1)
       {
-        try
-        {
-          const passwordResetData = {
-            from: process.env.EMAIL,
-            to: req.body.email,
-            subject: 'Reset your password',
-            text: 'text',
-            html: `<a href="https://localhost:3000/PasswordReset">Click here to reset your password</a>`
-          };
+        // try
+        // {
+        //   const passwordResetData = {
+        //     from: process.env.EMAIL,
+        //     to: req.body.email,
+        //     subject: 'Reset your password',
+        //     text: 'text',
+        //     html: `<a href="https://localhost:3000/PasswordReset">Click here to reset your password</a>`
+        //   };
 
-          transporter.sendMail(passwordResetData, (error, info) => {
-            if (error) {
-              return console.log(error);
-            }
-            console.log('Success!!');
-          });
-        }
-        catch(e)
-        {
-          console.log('failure: ' + e);
-        }
+        //   transporter.sendMail(passwordResetData, (error, info) => {
+        //     if (error) {
+        //       return console.log(error);
+        //     }
+        //     console.log('Success!!');
+        //   });
+        // }
+        // catch(e)
+        // {
+        //   console.log('failure: ' + e);
+        // }
+        return res.json({
+          msg: "Email sent"
+        });
       }
       else {
         return res.json({
