@@ -29,10 +29,11 @@ const Home = () =>
 
     return(
         <div onLoadStart={session}>
+            {userInfo}
             <h1 >Welcome {userInfo}</h1> 
             <Link to='/'>Log out</Link>
-            {/* <button onClick={session}>ClickMe</button>
-            {userInfo} */}
+            <button onClick={session}>ClickMe</button>
+            {userInfo}
         </div>
     );
 }

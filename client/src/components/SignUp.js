@@ -11,7 +11,7 @@ const SignUp = () =>
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [county, setCounty] = useState('');
+    const [userCounty, setCounty] = useState('');
 
 
     const doSignUp = async event => 
@@ -23,6 +23,7 @@ const SignUp = () =>
             password: password,
             firstName: firstName,
             lastName: lastName,
+            userCounty: userCounty,
             email: email
         };
         
