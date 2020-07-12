@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import { set } from 'mongoose';
 
 
 const SignUp = () => 
@@ -37,7 +38,7 @@ const SignUp = () =>
             data: {userName: payload.userName}
         })
         .then((response) => {
-            console.log(response)
+            console.log("response is " + response)
             console.log(response.data.taken);
             if (response.data.taken === "1") {
                 setMessage(response.data.msg);
@@ -50,7 +51,8 @@ const SignUp = () =>
                     data: payload
                 })
                 // These are promises
-                    .then(() => {
+                    .then((response) => {
+                        // setRegistered(true)
                     // console.log("data is: " + data)
                       setMessage(response.data.msg);
                     })
@@ -67,9 +69,9 @@ const SignUp = () =>
       
     };
 
-    // if (isRegistered) {
-    //     return <Redirect to='/Login' />;
-    //   }
+    if (isRegistered) {
+        return <Redirect to='/Login' />;
+      }
 
         return(
             <div className="app">

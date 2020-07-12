@@ -175,7 +175,7 @@ app.post('/api/findUser', (req, res) => {
 });
 
 app.post('/api/SignUp', (req, res) => {
-
+  console.log("Paylod is " + req.body)
   const data = req.body;
   const user = new Users(data);
 
@@ -223,7 +223,6 @@ app.post('/api/SignUp', (req, res) => {
     else {
       console.log("Has been Saved! " + user)
     }
-    
     return res.json({
       msg: 'Your data has been saved!'
     });
