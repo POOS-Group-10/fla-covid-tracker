@@ -29,7 +29,7 @@ const Home = () =>
             
             fetchData();
         }, []);
-    
+
     return(
         <div >
             <h1 >Welcome {userInfo.userName}</h1> 

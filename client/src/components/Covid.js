@@ -11,9 +11,11 @@ import { json } from 'body-parser';
 const Covid = () =>
 {
     const [county, setCountyInfo] = useState([]);
-    const [userInfo, setUserInfo] = useState("")
+    // const [userInfo, setUserInfo] = useState("")
+    const [userInfo, setUserInfo] = useState({}) //copy form Home.js
 
-    const url = 'https://covid19-us-api.herokuapp.com/county';
+    const url = 'https://covid19-us-api.herokuapp.com/county'
+    const url2 = 'http://localhost:3000/api/profile';
 
     var floridaCounties = 
     ["Alachua",
@@ -83,12 +85,12 @@ const Covid = () =>
     "Walton",
     "Washington"]
 
-    var currentCounty = ";"
+    var currentCounty = ""
     var listStorage = []
 
     useEffect(() => {
         async function fetchData(){
-            const response = await fetch(url, {
+            const response = await fetch(url2, {
             method:'GET',
             headers:{'Content-Type': 'application/json'}
         })
@@ -98,19 +100,18 @@ const Covid = () =>
         })
         .catch(err => console.log(err))
         }
-        // console.log("County is " + userInfo.county)
         fetchData();
     }, []);
-
+//    currentCounty = userInfo.userName
     async function makeRequest() {
-        
+        console.log("User county in covid.js bitch:" + userInfo.userCounty)
         // for(var counties in floridaCounties)
         // {
             var js = {
                 state: "FL",
                 // county: "Alachua"
                 // county: floridaCounties[counties]
-                county: currentCounty
+                county: userInfo.userCounty
             }; 
 
             const response = await fetch(url, {

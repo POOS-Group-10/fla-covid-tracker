@@ -122,7 +122,7 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
+  // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   return res.json(retVal)
 })
