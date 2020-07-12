@@ -4,11 +4,12 @@ const morgan = require('morgan');
 const path = require('path');
 const axios = require('axios');
 const fetch = require("node-fetch");
-var session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
+var session = require('express-session');
+
 
 const {
   NODE_ENV = 'development',
@@ -88,56 +89,68 @@ if (process.env.NODE_ENV === 'production') {
 // }))
 
 app.use(session({
-  genid: (req) => {
-    console.log('Inside the session middleware')
-    console.log(req.sessionID)
-    return uuid() // use UUIDs for session IDs
-  },
+  // genid: (req) => {
+  //   console.log('Inside the session middleware')
+  //   console.log(req.sessionID)
+  //   return uuid() // use UUIDs for session IDs
+  // },
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
 }))
 
  
-app.use(function (req, res, next) {
-  console.log("Line 76")
-  if (!req.session.userId) {
-    console.log("Inside if statement - Line 78")
-    req.session.userId = 0;
-  }
+// app.use(function (req, res, next) {
+  // console.log("Line 76")
+  // if (!req.session.userId) {
+  //   console.log("Inside if statement - Line 78")
+  //   req.session.userId = 0;
+  // }
 
-  Users.find({userName: req.body.userName})
-  .then((data) => {
-    if (data.length > 1)
-    {
-     console.log("id is  " + data._id)
-     req.session.userId = data[0]._id;
-    }
-  })
-  .catch(e)
-  {
-    console.log("Error: " + e)
-  }
-  next()
+//   Users.find({userName: req.body.userName})
+//   .then((data) => {
+//     if (data.length > 1)
+//     {
+//      console.log("id is  " + data._id)
+//     }
+//   })
+//   .catch(e)
+//   {
+//     console.log("Error: " + e)
+//   }
+//   next()
+// })
+
+app.get('/api/profile', (req, res) => {
+  console.log("profile works!!!")
+  console.log("req.session.userId = " + req.session.userId)
+  return res.json( {name:req.session.userId})
+  // res.send("it works " + req.session.userId)
 })
 
 app.post('/api/Login', (req, res) => {
 
+  if (!req.session.userId) {
+    console.log("Inside if statement - Line 126")
+    req.session.userId = 0;
+  }
+
   Users.find({ userName: req.body.userName, password: req.body.password})
     .then((data) => {
-      // console.log('Data is ' + data[0].userName);
       if (data.length < 1)
         return res.status(401).json({
           message: "Auth failed."
         })
       else {
+        console.log("Data is " + data)
+        req.session.userId = data[0]._id;
+        console.log("Session Object: " + req.session.userId)
         return res.status(200).json(data)
       }
     })
     .catch((error) => {
       console.log('Error: ', error);
     });
-    
 });
 
 app.post('/api/findUser', (req, res) => {
