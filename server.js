@@ -175,6 +175,7 @@ app.post('/api/findUser', (req, res) => {
 });
 
 app.post('/api/SignUp', (req, res) => {
+  console.log("Entering api")
   console.log("Paylod is " + req.body)
   const data = req.body;
   const user = new Users(data);

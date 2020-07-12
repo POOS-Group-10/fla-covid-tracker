@@ -21,6 +21,7 @@ const SignUp = () =>
 
     const doSignUp = async event => 
     {    
+        console.log("Ented the doSignUp Function");
         event.preventDefault(); // Stops the browser from refreshing
         
         const payload = {
@@ -32,6 +33,7 @@ const SignUp = () =>
             email: email
         };
         
+        console.log("About to enter axios");
         axios({
             url: '../api/findUser',
             method: 'POST',
@@ -53,7 +55,8 @@ const SignUp = () =>
                 // These are promises
                     .then((response) => {
                         // setRegistered(true)
-                    // console.log("data is: " + data)
+                    console.log("data is: " + response)
+
                       setMessage(response.data.msg);
                     })
                     .catch((e) => {
@@ -62,11 +65,12 @@ const SignUp = () =>
             }
         })
         .catch((error) => {
+            console.log("did not like ajax responsef")
             console.log(error);
         });
         
         setRegistered(true);
-      
+    
     };
 
     if (isRegistered) {
