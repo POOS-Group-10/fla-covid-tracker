@@ -51,7 +51,7 @@ const SignUp = () =>
                 })
                 // These are promises
                     .then(() => {
-                    console.log("data is: " + data)
+                    // console.log("data is: " + data)
                       setMessage(response.data.msg);
                     })
                     .catch((e) => {
