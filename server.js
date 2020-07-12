@@ -124,7 +124,7 @@ app.use(session({
 app.get('/api/profile', (req, res) => {
   console.log("profile works!!!")
   console.log("req.session.userId = " + req.session.userId)
-  return res.json({name:req.session.userId, userName: req.session.userName})
+  return res.json({name:req.session.userCounty, userName: req.session.userName})
   // res.send("it works " + req.session.userId)
 })
 
