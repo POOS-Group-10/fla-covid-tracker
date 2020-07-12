@@ -11,14 +11,14 @@ const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds
 var session = require('express-session');
 
 
-const {
-  NODE_ENV = 'production',
-  SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!quiet,it\'asecret!',
-  SESS_LIFETIME = TWO_HOURS
-} = process.env
+// const {
+//   NODE_ENV = 'production',
+//   SESS_NAME = 'sid',
+//   SESS_SECRET = 'ssh!quiet,it\'asecret!',
+//   SESS_LIFETIME = TWO_HOURS
+// } = process.env
 
-const IN_PROD = NODE_ENV === 'production'
+// const IN_PROD = NODE_ENV === 'production'
 
 require('dotenv').config();
 
