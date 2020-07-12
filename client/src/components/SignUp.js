@@ -51,6 +51,7 @@ const SignUp = () =>
                 })
                 // These are promises
                     .then(() => {
+                    console.log("data is: " + data)
                       setMessage(response.data.msg);
                     })
                     .catch((e) => {
@@ -66,9 +67,9 @@ const SignUp = () =>
       
     };
 
-    if (isRegistered) {
-        return <Redirect to='/Login' />;
-      }
+    // if (isRegistered) {
+    //     return <Redirect to='/Login' />;
+    //   }
 
         return(
             <div className="app">
@@ -123,7 +124,6 @@ const SignUp = () =>
                 </div>
                 <button>Submit</button>
             </form>
-
                 <Link to="/">Already have an account? Log in.</Link><br />
                 <p>{message}</p>
             </div>
