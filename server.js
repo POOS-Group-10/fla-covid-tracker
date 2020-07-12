@@ -146,7 +146,7 @@ app.post('/api/Login', (req, res) => {
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
         req.session.userCounty = data[0].userCounty;
-        return res.status(200).json({userId:req.session.userId})
+        return res.status(200).json()
       }
     })
     .catch((error) => {
