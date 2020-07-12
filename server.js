@@ -18,7 +18,7 @@ const {
   SESS_LIFETIME = TWO_HOURS
 } = process.env
 
-const IN_PROD = NODE_ENV === 'production'
+const IN_PROD = NODE_ENV === 'development'
 
 require('dotenv').config();
 

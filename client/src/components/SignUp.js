@@ -53,8 +53,8 @@ const SignUp = () =>
                     .then(() => {
                       setMessage(response.data.msg);
                     })
-                    .catch(() => {
-                      console.log('Internal server error');
+                    .catch((e) => {
+                      console.log('Internal server error: ' + e);
                     });
             }
         })
