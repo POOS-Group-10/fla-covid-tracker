@@ -15,7 +15,7 @@ require('dotenv').config();
 const Users = require('./models/user');
 // const routes = require('./routes/api');
 
-const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority';
 
 mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
   useNewUrlParser: true,
@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 const {
-  NODE_ENV = 'development',
+  NODE_ENV = 'production',
   SESS_NAME = 'sid',
   SESS_SECRET = 'ssh!quiet,it\'asecret!',
   SESS_LIFETIME = TWO_HOURS
@@ -129,13 +129,13 @@ app.get('/api/profile', (req, res) => {
 })
 
 app.post('/api/Login', (req, res) => {
-
+  console.log("Login API entered");
   if (!req.session.userId) {
     console.log("Inside if statement - Line 126")
     req.session.userId = 0;
   }
 
-  console.log("about to find");
+  console.log("About to find");
   Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
@@ -146,7 +146,7 @@ app.post('/api/Login', (req, res) => {
         })
       } 
       else {
-        console.log("Data is ")
+        console.log("Data is else")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
@@ -160,7 +160,7 @@ app.post('/api/Login', (req, res) => {
 });
 
 app.post('/api/findUser', (req, res) => {
-  
+  console.log("Entered Find User")
   Users.find({userName: req.body.userName})
     .then((data) => {
       if (data.length > 0)
