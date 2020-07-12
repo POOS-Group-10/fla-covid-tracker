@@ -124,7 +124,7 @@ app.use(session({
 app.get('/api/profile', (req, res) => {
   console.log("profile works!!!")
   console.log("req.session.userId = " + req.session.userId)
-  return res.json( {name:req.session.userId})
+  return res.json({name:req.session.userId, userName: req.session.userName})
   // res.send("it works " + req.session.userId)
 })
 
@@ -135,7 +135,7 @@ app.post('/api/Login', (req, res) => {
     req.session.userId = 0;
   }
 
-  Users.find({ userName: req.body.userName, password: req.body.password})
+  Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
         return res.status(401).json({
@@ -143,9 +143,12 @@ app.post('/api/Login', (req, res) => {
         })
       else {
         console.log("Data is " + data)
+        // req.session = data[0];
         req.session.userId = data[0]._id;
+        req.session.userName = data[0].userName;
+        // req.session.county = data[0].county;
         console.log("Session Object: " + req.session.userId)
-        return res.status(200).json(data)
+        return res.status(200).json({name:req.session.userName})
       }
     })
     .catch((error) => {

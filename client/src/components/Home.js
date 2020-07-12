@@ -18,19 +18,21 @@ const Home = () =>
         .then(res => res.json())
         .then(json => {
         //   console.log("json " + JSON.stringify(json))
+        console.log("entered!!!!")
           var j = JSON.stringify(json)
           list.push(j)
           setUserInfo(list)
+          console.log("list " + list)
         })
         .catch(err => console.log(err))
     }
 
     return(
-        <div>
-            <h1>We logged in!</h1> 
+        <div onLoadStart={session}>
+            <h1 >Welcome {userInfo}</h1> 
             <Link to='/'>Log out</Link>
-            <button onClick={session}>ClickMe</button>
-            {userInfo}
+            {/* <button onClick={session}>ClickMe</button>
+            {userInfo} */}
         </div>
     );
 }
