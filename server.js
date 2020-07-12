@@ -135,14 +135,18 @@ app.post('/api/Login', (req, res) => {
     req.session.userId = 0;
   }
 
+  console.log("about to find");
   Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
+      { 
+        console.log("enteded login bad")
         return res.status(401).json({
           message: "Auth failed."
         })
+      } 
       else {
-        console.log("Data is " + data)
+        console.log("Data is ")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
@@ -160,14 +164,18 @@ app.post('/api/findUser', (req, res) => {
   Users.find({userName: req.body.userName})
     .then((data) => {
       if (data.length > 0)
+      {
         return res.json({
           msg: "That username is taken",
           taken: "1"
         })
-      else 
-          return res.json({
-            taken: "0"
-          });
+      }
+      else
+      {
+        return res.json({
+          taken: "0"
+        });
+      }  
     })
     .catch((error) => {
       console.log("Users are not found!!!!")
