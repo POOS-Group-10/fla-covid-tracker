@@ -10,16 +10,6 @@ const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
 
-
-const {
-  NODE_ENV = 'development',
-  SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!quiet,it\'asecret!',
-  SESS_LIFETIME = TWO_HOURS
-} = process.env
-
-const IN_PROD = NODE_ENV === 'production'
-
 require('dotenv').config();
 
 const Users = require('./models/user');
@@ -55,6 +45,17 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   });
 }
+
+
+
+const {
+  NODE_ENV = 'development',
+  SESS_NAME = 'sid',
+  SESS_SECRET = 'ssh!quiet,it\'asecret!',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
 
 // Create email functionality
 // const nodemailer = require('nodemailer');

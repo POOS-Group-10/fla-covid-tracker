@@ -33,13 +33,14 @@ const SignUp = () =>
             email: email
         };
         
-        console.log("About to enter axios");
+        console.log("About to enter axios, payload is: " + payload);
         axios({
             url: '../api/findUser',
             method: 'POST',
             data: {userName: payload.userName}
         })
         .then((response) => {
+            console.log("Entered the then from first Axios")
             console.log("response is " + response)
             console.log(response.data.taken);
             if (response.data.taken === "1") {
