@@ -216,7 +216,7 @@ app.post('/api/SignUp', (req, res) => {
   // the link in the email later.
   user.save((error) => {
     if (error) {
-      // console.log(error);
+      console.log("Error in code here");
       res.status(500).json({ msg: 'Sorry, internal server errors'});
       return;
     }
