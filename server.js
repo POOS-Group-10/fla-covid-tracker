@@ -4,9 +4,62 @@ const morgan = require('morgan');
 const path = require('path');
 const axios = require('axios');
 const fetch = require("node-fetch");
+var session = require('express-session')
+
+const bodyParser = require('body-parser')
+
+const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
+
+const {
+  PORT = 3000,
+  NODE_ENV = 'development',
+  SESS_NAME = 'sid',
+  SESS_SECRET = 'ssh!quiet,it\'asecret!',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
+
+app.use(session({
+  name: SESS_NAME,
+  resave: false,
+  saveUnititialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+      secure: IN_PROD
+  }
+}))
+
+const redirectLogin = (req, res, next) => {
+  if (!req.session.userId) {
+      res.redirect('/login')
+  } else {
+      next()
+  }
+}
+
+const redirectHome = (req, res, next) => {
+  if (req.session.userId) {
+      res.redirect('/home')
+  } else {
+      next()
+  }
+}
+
+app.use((req, res, next) => {
+  const { userId } = req.session
+  if (userId) {
+      res.locals.user = users.find(
+          user => user.id === userId
+      )
+  }
+  next()
+})
 
 require('dotenv').config();
 
@@ -64,6 +117,9 @@ const Users = require('./models/user');
 //   }
 // });
 
+
+
+
 app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName, password: req.body.password})
@@ -73,11 +129,20 @@ app.post('/api/Login', (req, res) => {
         return res.status(401).json({
           message: "Auth failed."
         })
-      res.json(data);
+      else {
+        res.json(data);
+        return res.status(200).json({
+          if (user) {
+            req.session.userId = user.id
+            return res.redirect('/home')
+        }
+        })
+      }
     })
     .catch((error) => {
       console.log('Error: ', error);
     });
+    
 });
 
 app.post('/api/findUser', (req, res) => {

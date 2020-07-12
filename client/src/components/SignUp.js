@@ -11,6 +11,8 @@ const SignUp = () =>
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [county, setCounty] = useState('');
+
 
     const doSignUp = async event => 
     {    
@@ -96,6 +98,14 @@ const SignUp = () =>
                     placeholder="Email"
                     name="email"
                     onChange={e => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className = "form-input">
+                    <input
+                    type="text"
+                    placeholder="County"
+                    name="county"
+                    onChange={e => setCounty(e.target.value)}
                     />
                 </div>
                 <button>Submit</button>
