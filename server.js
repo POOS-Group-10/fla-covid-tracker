@@ -6,10 +6,18 @@ const axios = require('axios');
 const fetch = require("node-fetch");
 var session = require('express-session');
 const bodyParser = require('body-parser');
-
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
+const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 
+const {
+  NODE_ENV = 'development',
+  SESS_NAME = 'sid',
+  SESS_SECRET = 'ssh!quiet,it\'asecret!',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
 
 require('dotenv').config();
 
@@ -49,7 +57,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // Create email functionality
 // const nodemailer = require('nodemailer');
-const Users = require('./models/user');
 
 // const transporter = nodemailer.createTransport({
 //   service: 'gmail',
@@ -68,25 +75,63 @@ const Users = require('./models/user');
 // });
 
 
+// Starting Sessions
+// app.use(session({
+//   name: SESS_NAME,
+//   resave: false,
+//   saveUnititialized: false,
+//   secret: SESS_SECRET,
+//   cookie: {
+//       maxAge: SESS_LIFETIME,
+//       sameSite: true,
+//   }
+// }))
 
+app.use(session({
+  genid: (req) => {
+    console.log('Inside the session middleware')
+    console.log(req.sessionID)
+    return uuid() // use UUIDs for session IDs
+  },
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
+ 
+app.use(function (req, res, next) {
+  console.log("Line 76")
+  if (!req.session.userId) {
+    console.log("Inside if statement - Line 78")
+    req.session.userId = 0;
+  }
+
+  Users.find({userName: req.body.userName})
+  .then((data) => {
+    if (data.length > 1)
+    {
+     console.log("id is  " + data._id)
+     req.session.userId = data[0]._id;
+    }
+  })
+  .catch(e)
+  {
+    console.log("Error: " + e)
+  }
+  next()
+})
 
 app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName, password: req.body.password})
     .then((data) => {
-      console.log('Data ', data);
+      // console.log('Data is ' + data[0].userName);
       if (data.length < 1)
         return res.status(401).json({
           message: "Auth failed."
         })
       else {
-        res.json(data);
-        return res.status(200).json({
-          if (user) {
-            req.session.userId = user.id
-            return res.redirect('/home')
-        }
-        })
+        return res.status(200).json(data)
       }
     })
     .catch((error) => {
