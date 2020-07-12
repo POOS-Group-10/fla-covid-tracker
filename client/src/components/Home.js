@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import fetch from 'node-fetch';
 
@@ -7,33 +7,33 @@ import '../App.css';
 const Home = () =>
 {
     const url = 'http://localhost:3000/api/profile';
-    const [userInfo, setUserInfo] = useState([])
+    const [userInfo, setUserInfo] = useState({})
     var list = []
-   async function session()
-    {
-        const response = await fetch(url, {
-            method:'GET',
-            headers:{'Content-Type': 'application/json'}
-        })
-        .then(res => res.json())
-        .then(json => {
-        //   console.log("json " + JSON.stringify(json))
-        console.log("entered!!!!")
-          var j = JSON.stringify(json)
-          list.push(j)
-          setUserInfo(list)
-          console.log("list " + list)
-        })
-        .catch(err => console.log(err))
-    }
+  
+    useEffect(() => {
+            async function fetchData(){
+                const response = await fetch(url, {
+                method:'GET',
+                headers:{'Content-Type': 'application/json'}
+            })
+            .then(res => res.json())
+            .then(json => {
+                console.log("Home and line 21: " + json.county)
+                setUserInfo(json)
+                if (userInfo.userId)
+                {}
 
+            })
+            .catch(err => console.log(err))
+            }
+            
+            fetchData();
+        }, []);
+    
     return(
-        <div onLoadStart={session}>
-            {userInfo}
-            <h1 >Welcome {userInfo}</h1> 
+        <div >
+            <h1 >Welcome {userInfo.userName}</h1> 
             <Link to='/'>Log out</Link>
-            <button onClick={session}>ClickMe</button>
-            {userInfo}
         </div>
     );
 }

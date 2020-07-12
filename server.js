@@ -122,10 +122,9 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log("profile works!!!")
-  console.log("req.session.userId = " + req.session.userId)
-  return res.json({name:req.session.userCounty, userName: req.session.userName})
-  // res.send("it works " + req.session.userId)
+  console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
+  var retVal = {county:req.session.userCounty, userName: req.session.userName}
+  return res.json(retVal)
 })
 
 app.post('/api/Login', (req, res) => {
@@ -146,9 +145,8 @@ app.post('/api/Login', (req, res) => {
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
-        // req.session.county = data[0].county;
-        console.log("Session Object: " + req.session.userId)
-        return res.status(200).json({name:req.session.userName})
+        req.session.userCounty = data[0].userCounty;
+        return res.status(200).json({userId:req.session.userId})
       }
     })
     .catch((error) => {
