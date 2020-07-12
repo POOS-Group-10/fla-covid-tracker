@@ -114,7 +114,25 @@ const SignUp = () =>
                     />
                 </div>
                 <div className = "form-input">
-                <select onChange={e => setCounty(e.target.value)}>
+                    <input
+                    type="text"
+                    placeholder="County"
+                    name="county"
+                    onChange={e => setCounty(e.target.value)}
+                    />
+                </div>
+                <button>Submit</button>
+            </form>
+
+                <Link to="/">Already have an account? Log in.</Link><br />
+                <p>{message}</p>
+            </div>
+        );
+}
+
+export default SignUp;
+
+          /* <select onChange={e => setCounty(e.target.value)}>
                 <option value="Alachua" > Alachua  </option>
                 <option value="Baker" > Baker  </option>
                 <option value="Bay" > Bay  </option>
@@ -181,16 +199,4 @@ const SignUp = () =>
                 <option value="Wakulla" > Wakulla  </option>
                 <option value="Walton" > Walton  </option>
                 <option value="Washington"> Washington </option>
-                </select>
-                </div>
-                <button>Submit</button>
-            </form>
-
-                <Link to="/">Already have an account? Log in.</Link><br />
-                <p>{message}</p>
-            </div>
-        );
-
-}
-
-export default SignUp;
+                </select> */
