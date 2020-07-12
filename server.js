@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
+const axios = require('axios');
+const fetch = require("node-fetch");
 
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
@@ -196,5 +198,6 @@ app.post('/api/PasswordRecovery', (req, res) =>
     });
 
 });
+
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
