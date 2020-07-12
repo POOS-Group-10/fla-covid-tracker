@@ -169,6 +169,7 @@ app.post('/api/findUser', (req, res) => {
           });
     })
     .catch((error) => {
+      console.log("Users are not found!!!!")
       console.log(error);
     });
 });
