@@ -6,8 +6,8 @@ import '../App.css';
 
 const Home = () =>
 {
-    // const url = 'http://localhost:3000/api/profile';
-    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url = 'http://localhost:3000/api/profile';
+    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userInfo, setUserInfo] = useState({})
     var list = []
   
