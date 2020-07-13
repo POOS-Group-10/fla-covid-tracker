@@ -30,7 +30,6 @@ const Login = () => {
     })
       .then((response) => {
         console.log(response);
-        console.log('login line33') // connect-mongo update JR
         setLoggedIn(true);
       })
       .catch((e) => {

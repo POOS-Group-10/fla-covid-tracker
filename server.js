@@ -14,7 +14,6 @@ const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 require('dotenv').config();
 
 const Users = require('./models/user');
-const { json } = require('body-parser');
 // const routes = require('./routes/api');
 
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
@@ -142,13 +141,12 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log('Hellooooo') // connect-mongo update JR
   console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   console.log("This is a type: " + retVal)
   console.log("This is a type: " + res.json(retVal))
-  // return JSON.stringify(retVal)
-  return json('[ { userName: "pepe", userCounty: "Bay" } ]') // connect-mongo update JR
+  // console.log(JSON.stringify(retVal))
+  return JSON.stringify(retVal)
 })
 
 app.post('/api/Login', (req, res) => {

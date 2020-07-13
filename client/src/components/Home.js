@@ -6,14 +6,14 @@ import '../App.css';
 
 const Home = () =>
 {
-    // const url = 'http://localhost:3000/api/profile';
-    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url = 'http://localhost:3000/api/profile';
+    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userInfo, setUserInfo] = useState({})
     var list = []
   
     useEffect(() => {
             async function fetchData(){
-                const response = await fetch(url, {
+                const response = await fetch('https://florida-covid-tracking.herokuapp.com/api/profile', {
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
