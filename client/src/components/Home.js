@@ -19,7 +19,7 @@ const Home = () =>
             })
             .then(res => res.json())
             .then(json => {
-                // console.log("Home and line 21: " + json.county)
+                console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
 
             })
