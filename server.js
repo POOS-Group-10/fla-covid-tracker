@@ -139,8 +139,9 @@ app.use(session({
 //   }
 //   next()
 // })
-console.log(session.userName)
+
 app.get('/api/profile', (req, res) => {
+  console.log('Hellooooo')
   console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   console.log("This is a type: " + retVal)
