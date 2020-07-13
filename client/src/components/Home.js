@@ -21,8 +21,6 @@ const Home = () =>
             .then(json => {
                 // console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
-                if (userInfo.userId)
-                {}
 
             })
             .catch(err => console.log(err))
