@@ -11,30 +11,7 @@ const PasswordReset = () =>
 
     const resetPassword = async event =>
     {
-        event.preventDefault();
-
-        if (password !== confirmPassword) {
-          setMessage("Passwords do not match!");
-        }
-        else {
-          const payload = {
-            userName: 'Plotinus',
-            password: password
-          };
-
-          axios({
-            url: "../api/PasswordReset", // React app is communicating with the server by this route
-            method: "POST", // GET is used by default
-            data: payload,
-          })
-            // These are promises
-            .then((response) => {
-              setMessage(response.data.msg);
-            })
-            .catch((e) => {
-              console.log("Internal server error " + e);
-            });
-        }
+        
 
     }
 
