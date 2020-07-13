@@ -17,7 +17,7 @@ const Home = () =>
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
-            .then(res => console.log("this response is " + typeof(res.json())))
+            .then(res => res.json())
             .then(json => {
                 // console.log("Home and line 21: " + json.county)
                 setUserInfo(json)

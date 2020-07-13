@@ -94,7 +94,7 @@ const Covid = () =>
         })
         .then(res => res.json())
         .then(json => {
-            console.log("Inside Covid: " + json)
+            console.log("Type of Covid: " + typeof(json))
             setUserCounty(json.county);
             setUserInfo(json)
         })
