@@ -32,7 +32,7 @@ const Home = () =>
     return(
         <div >
             <h1 >Welcome {userInfo.userName}</h1> 
-            <Link to='/'>Log out</Link>
+            <Link to='/'>Log out john_branch</Link>
         </div>
     );
 }

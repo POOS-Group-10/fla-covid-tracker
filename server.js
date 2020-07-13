@@ -112,7 +112,12 @@ app.use(session({
   // },
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 60 * 60 * 1000,
+    sameSite: true,
+    secure: IN_PROD
+  }
 }))
 
  
