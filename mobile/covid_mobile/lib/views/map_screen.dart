@@ -206,7 +206,7 @@ class _MapScreen extends State<MapScreen> {
 ]''';
   int _polygonIdCounter = 1;
 
-  CountyLines lines = new CountyLines();
+  //CountyLines lines = new CountyLines();
   static final CameraPosition _florida = CameraPosition(
     target: LatLng(28, -84.3),
     zoom: 6,
@@ -219,7 +219,7 @@ class _MapScreen extends State<MapScreen> {
   }
 
 
-  void _setPolygon() {
+ /* void _setPolygon() {
     for(int i = 0; i < lines.countyCoord.length; i++) {
       polygonLatLngs.add(new List<LatLng>());
       for (int j = 0; j < lines.countyCoord[i].length; j++) {
@@ -241,7 +241,7 @@ class _MapScreen extends State<MapScreen> {
     }
     lines = null;
     polygonLatLngs = null;
-  }
+  }*/
 
   void _showCard(){
 
@@ -287,10 +287,10 @@ class _MapScreen extends State<MapScreen> {
       //onCameraIdle: _setPolygonsVisible,
       //onCameraMoveStarted: _setPolygonsInvisible,
       onMapCreated: (GoogleMapController controller) {
-        setState(() {
+        /*setState(() {
           _setPolygon();
         }
-        );
+        );*/
         controller.setMapStyle(styleJSON);
         _controller.complete(controller);
       },
