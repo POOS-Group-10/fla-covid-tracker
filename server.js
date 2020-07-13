@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
-var session = require('express-session');
+var session = require('cookie-session');
 
 require('dotenv').config();
 
