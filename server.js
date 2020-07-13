@@ -20,7 +20,10 @@ const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FL
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-// mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/merntutorial', {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -135,10 +138,10 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
+  console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   console.log("This is a type: " + retVal)
-  // console.log("This is a type: " + res.json(retVal))
+  console.log("This is a type: " + res.json(retVal))
   return JSON.stringify(retVal)
 })
 
