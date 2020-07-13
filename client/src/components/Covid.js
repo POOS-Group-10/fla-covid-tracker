@@ -94,27 +94,24 @@ const Covid = () =>
         })
         .then(res => res.json())
         .then(json => {
-            console.log("Inside Covid: " + json)
+            console.log("Type of Covid: " + typeof(json))
             setUserCounty(json.county);
             setUserInfo(json)
         })
         .catch(err => console.log(err))
         }
-        // console.log("County is " + userInfo.county)
         fetchData();
     }, []);
-
+//    currentCounty = userInfo.userName
     async function makeRequest() {
-        
+        console.log("User county in covid.js bitch:" + userInfo.userCounty)
         // for(var counties in floridaCounties)
         // {
             var js = {
                 state: "FL",
-                // county: "Alachua"
-                // county: floridaCounties[counties]
                 county: userCounty
             }; 
-            // console.log("JS is " + JSON.stringify(js))
+            console.log("JS is " + JSON.stringify(js))
             const response = await fetch(url, {
                 method:'POST',
                 body:JSON.stringify(js),
