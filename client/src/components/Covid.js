@@ -6,17 +6,17 @@ import fetch from 'node-fetch';
 import { json } from 'body-parser';
 // const fetch = require("node-fetch");
 
-
-
 const Covid = () =>
 {
     const [county, setCountyInfo] = useState([]);
-    // const [userInfo, setUserInfo] = useState("")
-    const [userInfo, setUserInfo] = useState({}) //copy form Home.js
+    const [userInfo, setUserInfo] = useState({});
+    const [userCounty, setUserCounty] = useState();
 
-    const url = 'https://covid19-us-api.herokuapp.com/county'
-    const url2 = 'http://localhost:3000/api/profile';
-
+    const url = 'https://covid19-us-api.herokuapp.com/county';
+    // const url2 ='http://localhost:3000/api/profile';
+    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    
+    var currentCounty = "";
     var floridaCounties = 
     ["Alachua",
     "Baker",
@@ -84,8 +84,6 @@ const Covid = () =>
     "Wakulla",
     "Walton",
     "Washington"]
-
-    var currentCounty = ""
     var listStorage = []
 
     useEffect(() => {
@@ -96,7 +94,9 @@ const Covid = () =>
         })
         .then(res => res.json())
         .then(json => {
-        setUserInfo(json)
+            console.log("Inside Covid: " + json)
+            setUserCounty(json.county);
+            setUserInfo(json)
         })
         .catch(err => console.log(err))
         }
@@ -111,9 +111,9 @@ const Covid = () =>
                 state: "FL",
                 // county: "Alachua"
                 // county: floridaCounties[counties]
-                county: userInfo.userCounty
+                county: userCounty
             }; 
-
+            // console.log("JS is " + JSON.stringify(js))
             const response = await fetch(url, {
                 method:'POST',
                 body:JSON.stringify(js),
@@ -122,8 +122,9 @@ const Covid = () =>
             .then(res => res.json())
             .then(json => {
                 var j = json.message[0]
-                console.log("Line 104 " + j)
+                
                 listStorage.push(j)
+                console.log("list " + listStorage)
                 setCountyInfo(listStorage);
             })
             .catch(err => console.log(err))
@@ -134,7 +135,7 @@ const Covid = () =>
         <div>
             <h1>Covid Map</h1> 
             <button onClick={makeRequest}>Click Me</button>
-    <h1>INfo is {userInfo.county}</h1>
+            <h1>User County is {userInfo.county}</h1>
             {county.map(res => <div>State: {res.state_name}</div>)}
             {county.map(res => <div>County: {res.county_name}</div>)}  
             {county.map(res => <div>Confirmed: {res.confirmed}</div>)} 

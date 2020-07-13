@@ -10,22 +10,12 @@ const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
 
-
-const {
-  NODE_ENV = 'development',
-  SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!quiet,it\'asecret!',
-  SESS_LIFETIME = TWO_HOURS
-} = process.env
-
-const IN_PROD = NODE_ENV === 'production'
-
 require('dotenv').config();
 
 const Users = require('./models/user');
 // const routes = require('./routes/api');
 
-const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority';
 
 mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
   useNewUrlParser: true,
@@ -55,6 +45,17 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   });
 }
+
+
+
+const {
+  NODE_ENV = 'production',
+  SESS_NAME = 'sid',
+  SESS_SECRET = 'ssh!quiet,it\'asecret!',
+  SESS_LIFETIME = TWO_HOURS
+} = process.env
+
+const IN_PROD = NODE_ENV === 'production'
 
 // Create email functionality
 // const nodemailer = require('nodemailer');
@@ -128,25 +129,29 @@ app.get('/api/profile', (req, res) => {
 })
 
 app.post('/api/Login', (req, res) => {
-
+  console.log("Login API entered");
   if (!req.session.userId) {
     console.log("Inside if statement - Line 126")
     req.session.userId = 0;
   }
 
+  console.log("About to find");
   Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
+      { 
+        console.log("enteded login bad")
         return res.status(401).json({
           message: "Auth failed."
         })
+      } 
       else {
-        console.log("Data is " + data)
+        console.log("Data is else")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
         req.session.userCounty = data[0].userCounty;
-        return res.status(200).json({userId:req.session.userId})
+        return res.status(200).json()
       }
     })
     .catch((error) => {
@@ -155,26 +160,32 @@ app.post('/api/Login', (req, res) => {
 });
 
 app.post('/api/findUser', (req, res) => {
-  
+  console.log("Entered Find User")
   Users.find({userName: req.body.userName})
     .then((data) => {
       if (data.length > 0)
+      {
         return res.json({
           msg: "That username is taken",
           taken: "1"
         })
-      else 
-          return res.json({
-            taken: "0"
-          });
+      }
+      else
+      {
+        return res.json({
+          taken: "0"
+        });
+      }  
     })
     .catch((error) => {
+      console.log("Users are not found!!!!")
       console.log(error);
     });
 });
 
 app.post('/api/SignUp', (req, res) => {
-
+  console.log("Entering api")
+  console.log("Paylod is " + req.body)
   const data = req.body;
   const user = new Users(data);
 
@@ -215,14 +226,13 @@ app.post('/api/SignUp', (req, res) => {
   // the link in the email later.
   user.save((error) => {
     if (error) {
-      // console.log(error);
+      console.log("Error in code here");
       res.status(500).json({ msg: 'Sorry, internal server errors'});
       return;
     }
     else {
       console.log("Has been Saved! " + user)
     }
-    
     return res.json({
       msg: 'Your data has been saved!'
     });
