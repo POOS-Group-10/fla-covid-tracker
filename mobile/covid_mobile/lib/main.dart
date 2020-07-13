@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:covid_mobile/views/county_screen.dart';
 import 'package:covid_mobile/views/login_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_mobile/views/home_screen.dart';
@@ -22,25 +24,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'COVID-19 Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: FutureBuilder<SharedPreferences> (
-        future: SharedPreferences.getInstance(),
-        builder: (context, snapshot) {
-          if(snapshot.hasData){
-            String prefsKey = 'email';
-            var email = snapshot.data.getString(prefsKey);
-            return (email == null) ? LogInScreen() : HomeScreen();
-          }else{
-            return LogInScreen();
-          }
-        }
-      ),
+      home: LogInScreen(),
+      // home: FutureBuilder<SharedPreferences> (
+      //   future: SharedPreferences.getInstance(),
+      //   builder: (context, snapshot) {
+      //     if(snapshot.hasData){
+      //       String prefsKey = 'email';
+      //       var email = snapshot.data.getString(prefsKey);
+      //       print("$email");
+      //       return (email == null) ? LogInScreen() : HomeScreen();
+      //     }else{
+      //       return LogInScreen();
+      //     }
+      //   }
+      // ),
+
       routes: <String, WidgetBuilder> {
         '/login': (BuildContext context) => LogInScreen(),
         '/home': (BuildContext context) => HomeScreen(),

@@ -53,6 +53,7 @@ class _LogInScreen extends State<LogInScreen> {
               child: RaisedButton(
                 child: Text('Login'),
                 onPressed: () async {
+                  print("HEREEE");
                   var res = await _authService.signIn(_emailController.text, _passwordController.text);
                   if (res == null){
                     showDialog(

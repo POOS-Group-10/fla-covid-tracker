@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 
 require('dotenv').config();
 
@@ -18,6 +19,12 @@ const Users = require('./models/user');
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
 
 console.log(MONGODB_URI);
+
+// Local mongoose connection
+// mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -106,7 +113,9 @@ app.use(session({
   // },
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  resave: true,  // connect-mongo update JR
+  store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
 }))
 
  
@@ -134,7 +143,10 @@ app.use(session({
 app.get('/api/profile', (req, res) => {
   console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
-  return res.json(retVal)
+  console.log("This is a type: " + retVal)
+  console.log("This is a type: " + res.json(retVal))
+  // console.log(JSON.stringify(retVal))
+  return JSON.stringify(retVal)
 })
 
 app.post('/api/Login', (req, res) => {

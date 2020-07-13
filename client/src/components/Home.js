@@ -21,8 +21,6 @@ const Home = () =>
             .then(json => {
                 console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
-                if (userInfo.userId)
-                {}
 
             })
             .catch(err => console.log(err))
@@ -30,7 +28,7 @@ const Home = () =>
             
             fetchData();
         }, []);
-    
+
     return(
         <div >
             <h1 >Welcome {userInfo.userName}</h1> 
