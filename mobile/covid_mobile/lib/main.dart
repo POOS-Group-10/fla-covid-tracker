@@ -8,8 +8,10 @@ import 'package:covid_mobile/views/home_screen.dart';
 import 'package:covid_mobile/views/search_screen.dart';
 import 'package:covid_mobile/views/map_screen.dart';
 import 'package:covid_mobile/services/service_locator.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart'; 
 
-void main() {
+Future<void> main() async {
   setupServiceLocator();
   runApp(MyApp());
 }
@@ -17,16 +19,31 @@ void main() {
 // Add login here => once logged in route to home screen
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'COVID-19 Tracker',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LogInScreen(),
+      home: FutureBuilder<SharedPreferences> (
+        future: SharedPreferences.getInstance(),
+        builder: (context, snapshot) {
+          if(snapshot.hasData){
+            String prefsKey = 'email';
+            var email = snapshot.data.getString(prefsKey);
+            return (email == null) ? LogInScreen() : HomeScreen();
+          }else{
+            return LogInScreen();
+          }
+        }
+      ),
       routes: <String, WidgetBuilder> {
+        '/login': (BuildContext context) => LogInScreen(),
+        '/home': (BuildContext context) => HomeScreen(),
         '/map': (BuildContext context) => MapScreen(),
         '/list': (BuildContext context) => SearchScreen(),
         '/county_screen': (BuildContext context) => CountyScreen()

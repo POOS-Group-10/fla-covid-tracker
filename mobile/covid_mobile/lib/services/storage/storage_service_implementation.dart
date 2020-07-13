@@ -37,8 +37,6 @@ class StorageSerivceImplementation implements StorageService {
       return [];
     }
 
-    print("FUCKKK: $data");
-
     final decodedData = jsonDecode(data);
 
     List<County> counties = []; 
