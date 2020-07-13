@@ -109,11 +109,9 @@ const Covid = () =>
         // {
             var js = {
                 state: "FL",
-                // county: "Alachua"
-                // county: floridaCounties[counties]
                 county: userCounty
             }; 
-            // console.log("JS is " + JSON.stringify(js))
+            console.log("JS is " + JSON.stringify(js))
             const response = await fetch(url, {
                 method:'POST',
                 body:JSON.stringify(js),
