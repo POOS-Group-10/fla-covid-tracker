@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 
 require('dotenv').config();
 
@@ -112,7 +113,8 @@ app.use(session({
   // },
   secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
 }))
 
  
