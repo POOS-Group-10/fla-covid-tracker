@@ -14,7 +14,7 @@ const Covid = () =>
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
     // const url2 ='http://localhost:3000/api/profile';
-     const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
     var currentCounty = "";
     var floridaCounties = 
