@@ -141,12 +141,13 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log('Hellooooo')
+  console.log('Hellooooo') // connect-mongo update JR
   console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   console.log("This is a type: " + retVal)
   console.log("This is a type: " + res.json(retVal))
-  return JSON.stringify(retVal)
+  // return JSON.stringify(retVal)
+  return '[ { userName: "pepe", userCounty: "Bay" } ]' // connect-mongo update JR
 })
 
 app.post('/api/Login', (req, res) => {
