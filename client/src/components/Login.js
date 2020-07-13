@@ -28,7 +28,6 @@ const Login = () => {
       method: "POST", // GET is used by default
       data: payload,
     })
-      These are promises
       .then((response) => {
         console.log(response);
         setLoggedIn(true);
