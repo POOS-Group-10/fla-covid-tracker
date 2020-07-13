@@ -114,6 +114,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
+  resave: true,  // connect-mongo update JR
   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
 }))
 
