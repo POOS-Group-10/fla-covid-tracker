@@ -27,13 +27,30 @@ class _LogInScreen extends State<LogInScreen> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: <Widget>[
-            TextField(
+            Container(
+              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+              child: TextField(
               controller: _usernameController,
               decoration: InputDecoration(labelText: 'Username')
-            ), 
-            TextField(
+              ) 
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+              child: TextField(
               controller: _passwordController,
               decoration: InputDecoration(labelText: 'Password'),
+              ),
+            ),
+            Container(
+              height: 50, 
+              padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
+              child: RaisedButton(
+                color: Color.fromRGBO(127, 127, 213, 1),
+                child: Text('Login'),
+                onPressed: (){
+
+                }
+              )
             )
           ],
         ),

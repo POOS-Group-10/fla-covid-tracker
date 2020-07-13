@@ -15,16 +15,25 @@ require('dotenv').config();
 const Users = require('./models/user');
 // const routes = require('./routes/api');
 
-const MONGODB_URI = 'mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLtracking?retryWrites=true&w=majority';
+const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
 
-mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+console.log(MONGODB_URI);
+
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+
+// test functions
+
+mongoose.connection.once('open', function(){
+  console.log("connected to mongo db");
 });
 
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose is connected!');
-});
+mongoose.connection.on('error', function(error){
+  console.log("errrr:" + error);
+})
+
+// mongoose.connection.on('connected', () => {
+//   console.log('Mongoose is connected!');
+// });
 
 // This is a middleware in express that will parse every json
 app.use(express.json());

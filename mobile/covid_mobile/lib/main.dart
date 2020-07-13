@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:covid_mobile/views/county_screen.dart';
+import 'package:covid_mobile/views/login_screen.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_mobile/views/home_screen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeScreen(),
+      home: LogInScreen(),
       routes: <String, WidgetBuilder> {
         '/map': (BuildContext context) => MapScreen(),
         '/list': (BuildContext context) => SearchScreen(),
@@ -32,6 +33,4 @@ class MyApp extends StatelessWidget {
       }
     );
   }
-
-
 }
