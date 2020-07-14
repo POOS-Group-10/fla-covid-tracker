@@ -94,7 +94,7 @@ const Covid = () =>
         })
         // .then(res => res.json())
         .then(json => {
-            console.log("Type of Covid: " + typeof(json) )
+            console.log("json response in Covid.js: " + json + " county is " + json.county)
             setUserCounty(json.county);
             setUserInfo(json)
         })
@@ -109,7 +109,8 @@ const Covid = () =>
         // {
             var js = {
                 state: "FL",
-                county: userCounty
+                // county: userCounty
+                county: "Alachua"
             }; 
             console.log("JS is " + JSON.stringify(js))
             const response = await fetch(url, {
