@@ -24,7 +24,7 @@ const Login = () => {
     //   headers:{'Content-Type': 'application/json'}
     // })
     axios({
-      url: "../api/Login", // React app is communicating with the server by this route
+      url: '../api/Login', // React app is communicating with the server by this route
       method: "POST", // GET is used by default
       data: payload,
     })

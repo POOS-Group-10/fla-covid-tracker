@@ -15,7 +15,7 @@ const Home = () =>
   
     useEffect(() => {
             async function fetchData(){
-                const response = await fetch("../api/profile", {
+                const response = await fetch('../api/profile', {
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
