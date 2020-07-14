@@ -124,8 +124,9 @@ const Covid = () =>
             //     headers:{'Content-Type': 'application/json'}
             // })
             axios({
-                url: "../api/profile", // React app is communicating with the server by this route
-                method: "GET" // GET is used by default
+                url: url, // React app is communicating with the server by this route
+                method: "POST",
+                data: js // GET is used by default
               })
             // .then(res => res.json())
             .then(json => {
