@@ -10,7 +10,7 @@ import { json } from 'body-parser';
 const Covid = () =>
 {
     const [countyInfo, setCountyInfo] = useState([]);
-    const [userInfo, setUserInfo] = useState([{userName: "", county: ""}]);
+    const [userInfo, setUserInfo] = useState({userName: "", county: ""});
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
