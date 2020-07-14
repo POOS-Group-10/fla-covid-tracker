@@ -18,7 +18,7 @@ const Home = () =>
                 headers:{'Content-Type': 'application/json'}
             })
             .then(res => {
-                console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
+                // console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
                 res.json()
             })
             .then(json => {
