@@ -99,6 +99,8 @@ const Covid = () =>
         //   })
         // .then(res => res.json())
         .then(json => {
+            const data = JSON.parse(json);
+
             console.log("In Covid.js: " + json + " county is " + json.county)
             setUserCounty(json.county);
             setUserInfo(json)
