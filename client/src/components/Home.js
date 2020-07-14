@@ -8,17 +8,19 @@ import '../App.css';
 
 const Home = () =>
 {
-    // const url = 'http://localhost:3000/api/profile';
-    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    // // const url = 'http://localhost:3000/api/profile';
+    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userInfo, setUserInfo] = useState([{userName: "", county: ""}]);
     var list = []
   
     useEffect(() => {
             async function fetchData(){
-                const response = await fetch('../api/profile', {
+                const response = await fetch(url, {
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
+
+            
             // axios({
             //     url: "../api/profile", // React app is communicating with the server by this route
             //     method: "GET" // GET is used by default
