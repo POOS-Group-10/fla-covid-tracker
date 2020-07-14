@@ -21,12 +21,12 @@ const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FL
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-// mongoose.connect('mongodb://localhost/fla-covid-tracking', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
+mongoose.connect('mongodb://localhost/fla-covid-tracking', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // test functions
 
@@ -148,6 +148,8 @@ app.get('/api/profile', (req, res) => {
   console.log("Jack this is the profile api!");
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   return res.json({county: "Polk" , userName: "DemoGod"})
+    // return res.json()
+
   // return retVal.json()
 })
 

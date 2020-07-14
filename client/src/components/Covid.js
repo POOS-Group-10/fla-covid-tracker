@@ -14,8 +14,8 @@ const Covid = () =>
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
-    // const url2 ='http://localhost:3000/api/profile';
-    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url2 ='http://localhost:3000/api/profile';
+    // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
     var currentCounty = "";
     var floridaCounties = 
@@ -89,7 +89,7 @@ const Covid = () =>
 
     useEffect(() => {
         async function fetchData(){
-            const response = await fetch('../api/profile', {
+            const response = await fetch("../api/profile", {
             method:'GET',
             headers:{'Content-Type': 'application/json'}
         })
@@ -99,8 +99,9 @@ const Covid = () =>
         //   })
         // .then(res => res.json())
         .then(json => {
-            // const data = JSON.parse(json);
-            // console.log("In Covid.js: " + json + " county is " + json.county)
+            // const json_conv =  "'" + json + "'" 
+            // const data = JSON.parse(json_conv);
+            console.log("In Covid.js: " + json + " json.county is " + json.county)
             // setUserCounty(json.county);
             setUserCounty(json.county);
             setUserInfo({userName: json.userName, county: json.county})
