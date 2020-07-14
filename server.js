@@ -156,7 +156,6 @@ app.post('/api/Login', (req, res) => {
     req.session.userId = 0;
   }
 
-  console.log("About to find");
   Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
@@ -167,11 +166,12 @@ app.post('/api/Login', (req, res) => {
         })
       } 
       else {
-        console.log("Data is else")
+        console.log("Server.js Line 170")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
         req.session.userCounty = data[0].userCounty;
+        console.log("Recorded County" + req.session.userCounty)
         return res.status(200).json()
       }
     })

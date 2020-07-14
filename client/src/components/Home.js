@@ -17,13 +17,20 @@ const Home = () =>
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
-            .then(res => res.json())
+            .then(res => {
+                console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
+                res.json()
+            })
             .then(json => {
                 console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
 
             })
-            .catch(err => console.log(err))
+            .catch(err => 
+            {
+                console.log("catch block of api/profile")
+                console.log(err)
+            })
             }
             
             fetchData();
