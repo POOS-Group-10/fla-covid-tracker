@@ -152,7 +152,7 @@ app.use(session({
 // })
 
 
-app.get('/api/profile', async (req, res, next) => 
+app.post('/api/profile', async (req, res, next) => 
 {
 
   var ret = {error:'we love cop 4331'};
