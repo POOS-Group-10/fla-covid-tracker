@@ -10,7 +10,7 @@ const Home = () =>
 {
     // const url = 'http://localhost:3000/api/profile';
     const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
-    const [userInfo, setUserInfo] = useState({})
+    const [userInfo, setUserInfo] = useState([{userName: "", county: ""}]);
     var list = []
   
     useEffect(() => {
@@ -23,14 +23,10 @@ const Home = () =>
             //     url: "../api/profile", // React app is communicating with the server by this route
             //     method: "GET" // GET is used by default
             //   })
-            // .then(res => {
-            //     res.json()
-            // })
+            .then(res => res.json())
             .then(json => {
                 console.log("json in home.js json.county: " + json +" "  + json.county)
-                // console.log("Home.js text " + console.log(json.text()))  
-                // console.log("Home.js " + JSON.stringify(json))
-                setUserInfo(json)
+                setUserInfo({userName: json.userName, county: json.county})
 
             })
             .catch(err => 
@@ -40,7 +36,7 @@ const Home = () =>
             })
             }
             
-            // fetchData();
+            fetchData();
         }, []);
 
     return(
