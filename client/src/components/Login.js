@@ -24,12 +24,19 @@ const Login = () => {
     //   headers:{'Content-Type': 'application/json'}
     // })
     axios({
-      url: "../api/Login", // React app is communicating with the server by this route
+      url: '../api/Login', // React app is communicating with the server by this route
       method: "POST", // GET is used by default
       data: payload,
     })
       .then((response) => {
-        console.log(response);
+        // console.log('response of api Login: ' + response);
+        // console.dir('response of api (.dir)Login:' + response)
+        // console.log('Line 34 in Login.js' + response.message)
+        // const test = response
+        // console.dir('test.dir: ' + test)
+        // console.log('test.log: ' + test)
+        // const test2 = test.toString()
+        // console.log('test2: ' + test2)
         setLoggedIn(true);
       })
       .catch((e) => {

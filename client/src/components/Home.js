@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import fetch from 'node-fetch';
+import axios from "axios";
+
 
 import '../App.css';
 
@@ -13,20 +15,32 @@ const Home = () =>
   
     useEffect(() => {
             async function fetchData(){
-                const response = await fetch(url, {
+                const response = await fetch('../api/profile', {
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
-            .then(res => res.json())
+            // axios({
+            //     url: "../api/profile", // React app is communicating with the server by this route
+            //     method: "GET" // GET is used by default
+            //   })
+            // .then(res => {
+            //     res.json()
+            // })
             .then(json => {
-                console.log("Home and line 21: " + json.county)
+                console.log("json in home.js json.county: " + json +" "  + json.county)
+                // console.log("Home.js text " + console.log(json.text()))  
+                // console.log("Home.js " + JSON.stringify(json))
                 setUserInfo(json)
 
             })
-            .catch(err => console.log(err))
+            .catch(err => 
+            {
+                console.log("catch block of api/profile")
+                console.log(err)
+            })
             }
             
-            fetchData();
+            // fetchData();
         }, []);
 
     return(
