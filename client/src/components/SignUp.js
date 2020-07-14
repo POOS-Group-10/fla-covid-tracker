@@ -33,7 +33,7 @@ const SignUp = () =>
             email: email
         };
         
-        console.log("About to enter axios, payload is: " + payload);
+        console.log("About to enter axios, payload is: " + payload.userName);
         axios({
             url: '../api/findUser',
             method: 'POST',
@@ -48,6 +48,7 @@ const SignUp = () =>
                 return;
             }
             else {
+                console.log("Name not taken. yay!" + typeof(response));
                 axios({
                     url: '../api/SignUp', // React app is communicating with the server by this route
                     method: 'POST', // GET is used by default
@@ -56,8 +57,7 @@ const SignUp = () =>
                 // These are promises
                     .then((response) => {
                         // setRegistered(true)
-                    console.log("data is: " + response)
-
+                    console.log("data is: " + typeof(response))
                       setMessage(response.data.msg);
                     })
                     .catch((e) => {
