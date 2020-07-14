@@ -147,7 +147,7 @@ app.get('/api/profile', (req, res) => {
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   // Test removing stringify
   // console.log("retval type: " + typeof(reVal))
-  res.json(retVal)
+  return res.json(retVal)
 })
 
 app.post('/api/Login', (req, res) => {
