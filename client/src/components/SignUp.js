@@ -42,6 +42,8 @@ const SignUp = () =>
         .then((response) => {
             console.log("Entered the then from first Axios")
             console.log("response is " + response)
+            const test_whats_inside = response      //Testing to see whats in resposne
+            console.log(test_whats_inside.text())   //^^
             console.log(response.data.taken);
             if (response.data.taken === "1") {
                 setMessage(response.data.msg);
