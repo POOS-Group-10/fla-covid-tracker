@@ -141,10 +141,10 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log("Jack this is the profile api!");
+  console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
 //  return {county: "Polk" , userName: "DemoGod"}
-  return res.json({county: "Polk" , userName: "DemoGod"})
+  return res.json({county: req.session.userCounty , userName: req.session.userName})
     // return res.json()
 
   // return retVal.json()
