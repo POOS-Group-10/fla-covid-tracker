@@ -30,6 +30,7 @@ const Login = () => {
     })
       .then((response) => {
         console.log('response of api Login: ' + response);
+        console.dir('response of api (.dir)Login:' + response)
         setLoggedIn(true);
       })
       .catch((e) => {
