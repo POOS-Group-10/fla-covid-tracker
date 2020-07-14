@@ -97,8 +97,8 @@ const Covid = () =>
         //     url: "../api/profile", // React app is communicating with the server by this route
         //     method: "GET" // GET is used by default
         //   })
-        .then(res => res.json())
-        .then(json => {
+        .then((res) => res.json())
+        .then((json) => {
             // const json_conv =  "'" + json + "'" 
             // const data = JSON.parse(json);
             console.log("In Covid.js: " + json + " json.county is " + json.county)
@@ -132,8 +132,8 @@ const Covid = () =>
             //     method: "POST",
             //     data: js // GET is used by default
             //   })
-            .then(res => res.json())
-            .then(json => {
+            .then((res) => res.json())
+            .then((json) => {
                 console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
                 var j = json.message[0]
                 listStorage.push(j)
