@@ -118,11 +118,15 @@ const Covid = () =>
                 county: "Alachua"
             }; 
             console.log("JS is " + JSON.stringify(js))
-            const response = await fetch(url, {
-                method:'POST',
-                body:JSON.stringify(js),
-                headers:{'Content-Type': 'application/json'}
-            })
+            // const response = await fetch(url, {
+            //     method:'POST',
+            //     body:JSON.stringify(js),
+            //     headers:{'Content-Type': 'application/json'}
+            // })
+            axios({
+                url: "../api/profile", // React app is communicating with the server by this route
+                method: "GET" // GET is used by default
+              })
             // .then(res => res.json())
             .then(json => {
                 console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
