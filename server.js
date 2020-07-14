@@ -147,7 +147,8 @@ app.use(session({
 app.get('/api/profile', (req, res) => {
   console.log("Jack this is the profile api!");
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
-  return retVal
+  return res.json({county: "Polk" , userName: "DemoGod"})
+  // return retVal.json()
 })
 
 app.post('/api/Login', (req, res) => {

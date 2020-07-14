@@ -23,13 +23,13 @@ const Home = () =>
             //     url: "../api/profile", // React app is communicating with the server by this route
             //     method: "GET" // GET is used by default
             //   })
-            .then(res => {
-                res.json()
-            })
+            // .then(res => {
+            //     res.json()
+            // })
             .then(json => {
-                // console.log("json in home.js json.county: " + json +" "  + json.county)
-                console.log("Home.js text " + console.log(json.text()))  
-                console.log("Home.js " + JSON.stringify(json))
+                console.log("json in home.js json.county: " + json +" "  + json.county)
+                // console.log("Home.js text " + console.log(json.text()))  
+                // console.log("Home.js " + JSON.stringify(json))
                 setUserInfo(json)
 
             })

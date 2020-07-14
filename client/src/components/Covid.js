@@ -97,9 +97,9 @@ const Covid = () =>
         //     url: "../api/profile", // React app is communicating with the server by this route
         //     method: "GET" // GET is used by default
         //   })
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(json => {
-            console.log("json response in Covid.js: " + json + " county is " + json.county)
+            console.log("In Covid.js: " + json + " county is " + json.county)
             setUserCounty(json.county);
             setUserInfo(json)
         })
