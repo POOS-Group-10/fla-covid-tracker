@@ -32,6 +32,9 @@ dependencies:
   get_it: ^4.0.2
   shared_preferences: ^0.5.7+3
   path_provider: ^1.6.11
+  http: ^0.12.1
+  intl: ^0.16.1
+  flutter_statusbar_text_color: ^0.1.2
 
 dev_dependencies:
   flutter_test:

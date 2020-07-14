@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:collection';
 
+import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -206,7 +207,7 @@ class _MapScreen extends State<MapScreen> {
 ]''';
   int _polygonIdCounter = 1;
 
-  //CountyLines lines = new CountyLines();
+  CountyLines lines = new CountyLines();
   static final CameraPosition _florida = CameraPosition(
     target: LatLng(28, -84.3),
     zoom: 6,
@@ -219,7 +220,7 @@ class _MapScreen extends State<MapScreen> {
   }
 
 
- /* void _setPolygon() {
+  void _setPolygon() {
     for(int i = 0; i < lines.countyCoord.length; i++) {
       polygonLatLngs.add(new List<LatLng>());
       for (int j = 0; j < lines.countyCoord[i].length; j++) {
@@ -234,14 +235,47 @@ class _MapScreen extends State<MapScreen> {
         strokeWidth: 1,
         strokeColor: Colors.red,
         fillColor: Colors.red.withOpacity(0.08),
-        onTap: (){print(countyNames[i]);},
-      ));
+        onTap: (){showModalBottomSheet(
+            context: context,
+            builder: (context){ return Padding(
+                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 70.0),
+            child: Card(
+              elevation: 0.0,
+              child: Padding(
+            padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
+              child: ListTile(
+              title: Text(countyNames[i],
+              style:
+              TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+              subtitle: Text('1',
+              style: TextStyle(fontSize: 15)),
+              trailing: new IconButton(
+              icon: (model.choices[0].isFavorite)
+              ? Icon(Icons.favorite, color: Colors.red)
+                  : Icon(Icons.favorite_border, color: Colors.red),
+              onPressed: () {
+              model.toggleFavoriteStatus(0);
+              }),
+              onTap: () {
+              Navigator.pushNamed(context, '/county_screen', arguments: {
+              'countyName': countyNames[i],
+              'infected': 1,
+              });
+              },
+              )),
+              ),
+            );
+            },
+          backgroundColor: Colors.black.withOpacity(0.00),
+          elevation: 0.0,
+          barrierColor: Colors.black.withOpacity(0.01),
+      );}));
       print(_polygonIdCounter);
       _polygonIdCounter++;
     }
     lines = null;
     polygonLatLngs = null;
-  }*/
+  }
 
   void _showCard(){
 
@@ -253,6 +287,10 @@ class _MapScreen extends State<MapScreen> {
     _tempPolygons = null;
     print("visible");
   }*/
+
+  void _nothing(){
+
+  }
 
   /*void _setPolygonsInvisible(){
     _tempPolygons = new HashSet.of(_polygons);
@@ -287,32 +325,21 @@ class _MapScreen extends State<MapScreen> {
       //onCameraIdle: _setPolygonsVisible,
       //onCameraMoveStarted: _setPolygonsInvisible,
       onMapCreated: (GoogleMapController controller) {
-        /*setState(() {
+        setState(() {
           _setPolygon();
         }
-        );*/
+        );
         controller.setMapStyle(styleJSON);
         _controller.complete(controller);
       },
     ),
-      //bottomSheet: buildListView(model),
     );
   }
 
-  /*Widget buildListView(SearchViewModel viewModel) {
-    return ChangeNotifierProvider<SearchViewModel>(
-        create: (context) => viewModel,
-        child: Consumer<SearchViewModel>(
-        builder: (context, model, child) => ListView.builder(
-        itemCount: model.choices.length,
-        itemBuilder: (context, index) {
-          return cardView(index);
-        })));
-  }*/
 
- /* Widget cardView(int index) {
+  Widget cardView(int index) {
     return Card(
-          elevation: 1.0,
+          elevation: 1,
           child: Padding(
               padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
               child: ListTile(
@@ -336,6 +363,6 @@ class _MapScreen extends State<MapScreen> {
                 },
               )),
         );
-  }*/
+  }
   
 }

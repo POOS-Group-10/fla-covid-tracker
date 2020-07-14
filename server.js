@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 
 require('dotenv').config();
 
@@ -20,7 +21,7 @@ const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FL
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-// mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/fla-covid-tracking', {
+// mongoose.connect('mongodb://localhost/fla-covid-tracking', {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 // });
@@ -42,8 +43,11 @@ mongoose.connection.on('error', function(error){
 // });
 
 // This is a middleware in express that will parse every json
-app.use(express.json());
-app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // HTTP request logger
 app.use(morgan('tiny'));
@@ -57,20 +61,19 @@ if (process.env.NODE_ENV === 'production') {
   // This prevents "CANNOT GET /" errors when directly accessing pages from the web.
   app.get('*', (req, res) =>
   {
+    console.log("get(*) Entered")
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   });
 }
 
-
-
 const {
   NODE_ENV = 'production',
   SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!quiet,it\'asecret!',
+  SESS_SECRET = 'ssh!quiet,itsasecret!',
   SESS_LIFETIME = TWO_HOURS
 } = process.env
 
-const IN_PROD = NODE_ENV === 'production'
+// const IN_PROD = NODE_ENV === 'production'
 
 // Create email functionality
 // const nodemailer = require('nodemailer');
@@ -91,34 +94,38 @@ const IN_PROD = NODE_ENV === 'production'
 //   }
 // });
 
-
 // Starting Sessions
-// app.use(session({
-//   name: SESS_NAME,
-//   resave: false,
-//   saveUnititialized: false,
-//   secret: SESS_SECRET,
-//   cookie: {
-//       maxAge: SESS_LIFETIME,
-//       sameSite: true,
-//   }
-// }))
-
 app.use(session({
-  // genid: (req) => {
-  //   console.log('Inside the session middleware')
-  //   console.log(req.sessionID)
-  //   return uuid() // use UUIDs for session IDs
-  // },
-  secret: 'keyboard cat',
+  name: SESS_NAME,
   resave: false,
+<<<<<<< HEAD
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000,
     sameSite: true,
     secure: IN_PROD
+=======
+  saveUnititialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+>>>>>>> master
   }
 }))
+
+// app.use(session({
+//   // genid: (req) => {
+//   //   console.log('Inside the session middleware')
+//   //   console.log(req.sessionID)
+//   //   return uuid() // use UUIDs for session IDs
+//   // },
+//   secret: 'keyboard cat',
+//   // resave: false,
+//   saveUninitialized: true,
+//   resave: true,  // connect-mongo update JR
+//   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
+// }))
 
  
 // app.use(function (req, res, next) {
@@ -143,21 +150,20 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
-  var retVal = {county:req.session.userCounty, userName: req.session.userName}
-  console.log("This is a type: " + retVal)
-  console.log("This is a type: " + res.json(retVal))
-  return JSON.stringify(retVal)
+  console.log("Jack this is the profile api!");
+  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
+//  return {county: "Polk" , userName: "DemoGod"}
+  return res.json({county: "Polk" , userName: "DemoGod"})
+    // return res.json()
+
+  // return retVal.json()
 })
 
 app.post('/api/Login', (req, res) => {
-  console.log("Login API entered");
   if (!req.session.userId) {
-    console.log("Inside if statement - Line 126")
     req.session.userId = 0;
   }
 
-  console.log("About to find");
   Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
@@ -168,11 +174,11 @@ app.post('/api/Login', (req, res) => {
         })
       } 
       else {
-        console.log("Data is else")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
         req.session.userCounty = data[0].userCounty;
+        console.log("Server.js Recorded County: " + req.session.userCounty)
         return res.status(200).json()
       }
     })
