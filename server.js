@@ -142,18 +142,16 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
-  console.log("Inside of /api/profile");
+  console.log("Jack this is the profile api!");
   // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   // Test removing stringify
-  console.log("retval type: " + typeof(reVal))
-  return retVal.json()
+  // console.log("retval type: " + typeof(reVal))
+  res.json(retVal)
 })
 
 app.post('/api/Login', (req, res) => {
-  console.log("Login API entered");
   if (!req.session.userId) {
-    console.log("Inside if statement - Line 126")
     req.session.userId = 0;
   }
 
