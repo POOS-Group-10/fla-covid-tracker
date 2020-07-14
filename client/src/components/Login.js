@@ -31,6 +31,10 @@ const Login = () => {
       .then((response) => {
         console.log('response of api Login: ' + response);
         console.dir('response of api (.dir)Login:' + response)
+        const test = response
+        console.dir('test.dir: ' + test)
+        console.log('test.log: ' + test)
+        console.log('.tosource: ' + test.toSource())
         setLoggedIn(true);
       })
       .catch((e) => {
