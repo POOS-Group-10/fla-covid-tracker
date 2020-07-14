@@ -112,11 +112,11 @@ const Covid = () =>
 
     useEffect(() => {
         console.log('Use effect fired once.')
-        async function fetchData(){
-            const response = await fetch("../api/profile", {
-            method:'GET',
-            headers:{'Content-Type': 'application/json'}
-        })
+        // async function fetchData(){
+        //     const response = await fetch("../api/profile", {
+        //     method:'GET',
+        //     headers:{'Content-Type': 'application/json'}
+        // })
         // // axios({
         // //     url: "../api/profile", // React app is communicating with the server by this route
         // //     method: "GET" // GET is used by default
@@ -131,7 +131,6 @@ const Covid = () =>
         //     setUserInfo({userName: json.userName, county: json.county})
         // })
         // .catch(err => console.log(err))
-        }
         fetchData();
     }, []);
 //    currentCounty = userInfo.userName
