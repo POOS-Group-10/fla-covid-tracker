@@ -89,14 +89,14 @@ const Covid = () =>
 
     useEffect(() => {
         async function fetchData(){
-        //     const response = await fetch(url2, {
-        //     method:'GET',
-        //     headers:{'Content-Type': 'application/json'}
-        // })
-        axios({
-            url: "../api/profile", // React app is communicating with the server by this route
-            method: "GET" // GET is used by default
-          })
+            const response = await fetch("../api/profile", {
+            method:'GET',
+            headers:{'Content-Type': 'application/json'}
+        })
+        // axios({
+        //     url: "../api/profile", // React app is communicating with the server by this route
+        //     method: "GET" // GET is used by default
+        //   })
         // .then(res => res.json())
         .then(json => {
             console.log("json response in Covid.js: " + json + " county is " + json.county)
@@ -118,16 +118,16 @@ const Covid = () =>
                 county: "Alachua"
             }; 
             console.log("JS is " + JSON.stringify(js))
-            // const response = await fetch(url, {
-            //     method:'POST',
-            //     body:JSON.stringify(js),
-            //     headers:{'Content-Type': 'application/json'}
-            // })
-            axios({
-                url: url, // React app is communicating with the server by this route
-                method: "POST",
-                data: js // GET is used by default
-              })
+            const response = await fetch(url, {
+                method:'POST',
+                body:JSON.stringify(js),
+                headers:{'Content-Type': 'application/json'}
+            })
+            // axios({
+            //     url: url, // React app is communicating with the server by this route
+            //     method: "POST",
+            //     data: js // GET is used by default
+            //   })
             // .then(res => res.json())
             .then(json => {
                 console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
