@@ -66,13 +66,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-
-const {
-  NODE_ENV = 'production',
-  SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!quiet,it\'asecret!',
-  SESS_LIFETIME = TWO_HOURS
-} = process.env
+  const sess_name = process.env.SESS_NAME
+  const sess_secret = process.env.SESS_SECRET
+  const sess_lifetime = process.env.SESS_LIFETIME
 
 // const IN_PROD = NODE_ENV === 'production'
 
@@ -98,12 +94,12 @@ const {
 
 // Starting Sessions
 app.use(session({
-  name: SESS_NAME,
+  name: sess_name,
   resave: false,
   saveUnititialized: false,
-  secret: SESS_SECRET,
+  secret: sess_secret,
   cookie: {
-      maxAge: SESS_LIFETIME,
+      maxAge: sess_lifetime,
       sameSite: true,
   }
 }))
