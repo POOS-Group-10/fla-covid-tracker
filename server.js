@@ -26,7 +26,7 @@ console.log(MONGODB_URI);
 //   useUnifiedTopology: true
 // });
 
-// mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // test functions
 
