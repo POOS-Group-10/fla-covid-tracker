@@ -35,9 +35,9 @@ class MyApp extends StatelessWidget {
           if(snapshot.hasData){
             String prefsKey = 'email';
             var email = snapshot.data.getString(prefsKey);
-            return (email == null) ? LogInScreen() : HomeScreen();
-          }else{
-            return LogInScreen();
+            //return (email == null) ? LogInScreen() : HomeScreen();
+          //}else{
+            return HomeScreen();
           }
         }
       ),
