@@ -23,10 +23,9 @@ const Home = () =>
             //     url: "../api/profile", // React app is communicating with the server by this route
             //     method: "GET" // GET is used by default
             //   })
-            // .then(res => {
-            //     // console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
-            //     res.json()
-            // })
+            .then(res => {
+                res.json()
+            })
             .then(json => {
                 // console.log("json in home.js json.county: " + json +" "  + json.county)
                 console.log("Home.js text " + console.log(json.text()))  

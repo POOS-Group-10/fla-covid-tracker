@@ -128,7 +128,7 @@ const Covid = () =>
             //     method: "POST",
             //     data: js // GET is used by default
             //   })
-            // .then(res => res.json())
+            .then(res => res.json())
             .then(json => {
                 console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
                 var j = json.message[0]
