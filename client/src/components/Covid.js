@@ -97,7 +97,7 @@ const Covid = () =>
         //     url: "../api/profile", // React app is communicating with the server by this route
         //     method: "GET" // GET is used by default
         //   })
-        // .then(res => res.json())
+        .then(res => res.json())
         .then(json => {
             // const json_conv =  "'" + json + "'" 
             // const data = JSON.parse(json);
