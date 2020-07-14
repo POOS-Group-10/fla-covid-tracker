@@ -22,8 +22,9 @@ const Home = () =>
             //     res.json()
             // })
             .then(json => {
-                console.log("json in home.js json.county: " + json +" "  + json.county)
-                // console.log("Home and line 21: " + json.county)
+                // console.log("json in home.js json.county: " + json +" "  + json.county)
+                console.log("Home.js text " + console.log(json.text()))  
+                console.log("Home.js " + JSON.stringify(json))
                 setUserInfo(json)
 
             })
