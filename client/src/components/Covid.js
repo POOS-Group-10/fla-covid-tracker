@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import fetch from 'node-fetch';
 import { json } from 'body-parser';
-import axios from "axios";
 
 // const fetch = require("node-fetch");
 
