@@ -17,12 +17,13 @@ const Home = () =>
                 method:'GET',
                 headers:{'Content-Type': 'application/json'}
             })
-            .then(res => {
-                // console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
-                res.json()
-            })
+            // .then(res => {
+            //     // console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
+            //     res.json()
+            // })
             .then(json => {
-                console.log("Home and line 21: " + json.county)
+                console.log("json in home.js is type of: " + typeof(json))
+                // console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
 
             })

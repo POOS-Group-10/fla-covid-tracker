@@ -117,8 +117,9 @@ const Covid = () =>
                 body:JSON.stringify(js),
                 headers:{'Content-Type': 'application/json'}
             })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(json => {
+                console.log("json in Covid.js is type of: " + typeof(json))
                 var j = json.message[0]
                 
                 listStorage.push(j)

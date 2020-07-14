@@ -141,10 +141,12 @@ app.use(session({
 // })
 
 app.get('/api/profile', (req, res) => {
+  console.log("Inside of /api/profile");
   // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   // Test removing stringify
-  return retVal
+  console.log("retval type: " + typeof(reVal))
+  return retVal.json()
 })
 
 app.post('/api/Login', (req, res) => {
