@@ -11,7 +11,7 @@ const Covid = () =>
 {
     const [county, setCountyInfo] = useState([]);
     const [userInfo, setUserInfo] = useState({});
-    const [userCounty, setUserCounty] = useState({userCounty:""});
+    const [userCounty, setUserCounty] = useState();
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
     // const url2 ='http://localhost:3000/api/profile';
