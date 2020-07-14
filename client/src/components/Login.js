@@ -31,6 +31,7 @@ const Login = () => {
       .then((response) => {
         console.log('response of api Login: ' + response);
         console.dir('response of api (.dir)Login:' + response)
+        console.log('Line 34 in Login.js' + response.message)
         const test = response
         console.dir('test.dir: ' + test)
         console.log('test.log: ' + test)
