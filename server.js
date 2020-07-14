@@ -94,29 +94,29 @@ const IN_PROD = NODE_ENV === 'production'
 
 
 // Starting Sessions
-// app.use(session({
-//   name: SESS_NAME,
-//   resave: false,
-//   saveUnititialized: false,
-//   secret: SESS_SECRET,
-//   cookie: {
-//       maxAge: SESS_LIFETIME,
-//       sameSite: true,
-//   }
-// }))
-
 app.use(session({
-  // genid: (req) => {
-  //   console.log('Inside the session middleware')
-  //   console.log(req.sessionID)
-  //   return uuid() // use UUIDs for session IDs
-  // },
-  secret: 'keyboard cat',
-  // resave: false,
-  saveUninitialized: true,
-  resave: true,  // connect-mongo update JR
-  store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
+  name: SESS_NAME,
+  resave: false,
+  saveUnititialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+  }
 }))
+
+// app.use(session({
+//   // genid: (req) => {
+//   //   console.log('Inside the session middleware')
+//   //   console.log(req.sessionID)
+//   //   return uuid() // use UUIDs for session IDs
+//   // },
+//   secret: 'keyboard cat',
+//   // resave: false,
+//   saveUninitialized: true,
+//   resave: true,  // connect-mongo update JR
+//   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
+// }))
 
  
 // app.use(function (req, res, next) {
