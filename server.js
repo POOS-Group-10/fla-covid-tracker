@@ -140,7 +140,7 @@ app.use(session({
 //   next()
 // })
 
-app.get('/api/profile', (req, res) => {
+app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
 //  return {county: "Polk" , userName: "DemoGod"}

@@ -18,7 +18,6 @@ const Covid = () =>
     // const url2 ='http://localhost:3000/api/profile';
     const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
-    var currentCounty = "";
     var floridaCounties = 
     ["Alachua",
     "Baker",
@@ -90,7 +89,7 @@ const Covid = () =>
 
     async function fetchData(){
         const response = await fetch("../api/profile", {
-        method:'GET',
+        method:'POST',
         headers:{'Content-Type': 'application/json'}
     })
     // axios({
