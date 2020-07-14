@@ -144,7 +144,7 @@ app.get('/api/profile', (req, res) => {
   // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
   var retVal = {county:req.session.userCounty, userName: req.session.userName}
   // Test removing stringify
-  return retval.json()
+  return retVal
 })
 
 app.post('/api/Login', (req, res) => {
