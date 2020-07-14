@@ -34,7 +34,8 @@ const Login = () => {
         const test = response
         console.dir('test.dir: ' + test)
         console.log('test.log: ' + test)
-        test.toString()
+        const test2 = test.toString()
+        console.log('test2: ' + test2)
         setLoggedIn(true);
       })
       .catch((e) => {
