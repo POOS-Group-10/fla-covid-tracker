@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import fetch from 'node-fetch';
 import { json } from 'body-parser';
+import axios from "axios";
+
 // const fetch = require("node-fetch");
 
 const Covid = () =>
@@ -88,10 +90,14 @@ const Covid = () =>
 
     useEffect(() => {
         async function fetchData(){
-            const response = await fetch(url2, {
-            method:'GET',
-            headers:{'Content-Type': 'application/json'}
-        })
+        //     const response = await fetch(url2, {
+        //     method:'GET',
+        //     headers:{'Content-Type': 'application/json'}
+        // })
+        axios({
+            url: "../api/profile", // React app is communicating with the server by this route
+            method: "GET" // GET is used by default
+          })
         // .then(res => res.json())
         .then(json => {
             console.log("json response in Covid.js: " + json + " county is " + json.county)

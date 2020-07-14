@@ -13,10 +13,14 @@ const Home = () =>
   
     useEffect(() => {
             async function fetchData(){
-                const response = await fetch(url, {
-                method:'GET',
-                headers:{'Content-Type': 'application/json'}
-            })
+            //     const response = await fetch(url, {
+            //     method:'GET',
+            //     headers:{'Content-Type': 'application/json'}
+            // })
+            axios({
+                url: "../api/profile", // React app is communicating with the server by this route
+                method: "GET" // GET is used by default
+              })
             // .then(res => {
             //     // console.log("Home.js api/profile was called correctly" + typeof(res) + " " + typeof(res.json()))
             //     res.json()
@@ -35,7 +39,7 @@ const Home = () =>
             })
             }
             
-            fetchData();
+            // fetchData();
         }, []);
 
     return(
