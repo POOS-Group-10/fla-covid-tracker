@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
-const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 
 require('dotenv').config();
 
@@ -98,19 +97,11 @@ const {
 app.use(session({
   name: SESS_NAME,
   resave: false,
-<<<<<<< HEAD
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 60 * 60 * 1000,
-    sameSite: true,
-    secure: IN_PROD
-=======
   saveUnititialized: false,
   secret: SESS_SECRET,
   cookie: {
       maxAge: SESS_LIFETIME,
       sameSite: true,
->>>>>>> master
   }
 }))
 
