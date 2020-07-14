@@ -29,7 +29,7 @@ const Login = () => {
       data: payload,
     })
       .then((response) => {
-        console.log(response);
+        console.log('response of api Login: ' + response);
         setLoggedIn(true);
       })
       .catch((e) => {
