@@ -140,27 +140,6 @@ app.use(session({
 //   next()
 // })
 
-<<<<<<< HEAD
-// app.get('/api/profile', (req, res) => {
-//   console.log("Jack this is the profile api!");
-//   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
-// //  return {county: "Polk" , userName: "DemoGod"}
-//   return res.json({county: "Polk" , userName: "DemoGod"})
-//     // return res.json()
-
-//   // return retVal.json()
-// })
-
-
-app.post('/api/profile', async (req, res, next) => 
-{
-
-  var ret = {error:'we love cop 4331'};
-  res.status(200).json(ret);
-});
-
-
-=======
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
@@ -170,7 +149,6 @@ app.post('/api/profile', (req, res) => {
 
   // return retVal.json()
 })
->>>>>>> john_init
 
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
