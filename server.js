@@ -112,7 +112,7 @@ app.use(session({
   //   return uuid() // use UUIDs for session IDs
   // },
   secret: 'keyboard cat',
-  resave: false,
+  // resave: false,
   saveUninitialized: true,
   resave: true,  // connect-mongo update JR
   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
