@@ -121,16 +121,16 @@ const Covid = () =>
         // //     url: "../api/profile", // React app is communicating with the server by this route
         // //     method: "GET" // GET is used by default
         // //   })
-        .then((res) => res.json())
-        .then((json) => {
+        // .then((res) => res.json())
+        // .then((json) => {
             // const json_conv =  "'" + json + "'" 
             // const data = JSON.parse(json);
-            console.log("In Covid.js: " + json + " json.county is " + json.county)
+            // console.log("In Covid.js: " + json + " json.county is " + json.county)
             // setUserCounty(json.county);
-            setUserCounty(json.county);
-            setUserInfo({userName: json.userName, county: json.county})
-        })
-        .catch(err => console.log(err))
+        //     setUserCounty(json.county);
+        //     setUserInfo({userName: json.userName, county: json.county})
+        // })
+        // .catch(err => console.log(err))
         }
         fetchData();
     }, []);
