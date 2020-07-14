@@ -10,14 +10,14 @@ import { json } from 'body-parser';
 const Covid = () =>
 {
     const [countyInfo, setCountyInfo] = useState([]);
-    const [userInfo, setUserInfo] = useState({userName: "", county: ""});
+    const [userName, setUserName] = useState('');
+    // const [userInfo, setUserInfo] = useState([{userName: '', county: ''}]);
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
     // const url2 ='http://localhost:3000/api/profile';
     // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
-    var currentCounty = "";
     var floridaCounties = 
     ["Alachua",
     "Baker",
@@ -87,21 +87,47 @@ const Covid = () =>
     "Washington"]
     var listStorage = []
 
+    async function fetchData(){
+        const response = await fetch("../api/profile", {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'}
+    })
+    // axios({
+    //     url: "../api/profile", // React app is communicating with the server by this route
+    //     method: "GET" // GET is used by default
+    //   })
+    .then((res) => res.json())
+    .then((json) => {
+        // const json_conv =  "'" + json + "'" 
+        // const data = JSON.parse(json);
+        console.log("In Covid.js: " + json + " json.county is " + json.county)
+        // setUserCounty(json.county);
+        setUserCounty(json.county);
+        setUserName(json.userName);
+        console.log('json info: ' + json.userName + ' ' + json.county)
+        console.log('states are: ' + userName + ' f ' + userCounty)
+    })
+    .catch(err => console.log(err))
+    }
+
     useEffect(() => {
+        console.log('Use effect fired once.')
         async function fetchData(){
-            const response = await fetch('../api/profile', {
+            const response = await fetch("../api/profile", {
             method:'GET',
             headers:{'Content-Type': 'application/json'}
         })
-        // axios({
-        //     url: "../api/profile", // React app is communicating with the server by this route
-        //     method: "GET" // GET is used by default
-        //   })
-        // .then(res => res.json())
-        .then(json => {
+        // // axios({
+        // //     url: "../api/profile", // React app is communicating with the server by this route
+        // //     method: "GET" // GET is used by default
+        // //   })
+        .then((res) => res.json())
+        .then((json) => {
+            // const json_conv =  "'" + json + "'" 
             // const data = JSON.parse(json);
-            // console.log("In Covid.js: " + json + " county is " + json.county)
+            console.log("In Covid.js: " + json + " json.county is " + json.county)
             // setUserCounty(json.county);
+            setUserCounty(json.county);
             setUserInfo({userName: json.userName, county: json.county})
         })
         .catch(err => console.log(err))
@@ -130,8 +156,8 @@ const Covid = () =>
             //     method: "POST",
             //     data: js // GET is used by default
             //   })
-            .then(res => res.json())
-            .then(json => {
+            .then((res) => res.json())
+            .then((json) => {
                 console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
                 var j = json.message[0]
                 listStorage.push(j)
@@ -144,9 +170,10 @@ const Covid = () =>
    
     return (
         <div>
+        <div>
             <h1>Covid Map</h1> 
             <button onClick={makeRequest}>Click Me</button>
-            <h1>User County is {userInfo.county}</h1>
+            <h1>User County is {userCounty}</h1>
             {countyInfo.map(res => <div>State: {res.state_name}</div>)}
             {countyInfo.map(res => <div>County: {res.county_name}</div>)}  
             {countyInfo.map(res => <div>Confirmed: {res.confirmed}</div>)} 
@@ -154,6 +181,11 @@ const Covid = () =>
             {countyInfo.map(res => <div>New Death: {res.new_death}</div>)}   
             {countyInfo.map(res => <div>Last Updated: {res.last_update}</div>)}           
 
+        </div>
+        <div>
+            <p>{userName}</p>
+            <p>{userCounty}</p>
+        </div>
         </div>
     )
 };

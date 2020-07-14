@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
-const MongoStore = require('connect-mongo')(session); // connect-mongo update JR
 
 require('dotenv').config();
 
@@ -141,6 +140,7 @@ app.use(session({
 //   next()
 // })
 
+<<<<<<< HEAD
 // app.get('/api/profile', (req, res) => {
 //   console.log("Jack this is the profile api!");
 //   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
@@ -160,6 +160,17 @@ app.post('/api/profile', async (req, res, next) =>
 });
 
 
+=======
+app.post('/api/profile', (req, res) => {
+  console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
+  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
+//  return {county: "Polk" , userName: "DemoGod"}
+  return res.json({county: req.session.userCounty , userName: req.session.userName})
+    // return res.json()
+
+  // return retVal.json()
+})
+>>>>>>> john_init
 
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
@@ -193,10 +204,11 @@ app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   Users.find({userName: req.body.userName})
     .then((data) => {
+      console.log(data);
       if (data.length > 0)
       {
         return res.json({
-          msg: "That username is taken",
+          msg: "That username and/or email is taken",
           taken: "1"
         })
       }

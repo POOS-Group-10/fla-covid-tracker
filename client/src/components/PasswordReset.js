@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 import "../App.css";
 
@@ -24,7 +24,7 @@ const PasswordReset = () =>
                 type="password"
                 placeholder="Password"
                 name="email"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {setPassword(e.target.value, 1)}}
               />
             </div>
             <div className="form-input">
@@ -32,7 +32,7 @@ const PasswordReset = () =>
                 type="password"
                 placeholder="Confirm Password"
                 name="email"
-                onChange={(e) => {setConfirmPassword(e.target.value)}}
+                onChange={(e) => {setConfirmPassword(e.target.value, 0)}}
               />
             </div>
             <button>Submit</button>
