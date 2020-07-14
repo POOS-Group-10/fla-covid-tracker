@@ -143,11 +143,8 @@ app.use(session({
 
 app.get('/api/profile', (req, res) => {
   console.log("Jack this is the profile api!");
-  // console.log("Inside server.js: " + req.session.userCounty + " " + req.session.userName)
-  var retVal = {county:req.session.userCounty, userName: req.session.userName}
-  // Test removing stringify
-  // console.log("retval type: " + typeof(reVal))
-  return res.json(retVal)
+  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
+  return res.json({county: "Brevard", userName: "coco"})
 })
 
 app.post('/api/Login', (req, res) => {
@@ -165,12 +162,11 @@ app.post('/api/Login', (req, res) => {
         })
       } 
       else {
-        console.log("Server.js Line 170")
         // req.session = data[0];
         req.session.userId = data[0]._id;
         req.session.userName = data[0].userName;
         req.session.userCounty = data[0].userCounty;
-        console.log("Recorded County" + req.session.userCounty)
+        console.log("Recorded County: " + req.session.userCounty)
         return res.status(200).json()
       }
     })
