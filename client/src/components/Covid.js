@@ -10,12 +10,12 @@ import { json } from 'body-parser';
 const Covid = () =>
 {
     const [countyInfo, setCountyInfo] = useState([]);
-    const [userInfo, setUserInfo] = useState([{userName: "", county: ""}]);
+    const [userInfo, setUserInfo] = useState({userName: "", county: ""});
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
     // const url2 ='http://localhost:3000/api/profile';
-    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
     var currentCounty = "";
     var floridaCounties = 
@@ -89,7 +89,7 @@ const Covid = () =>
 
     useEffect(() => {
         async function fetchData(){
-            const response = await fetch("../api/profile", {
+            const response = await fetch('../api/profile', {
             method:'GET',
             headers:{'Content-Type': 'application/json'}
         })
@@ -97,13 +97,11 @@ const Covid = () =>
         //     url: "../api/profile", // React app is communicating with the server by this route
         //     method: "GET" // GET is used by default
         //   })
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(json => {
-            // const json_conv =  "'" + json + "'" 
             // const data = JSON.parse(json);
-            console.log("In Covid.js: " + json + " json.county is " + json.county)
+            // console.log("In Covid.js: " + json + " county is " + json.county)
             // setUserCounty(json.county);
-            setUserCounty(json.county);
             setUserInfo({userName: json.userName, county: json.county})
         })
         .catch(err => console.log(err))

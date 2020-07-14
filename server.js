@@ -141,15 +141,25 @@ app.use(session({
 //   next()
 // })
 
-app.get('/api/profile', (req, res) => {
-  console.log("Jack this is the profile api!");
-  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
-//  return {county: "Polk" , userName: "DemoGod"}
-  return res.json({county: "Polk" , userName: "DemoGod"})
-    // return res.json()
+// app.get('/api/profile', (req, res) => {
+//   console.log("Jack this is the profile api!");
+//   // var retVal = {county:req.session.userCounty, userName: req.session.userName}
+// //  return {county: "Polk" , userName: "DemoGod"}
+//   return res.json({county: "Polk" , userName: "DemoGod"})
+//     // return res.json()
 
-  // return retVal.json()
-})
+//   // return retVal.json()
+// })
+
+
+app.get('/api/profile', async (req, res, next) => 
+{
+
+  var ret = {error:'we love cop 4331'};
+  res.status(200).json(ret);
+});
+
+
 
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
