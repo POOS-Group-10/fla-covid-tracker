@@ -117,7 +117,7 @@ const Covid = () =>
         // {
             var js = {
                 state: "FL",
-                county: userCounty
+                county: "Alachua"
                 // county: "Alachua"
             }; 
             
