@@ -13,29 +13,29 @@ const Home = () =>
     const [userName, setUserName] = useState('');
     var list = []
   
-    useEffect(() => {
-            async function fetchData(){
-                const response = await fetch(url, {
-                method:'POST',
-                headers:{'Content-Type': 'application/json'}
-            })
-            // axios({
-            //     url: "../../api/profile", // React app is communicating with the server by this route
-            //     method: "GET" // GET is used by default
-            //   })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log("json in home.js json.county: " + json + " "  + json.county)
-                setUserName(json.userName)
+    async function fetchData(){
+        const response = await fetch(url, {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'}
+    })
+    // axios({
+    //     url: "../../api/profile", // React app is communicating with the server by this route
+    //     method: "GET" // GET is used by default
+    //   })
+    .then((res) => res.json())
+    .then((json) => {
+        console.log("json in home.js json.county: " + json + " "  + json.county)
+        setUserName(json.userName)
 
-            })
-            .catch(err => 
-            {
-                console.log("catch block of api/profile")
-                console.log(err)
-            })
-            }
-            
+    })
+    .catch(err => 
+    {
+        console.log("catch block of api/profile")
+        console.log(err)
+    })
+    }
+
+    useEffect(() => {
             fetchData();
         }, []);
 
