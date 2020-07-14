@@ -58,6 +58,7 @@ if (process.env.NODE_ENV === 'production') {
   // This prevents "CANNOT GET /" errors when directly accessing pages from the web.
   app.get('*', (req, res) =>
   {
+    console.log("get(*) Entered")
     res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
   });
 }

@@ -22,7 +22,7 @@ const Home = () =>
             //     res.json()
             // })
             .then(json => {
-                console.log("json in home.js is type of: " + typeof(json))
+                console.log("json in home.js: " + json)
                 // console.log("Home and line 21: " + json.county)
                 setUserInfo(json)
 

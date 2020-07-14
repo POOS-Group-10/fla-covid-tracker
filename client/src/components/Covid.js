@@ -92,9 +92,9 @@ const Covid = () =>
             method:'GET',
             headers:{'Content-Type': 'application/json'}
         })
-        .then(res => res.json())
+        // .then(res => res.json())
         .then(json => {
-            console.log("Type of Covid: " + typeof(json))
+            console.log("Type of Covid: " + typeof(json) )
             setUserCounty(json.county);
             setUserInfo(json)
         })
