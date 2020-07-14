@@ -43,8 +43,11 @@ mongoose.connection.on('error', function(error){
 // });
 
 // This is a middleware in express that will parse every json
-app.use(express.json());
-app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // HTTP request logger
 app.use(morgan('tiny'));
