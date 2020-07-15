@@ -30,9 +30,9 @@ const Login = () => {
     })
       .then((response) => {
         console.log('response to login api: ' + response)
-        if (response){
-          setLoggedIn(true);
-        } else{ setLoggedIn(false)}
+        if (response.data.taken === "0"){
+          setLoggedIn(false);
+        } else{ setLoggedIn(true)}
               
       })
       .catch((e) => {
