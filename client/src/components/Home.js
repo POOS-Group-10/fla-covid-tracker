@@ -29,9 +29,9 @@ const Home = () =>
     .then((res) => res.json())
     .then((json) => {
         console.log("json in home.js json.county: " + json + " "  + json.county)
-        if (json.userName == '{}') {
-            setLoggedIn(false)
-        }else if (json.userName != '{}') {
+        // if (json.userName == '{}') {
+        //     setLoggedIn(false)}
+        if (json.userName != '{}') {
             setLoggedIn(true)
         }
         
