@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
-const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -151,61 +150,27 @@ app.post('/api/profile', (req, res) => {
   // return retVal.json()
 })
 
-// app.post('/api/Login', (req, res) => {
-//   if (!req.session.userId) {
-//     req.session.userId = 0;
-//   }
-
-//   Users.find({ userName: req.body.userName, password: req.body.password })
-//     .then((data) => {
-//       if (data.length < 1)
-//       { 
-//         console.log("enteded login bad")
-//         return res.status(401).json({
-//           message: "Auth failed."
-//         })
-//       } 
-//       else {
-//         // req.session = data[0];
-//         req.session.userId = data[0]._id;
-//         req.session.userName = data[0].userName;
-//         req.session.userCounty = data[0].userCounty;
-//         console.log("Server.js Recorded County: " + req.session.userCounty)
-//         return res.status(200).json()
-//       }
-//     })
-//     .catch((error) => {
-//       console.log('Error: ', error);
-//     });
-// });
-
-
-app.post('/api/Login', async(req, res) => {
+app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
 
-  Users.find({ userName: req.body.userName })
+  Users.find({ userName: req.body.userName, password: req.body.password })
     .then((data) => {
       if (data.length < 1)
       { 
-        console.log("User name not found")
+        console.log("enteded login bad")
         return res.status(401).json({
-          message: "UserName not found."
+          message: "Auth failed."
         })
       } 
       else {
-	      	 if ( bcrypt.compare(req.body.password, data[0].password)) {
-	        	res.send('success password matched')
-	     	 } else {
-	     	 	res.send('Incorrect password')
-	     	 }
-	        req.session = data[0];
-	        req.session.userId = data[0]._id;
-	        req.session.userName = data[0].userName;
-	        req.session.userCounty = data[0].userCounty;
-	        console.log("Server.js Recorded County: " + req.session.userCounty)
-	        return res.status(200).json()
+        // req.session = data[0];
+        req.session.userId = data[0]._id;
+        req.session.userName = data[0].userName;
+        req.session.userCounty = data[0].userCounty;
+        console.log("Server.js Recorded County: " + req.session.userCounty)
+        return res.status(200).json()
       }
     })
     .catch((error) => {
@@ -238,21 +203,11 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
-app.post('/api/SignUp', async (req, res) => {
+app.post('/api/SignUp', (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
   const data = req.body;
-  // const user = new Users(data);
-  //hash faile? delete form here  and uncomment the live above
-  const hashPassword = await bcrypt.hash(req.body.password, 10)
-  const user = new Users( {              
-        userName: req.body.userName,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: hashPassword
-      });
-// until here ... and the "const bcrypt = require('bcrypt')" 
+  const user = new Users(data);
 
   // try
   // {
