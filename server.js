@@ -255,6 +255,7 @@ app.post('/api/SignUp', async (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
+        userCounty: req.body.userCounty,
         password: hashPassword
       });
       console.log('user is: ' + user)
@@ -297,6 +298,7 @@ app.post('/api/SignUp', async (req, res) => {
   user.save((error) => {
     if (error) {
       console.log("Error in code here");
+      console.log(error)
       res.status(500).json({ msg: 'Sorry, internal server errors'});
       return;
     }
