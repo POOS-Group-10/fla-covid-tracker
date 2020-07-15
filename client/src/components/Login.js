@@ -29,9 +29,10 @@ const Login = () => {
       data: payload,
     })
       .then((response) => {
+        console.log('response to login api: ' + response)
         if (response){
           setLoggedIn(true);
-        }
+        } else{ setLoggedIn(false)}
               
       })
       .catch((e) => {
