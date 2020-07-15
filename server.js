@@ -152,70 +152,74 @@ app.post('/api/profile', (req, res) => {
   // return retVal.json()
 })
 
-// MASTER VERSION
-app.post('/api/Login', (req, res) => {
-  if (!req.session.userId) {
-    req.session.userId = 0;
-  }
-
-  Users.find({ userName: req.body.userName, password: req.body.password })
-    .then((data) => {
-      if (data.length < 1)
-      { 
-        console.log("enteded login bad")
-        return res.status(401).json({
-          message: "Auth failed."
-        })
-      } 
-      else {
-        // req.session = data[0];
-        req.session.userId = data[0]._id;
-        req.session.userName = data[0].userName;
-        req.session.userCounty = data[0].userCounty;
-        console.log("Server.js Recorded County: " + req.session.userCounty)
-        return res.status(200).json()
-      }
-    })
-    .catch((error) => {
-      console.log('Error: ', error);
-    });
-});
-
-
-
-// // Login
+// // MASTER VERSION
 // app.post('/api/Login', (req, res) => {
 //   if (!req.session.userId) {
 //     req.session.userId = 0;
 //   }
 
-//   Users.find({ userName: req.body.userName })
+//   Users.find({ userName: req.body.userName, password: req.body.password })
 //     .then((data) => {
 //       if (data.length < 1)
 //       { 
-//         console.log("User name not found")
+//         console.log("enteded login bad")
 //         return res.status(401).json({
-//           message: "UserName not found."
+//           message: "Auth failed."
 //         })
 //       } 
 //       else {
-//             if ( bcrypt.compare(req.body.password, data[0].password)) {
-//             res.send('success password matched')
-//           } else {
-//             res.send('Incorrect password')
-//           }
-//           req.session = data[0];
-//           req.session.userId = data[0]._id;
-//           req.session.userName = data[0].userName;
-//           req.session.userCounty = data[0].userCounty;
-//           console.log("Server.js Recorded County: " + req.session.userCounty)
-//           return res.status(200).json()
+//         // req.session = data[0];
+//         req.session.userId = data[0]._id;
+//         req.session.userName = data[0].userName;
+//         req.session.userCounty = data[0].userCounty;
+//         console.log("Server.js Recorded County: " + req.session.userCounty)
+//         return res.status(200).json()
 //       }
 //     })
 //     .catch((error) => {
 //       console.log('Error: ', error);
 //     });
 // });
+
+
+
+// Login
+app.post('/api/Login', (req, res) => {
+  if (!req.session.userId) {
+    req.session.userId = 0;
+  }
+
+  Users.find({ userName: req.body.userName })
+    .then((data) => {
+      if (data.length < 1)
+      { 
+        console.log("User name not found")
+        return res.status(401).json({
+          message: "UserName not found."
+        })
+      } 
+      else {
+          console.log('req..passw: ' + req.body.password)
+          console.log('data[0].passw: ' + data[0].password)
+            if ( bcrypt.compare(req.body.password, data[0].password)) {
+              console.log('password is a mathc')
+            res.send('success password matched')
+          } else {
+            console.log('password no matchy')
+            res.send('Incorrect password')
+          }
+          req.session = data[0];
+          req.session.userId = data[0]._id;
+          req.session.userName = data[0].userName;
+          req.session.userCounty = data[0].userCounty;
+          console.log("Server.js Recorded County: " + req.session.userCounty)
+          return res.status(200).json()
+      }
+    })
+    .catch((error) => {
+      console.log('Error: ', error);
+    });
+});
 
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
