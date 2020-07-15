@@ -201,12 +201,14 @@ app.post('/api/Login', (req, res) => {
       else {
           console.log('req..passw: ' + req.body.password)
           console.log('data[0].passw: ' + data[0].password)
-            if ( bcrypt.compare(req.body.password, data[0].password)) {
+          const compRes = bcrypt.compare(req.body.password, data[0].password)
+          console.log('compRes: ' + compRes)
+            if ( compRes) {
               console.log('password is a match')
-            res.send('success password matched')
+            res.send(true)
           } else {
             console.log('password no matchy')
-            res.send('Incorrect password')
+            res.send(false)
           }
           req.session = data[0];
           req.session.userId = data[0]._id;
