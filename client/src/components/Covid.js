@@ -15,11 +15,7 @@ const Covid = () =>
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
-<<<<<<< HEAD
-    const url2 ='http://localhost:3000/api/profile';
-=======
     // const url2 ='http://localhost:3000/api/profile';
->>>>>>> master
     // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
     var floridaCounties = 
