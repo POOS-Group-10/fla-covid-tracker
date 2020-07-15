@@ -1,3 +1,7 @@
+import 'package:covid_mobile/services/auth/auth.dart';
+import 'package:covid_mobile/services/auth/auth_service_implementation.dart';
+import 'package:covid_mobile/services/counties/county_service.dart';
+import 'package:covid_mobile/services/service_locator.dart';
 import 'package:flutter/material.dart';
 
 class LogInScreen extends StatefulWidget{
@@ -7,8 +11,9 @@ class LogInScreen extends StatefulWidget{
 
 class _LogInScreen extends State<LogInScreen> {
 
-  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final AuthService _authService = serviceLocator<AuthService>();
 
 
   @override
@@ -30,14 +35,15 @@ class _LogInScreen extends State<LogInScreen> {
             Container(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
               child: TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username')
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email')
               ) 
             ),
             Container(
               padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
               child: TextField(
               controller: _passwordController,
+              obscureText: true,
               decoration: InputDecoration(labelText: 'Password'),
               ),
             ),
@@ -45,10 +51,22 @@ class _LogInScreen extends State<LogInScreen> {
               height: 50, 
               padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
               child: RaisedButton(
-                color: Color.fromRGBO(127, 127, 213, 1),
                 child: Text('Login'),
-                onPressed: (){
-
+                onPressed: () async {
+                  print("HEREEE");
+                  var res = await _authService.signIn(_emailController.text, _passwordController.text);
+                  if (res == null){
+                    showDialog(
+                      context: context, 
+                      builder: (context) => AlertDialog(
+                        title: Text("Error"),
+                        content: Text("You username or password is incorrect!")
+                      )
+                    );
+                    return; 
+                  }else{
+                    Navigator.pushReplacementNamed(context, '/home');
+                  }
                 }
               )
             )
