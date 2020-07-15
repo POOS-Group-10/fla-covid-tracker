@@ -44,7 +44,7 @@ const Home = () =>
     return(
         <div >
             <h1 >Welcome {userName}</h1> 
-            <Link to='/'>Log out john_branch</Link>
+            <Link to='/'>Log out jack_branch</Link>
         </div>
     );
 }
