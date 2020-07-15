@@ -184,13 +184,13 @@ app.post('/api/profile', (req, res) => {
 
 
 // Login
-app.post('/api/Login', async (req, res) => {
+app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
 
   Users.find({ userName: req.body.userName })
-    .then((data) => {
+    .then(async (data) => {
       if (data.length < 1)
       { 
         console.log("User name not found")
@@ -201,9 +201,7 @@ app.post('/api/Login', async (req, res) => {
       else {
           console.log('req..passw: ' + req.body.password)
           console.log('data[0].passw: ' + data[0].password)
-          const compRes = await bcrypt.compare(req.body.password, data[0].password)
-          console.log('compRes: ' + compRes)
-            if ( compRes) {
+            if ( await bcrypt.compare(req.body.password, data[0].password)) {
               console.log('password is a match')
             res.send(true)
           } else {
