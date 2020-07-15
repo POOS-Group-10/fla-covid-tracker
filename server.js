@@ -216,7 +216,7 @@ app.post('/api/Login', (req, res) => {
             req.session.userName = data[0].userName;
             req.session.userCounty = data[0].userCounty;
             console.log("Server.js Recorded County: " + req.session.userCounty)
-            return res.status(200).json()
+            return res.status(200).json({msg: "Password matched", auth: "1"})
           }
 
       }

@@ -30,9 +30,11 @@ const Login = () => {
     })
       .then((response) => {
         console.log('response to login api: ' + response)
-        if (response.data.auth === "0"){
+        if (response.data.auth == "0"){
           setLoggedIn(false);
-        } else{ setLoggedIn(true)}
+        } else{
+          console.log('loggin to true')
+          setLoggedIn(true)}
               
       })
       .catch((e) => {
