@@ -211,7 +211,7 @@ app.post('/api/Login', (req, res) => {
           } else {
             console.log('password is bueno!')
           
-            req.session = data[0];
+            // req.session = data[0];
             req.session.userId = data[0]._id;
             req.session.userName = data[0].userName;
             req.session.userCounty = data[0].userCounty;
