@@ -204,19 +204,19 @@ app.post('/api/Login', (req, res) => {
             if ( !(await bcrypt.compare(req.body.password, data[0].password))) {
               console.log('password no matchy')
               return res.json({
-                msg: "That username and/or email is taken",
-                taken: "1"
+                msg: "Password no matchy",
+                auth: "0"
               })
 
           } else {
             console.log('password is bueno!')
           
-          req.session = data[0];
-          req.session.userId = data[0]._id;
-          req.session.userName = data[0].userName;
-          req.session.userCounty = data[0].userCounty;
-          console.log("Server.js Recorded County: " + req.session.userCounty)
-          return res.status(200).json()
+            req.session = data[0];
+            req.session.userId = data[0]._id;
+            req.session.userName = data[0].userName;
+            req.session.userCounty = data[0].userCounty;
+            console.log("Server.js Recorded County: " + req.session.userCounty)
+            return res.status(200).json()
           }
 
       }
