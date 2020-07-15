@@ -150,27 +150,33 @@ app.post('/api/profile', (req, res) => {
   // return retVal.json()
 })
 
-app.post('/api/Login', (req, res) => {
+// Login
+app.post('/api/Login', async(req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
 
-  Users.find({ userName: req.body.userName, password: req.body.password })
+  Users.find({ userName: req.body.userName })
     .then((data) => {
       if (data.length < 1)
       { 
-        console.log("enteded login bad")
+        console.log("User name not found")
         return res.status(401).json({
-          message: "Auth failed."
+          message: "UserName not found."
         })
       } 
       else {
-        // req.session = data[0];
-        req.session.userId = data[0]._id;
-        req.session.userName = data[0].userName;
-        req.session.userCounty = data[0].userCounty;
-        console.log("Server.js Recorded County: " + req.session.userCounty)
-        return res.status(200).json()
+            if (await bcrypt.compare(req.body.password, data[0].password)) {
+            res.send('success password matched')
+          } else {
+            res.send('Incorrect password')
+          }
+          req.session = data[0];
+          req.session.userId = data[0]._id;
+          req.session.userName = data[0].userName;
+          req.session.userCounty = data[0].userCounty;
+          console.log("Server.js Recorded County: " + req.session.userCounty)
+          return res.status(200).json()
       }
     })
     .catch((error) => {
@@ -207,7 +213,15 @@ app.post('/api/SignUp', (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
   const data = req.body;
-  const user = new Users(data);
+  const hashPassword = await bcrypt.hash(req.body.password, 10)
+  const user = new Users( {              
+        userName: req.body.userName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: hashPassword
+      });
+
 
   // try
   // {
