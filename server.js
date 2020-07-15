@@ -9,6 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
 const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds 
 var session = require('express-session');
+const bcrypt = require('bcrypt');
+
 
 require('dotenv').config();
 
@@ -150,27 +152,73 @@ app.post('/api/profile', (req, res) => {
   // return retVal.json()
 })
 
+// // MASTER VERSION
+// app.post('/api/Login', (req, res) => {
+//   if (!req.session.userId) {
+//     req.session.userId = 0;
+//   }
+
+//   Users.find({ userName: req.body.userName, password: req.body.password })
+//     .then((data) => {
+//       if (data.length < 1)
+//       { 
+//         console.log("enteded login bad")
+//         return res.status(401).json({
+//           message: "Auth failed."
+//         })
+//       } 
+//       else {
+//         // req.session = data[0];
+//         req.session.userId = data[0]._id;
+//         req.session.userName = data[0].userName;
+//         req.session.userCounty = data[0].userCounty;
+//         console.log("Server.js Recorded County: " + req.session.userCounty)
+//         return res.status(200).json()
+//       }
+//     })
+//     .catch((error) => {
+//       console.log('Error: ', error);
+//     });
+// });
+
+
+
+// Login
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
 
-  Users.find({ userName: req.body.userName, password: req.body.password })
-    .then((data) => {
+  Users.find({ userName: req.body.userName })
+    .then(async (data) => {
       if (data.length < 1)
       { 
-        console.log("enteded login bad")
+        console.log("User name not found")
         return res.status(401).json({
-          message: "Auth failed."
+          message: "UserName not found."
         })
       } 
       else {
-        // req.session = data[0];
-        req.session.userId = data[0]._id;
-        req.session.userName = data[0].userName;
-        req.session.userCounty = data[0].userCounty;
-        console.log("Server.js Recorded County: " + req.session.userCounty)
-        return res.status(200).json()
+          console.log('req..passw: ' + req.body.password)
+          console.log('data[0].passw: ' + data[0].password)
+            if ( !(await bcrypt.compare(req.body.password, data[0].password))) {
+              console.log('password no matchy')
+              return res.json({
+                msg: "Password no matchy",
+                auth: "0"
+              })
+
+          } else {
+            console.log('password is bueno!')
+          
+            // req.session = data[0];
+            req.session.userId = data[0]._id;
+            req.session.userName = data[0].userName;
+            req.session.userCounty = data[0].userCounty;
+            console.log("Server.js Recorded County: " + req.session.userCounty)
+            return res.status(200).json({msg: "Password matched", auth: "1"})
+          }
+
       }
     })
     .catch((error) => {
@@ -180,6 +228,7 @@ app.post('/api/Login', (req, res) => {
 
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
+  console.log('userName we are looking for: ' + req.body.userName)
   Users.find({userName: req.body.userName})
     .then((data) => {
       console.log(data);
@@ -203,11 +252,22 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
-app.post('/api/SignUp', (req, res) => {
+app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
+  console.log('body.userName' + req.body.userName)
+  console.log('body.password' + req.body.password)
   const data = req.body;
-  const user = new Users(data);
+  const hashPassword = await bcrypt.hash(req.body.password, 10)
+  const user = new Users( {              
+        userName: req.body.userName,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        userCounty: req.body.userCounty,
+        password: hashPassword
+      });
+      console.log('user is: ' + user)
 
   // try
   // {
@@ -247,6 +307,7 @@ app.post('/api/SignUp', (req, res) => {
   user.save((error) => {
     if (error) {
       console.log("Error in code here");
+      console.log(error)
       res.status(500).json({ msg: 'Sorry, internal server errors'});
       return;
     }

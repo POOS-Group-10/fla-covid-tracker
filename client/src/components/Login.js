@@ -29,15 +29,13 @@ const Login = () => {
       data: payload,
     })
       .then((response) => {
-        // console.log('response of api Login: ' + response);
-        // console.dir('response of api (.dir)Login:' + response)
-        // console.log('Line 34 in Login.js' + response.message)
-        // const test = response
-        // console.dir('test.dir: ' + test)
-        // console.log('test.log: ' + test)
-        // const test2 = test.toString()
-        // console.log('test2: ' + test2)
-        setLoggedIn(true);
+        console.log('response to login api: ' + response)
+        if (response.data.auth == "0"){
+          setLoggedIn(false);
+        } else{
+          console.log('loggin to true')
+          setLoggedIn(true)}
+              
       })
       .catch((e) => {
         console.log("Internal server error " + e);
