@@ -184,7 +184,7 @@ app.post('/api/profile', (req, res) => {
 
 
 // Login
-app.post('/api/Login', (req, res) => {
+app.post('/api/Login', async (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
@@ -201,7 +201,7 @@ app.post('/api/Login', (req, res) => {
       else {
           console.log('req..passw: ' + req.body.password)
           console.log('data[0].passw: ' + data[0].password)
-          const compRes = bcrypt.compare(req.body.password, data[0].password)
+          const compRes = await bcrypt.compare(req.body.password, data[0].password)
           console.log('compRes: ' + compRes)
             if ( compRes) {
               console.log('password is a match')
