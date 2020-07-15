@@ -153,7 +153,7 @@ app.post('/api/profile', (req, res) => {
 })
 
 // Login
-app.post('/api/Login', async(req, res) => {
+app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
   }
@@ -168,7 +168,7 @@ app.post('/api/Login', async(req, res) => {
         })
       } 
       else {
-            if (await bcrypt.compare(req.body.password, data[0].password)) {
+            if ( bcrypt.compare(req.body.password, data[0].password)) {
             res.send('success password matched')
           } else {
             res.send('Incorrect password')
@@ -211,7 +211,7 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
-app.post('/api/SignUp', (req, res) => {
+app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
   const data = req.body;
