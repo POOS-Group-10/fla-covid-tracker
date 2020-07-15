@@ -8,15 +8,9 @@ import '../App.css';
 
 const Home = () =>
 {
-<<<<<<< HEAD
-    const url = 'http://localhost:3000/api/profile';
-    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
-    const [userInfo, setUserInfo] = useState({})
-=======
     // const url = 'http://localhost:3000/api/profile';
     const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userName, setUserName] = useState('');
->>>>>>> master
     var list = []
   
     async function fetchData(){
