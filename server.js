@@ -152,36 +152,6 @@ app.post('/api/profile', (req, res) => {
   // return retVal.json()
 })
 
-// // MASTER VERSION
-// app.post('/api/Login', (req, res) => {
-//   if (!req.session.userId) {
-//     req.session.userId = 0;
-//   }
-
-//   Users.find({ userName: req.body.userName, password: req.body.password })
-//     .then((data) => {
-//       if (data.length < 1)
-//       { 
-//         console.log("enteded login bad")
-//         return res.status(401).json({
-//           message: "Auth failed."
-//         })
-//       } 
-//       else {
-//         // req.session = data[0];
-//         req.session.userId = data[0]._id;
-//         req.session.userName = data[0].userName;
-//         req.session.userCounty = data[0].userCounty;
-//         console.log("Server.js Recorded County: " + req.session.userCounty)
-//         return res.status(200).json()
-//       }
-//     })
-//     .catch((error) => {
-//       console.log('Error: ', error);
-//     });
-// });
-
-
 
 // Login
 app.post('/api/Login', (req, res) => {
