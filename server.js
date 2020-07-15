@@ -144,12 +144,10 @@ app.use(session({
 
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
-//  return {county: "Polk" , userName: "DemoGod"}
-  return res.json({county: req.session.userCounty , userName: req.session.userName})
-    // return res.json()
+  console.log('session id ' + session._id)
 
-  // return retVal.json()
+  return res.json({county: req.session.userCounty , userName: req.session.userName})
+  
 })
 
 
