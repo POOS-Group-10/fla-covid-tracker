@@ -219,6 +219,7 @@ app.post('/api/Login', (req, res) => {
 
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
+  console.log('userName we are looking for: ' + req.body.userName)
   Users.find({userName: req.body.userName})
     .then((data) => {
       console.log(data);
@@ -245,6 +246,8 @@ app.post('/api/findUser', (req, res) => {
 app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
+  console.log('body.userName' + req.body.userName)
+  console.log('body.password' + req.body.password)
   const data = req.body;
   const hashPassword = await bcrypt.hash(req.body.password, 10)
   const user = new Users( {              
@@ -254,7 +257,7 @@ app.post('/api/SignUp', async (req, res) => {
         email: req.body.email,
         password: hashPassword
       });
-
+      console.log('user is: ' + user)
 
   // try
   // {
