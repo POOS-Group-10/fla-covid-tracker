@@ -33,6 +33,7 @@ const Home = () =>
         //     setLoggedIn(false)}
         if (json.userName != '{}') {
             setLoggedIn(true)
+            console.log('setting to true bitch')
         }
         
         setUserName(json.userName)

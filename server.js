@@ -153,7 +153,7 @@ app.post('/api/profile', (req, res) => {
 
 // Login
 app.post('/api/Login', (req, res) => {
-  if (!req.session.userId) {
+  if (req.session.userId != 0) {
     req.session.userId = 0;
   }
 
