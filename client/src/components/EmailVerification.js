@@ -5,11 +5,14 @@ import '../App.css';
 
 const EmailVerification = () =>
 {
+    const BASE_URL = 'https://florida-covid-tracking.herokuapp.com/';
+    const length = BASE_URL.length;
+
     const doEmailVerification = async (event) =>
     {
-        console.log(window.location.pathname.slice(19));
+        console.log(window.location.pathname.slice(length));
         axios({
-            url: '../api/EmailVerification/' + window.location.pathname.slice(19),
+            url: '../api/EmailVerification/' + window.location.pathname.slice(length),
             method: 'PUT'
         })
         .then(() => {
