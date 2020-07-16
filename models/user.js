@@ -30,7 +30,7 @@ const UserSchema = new Schema({
   verified: {
     type: Boolean,
     required: true 
-  }
+  },
   date: {
     type: String,
     default: Date.now()
