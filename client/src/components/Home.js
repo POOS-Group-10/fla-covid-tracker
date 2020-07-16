@@ -29,11 +29,11 @@ const Home = () =>
     .then((res) => res.json())
     .then((json) => {
         console.log("json in home.js json.county: " + json + " "  + json.county)
-        console.log('isLoggedIn: ' + isLoggedIn)
-        if (json.userName == '{}') {
+        console.log('isLoggedIn: top ' + isLoggedIn)
+        if (json.userName == '') {
             console.log('setting to false bitch')
             setLoggedIn(false)}
-        if (json.userName != '{}') {
+        if (json.userName != '') {
             console.log('setting to true bitch')
             setLoggedIn(true)
             
@@ -53,7 +53,7 @@ const Home = () =>
             fetchData();
         }, []);
 
-    console.log('isLoggedIn: ' + isLoggedIn)
+    console.log('isLoggedIn: bottom ' + isLoggedIn)
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
