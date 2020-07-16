@@ -98,20 +98,15 @@ const Covid = () =>
     //   })
     .then((res) => res.json())
     .then((json) => {
-        // const json_conv =  "'" + json + "'" 
-        // const data = JSON.parse(json);
-        console.log("In Covid.js: " + json + " json.county is " + json.county)
-        // setUserCounty(json.county);
+
         setUserCounty(json.county);
         setUserName(json.userName);
-        console.log('json info: ' + json.userName + ' ' + json.county)
-        console.log('states are: ' + userName + ' f ' + userCounty)
+
     })
     .catch(err => console.log(err))
     }
 
     useEffect(() => {
-        console.log('Use effect fired once.')
         // async function fetchData(){
         //     const response = await fetch("../api/profile", {
         //     method:'GET',
@@ -141,7 +136,6 @@ const Covid = () =>
             var js = {
                 state: "FL",
                 county: userCounty
-                // county: "Alachua"
             }; 
             
             console.log("JS is " + JSON.stringify(js))
@@ -157,7 +151,6 @@ const Covid = () =>
             //   })
             .then((res) => res.json())
             .then((json) => {
-                console.log("json in Covid.js is type of: " + typeof(json) + " response is " + json.message[0] + " ---- " + JSON.stringify(json.message[0]))
                 var j = json.message[0]
                 listStorage.push(j)
                 console.log("list " + listStorage)
@@ -166,25 +159,27 @@ const Covid = () =>
             .catch(err => console.log(err))
         // }
     };
-   
+
+   makeRequest();
+
     return (
         <div>
-        <div>
-            <h1>Covid Map</h1> 
-            <button onClick={makeRequest}>Click Me</button>
-            <h1>User County is {userCounty}</h1>
-            {countyInfo.map(res => <div>State: {res.state_name}</div>)}
-            {countyInfo.map(res => <div>County: {res.county_name}</div>)}  
-            {countyInfo.map(res => <div>Confirmed: {res.confirmed}</div>)} 
-            {countyInfo.map(res => <div>Deaths: {res.death}</div>)}   
-            {countyInfo.map(res => <div>New Death: {res.new_death}</div>)}   
-            {countyInfo.map(res => <div>Last Updated: {res.last_update}</div>)}           
+            <div>
+                <h1>Covid Map</h1> 
+                {/* <button onClick={makeRequest}>Click Me</button> */}
+                <h1>User County is {userCounty}</h1>
+                {countyInfo.map(res => <div>State: {res.state_name}</div>)}
+                {countyInfo.map(res => <div>County: {res.county_name}</div>)}  
+                {countyInfo.map(res => <div>Confirmed: {res.confirmed}</div>)} 
+                {countyInfo.map(res => <div>Deaths: {res.death}</div>)}   
+                {countyInfo.map(res => <div>New Death: {res.new_death}</div>)}   
+                {countyInfo.map(res => <div>Last Updated: {res.last_update}</div>)}           
 
-        </div>
-        <div>
-            <p>{userName}</p>
-            <p>{userCounty}</p>
-        </div>
+            </div>
+            <div>
+                <p>{userName}</p>
+                <p>{userCounty}</p>
+            </div>
         </div>
     )
 };
