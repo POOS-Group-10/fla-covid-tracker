@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import fetch from 'node-fetch';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+const { JSDOM } = require( "jsdom" );
+const { window } = new JSDOM( "" );
+const $ = require( "jquery" )( window );
 
 
 import '../App.css';
