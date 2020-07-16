@@ -30,13 +30,19 @@ const Home = () =>
     .then((json) => {
         console.log("json in home.js json.county: " + json + " "  + json.county)
         console.log('isLoggedIn: top ' + isLoggedIn)
-        if (json.userName == '') {
+        // if (json.userName == '') {
+        //     console.log('setting to false bitch')
+        //     setLoggedIn(false)}
+        // if (json.userName != '') {
+        //     console.log('setting to true bitch')
+        //     setLoggedIn(true)  
+        // }
+        if (json.length < 1) {
             console.log('setting to false bitch')
             setLoggedIn(false)}
-        if (json.userName != '') {
+        if (json.userName > 0) {
             console.log('setting to true bitch')
-            setLoggedIn(true)
-            
+            setLoggedIn(true)  
         }
         
         setUserName(json.userName)
