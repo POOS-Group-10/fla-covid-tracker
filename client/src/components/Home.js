@@ -37,6 +37,7 @@ const Home = () =>
         //     console.log('setting to true bitch')
         //     setLoggedIn(true)  
         // }
+        console.log('j lenght: ' + json.length)
         if (json.length < 1) {
             console.log('setting to false bitch')
             setLoggedIn(false)}
