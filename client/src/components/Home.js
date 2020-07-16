@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 import fetch from 'node-fetch';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-const { JSDOM } = require( "jsdom" );
-const { window } = new JSDOM( "" );
-const $ = require( "jquery" )( window );
 
 
 import '../App.css';
@@ -40,14 +37,15 @@ const Home = () =>
         //     console.log('setting to true bitch')
         //     setLoggedIn(true)  
         // }
-        
-        if ( jQuery.isEmptyObject(json) ) {
+        const json2 = json
+
+        if ( JSON.stringify(json2) == '{}' ) {
             console.log('setting to false bitch') 
             setLoggedIn(false)}
-        if ( !jQuery.isEmptyObject(json) ) {
-            console.log('setting to true bitch')
-            setLoggedIn(true)  
-        }
+        // if ( !json[0] ) {
+        //     console.log('setting to true bitch')
+        //     setLoggedIn(true)  
+        // }
         
         setUserName(json.userName)
 
