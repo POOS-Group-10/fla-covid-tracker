@@ -33,7 +33,7 @@ const Login = () => {
         if (response.data.auth == "0"){
           setLoggedIn(false);
         } else{
-          console.log('loggin to true')
+          console.log('loggin to accepted')
           setLoggedIn(true)}
               
       })

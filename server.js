@@ -71,7 +71,7 @@ const {
   NODE_ENV = 'production',
   SESS_NAME = 'sid',
   SESS_SECRET = 'ssh!quiet,itsasecret!',
-  SESS_LIFETIME = 60000 //TWO_HOURS
+  SESS_LIFETIME = TWO_HOURS
 } = process.env
 
 // const IN_PROD = NODE_ENV === 'production'
@@ -144,12 +144,10 @@ app.use(session({
 
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
-//  return {county: "Polk" , userName: "DemoGod"}
-  return res.json({county: req.session.userCounty , userName: req.session.userName})
-    // return res.json()
+  console.log('session id ' + session._id)
 
-  // return retVal.json()
+  return res.json({county: req.session.userCounty , userName: req.session.userName})
+  
 })
 
 
@@ -186,7 +184,15 @@ app.post('/api/Login', (req, res) => {
             req.session.userName = data[0].userName;
             req.session.userCounty = data[0].userCounty;
             console.log("Server.js Recorded County: " + req.session.userCounty)
-            return res.status(200).json({msg: "Password matched", auth: "1"})
+            return res.status(200).json({ 
+              _id: data[0]._id,           
+              userName: data[0].userName,
+              firstName: data[0].firstName,
+              lastName: data[0].lastName,
+              email: data[0].email,
+              userCounty: data[0].userCounty,
+              auth: "1"
+              })
           }
 
       }
@@ -227,7 +233,6 @@ app.post('/api/SignUp', async (req, res) => {
   console.log("Paylod is " + req.body)
   console.log('body.userName' + req.body.userName)
   console.log('body.password' + req.body.password)
-  const data = req.body;
   const hashPassword = await bcrypt.hash(req.body.password, 10)
   const user = new Users( {              
         userName: req.body.userName,
@@ -235,7 +240,8 @@ app.post('/api/SignUp', async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         userCounty: req.body.userCounty,
-        password: hashPassword
+        password: hashPassword,
+        verified: req.body.verified
       });
       console.log('user is: ' + user)
 

@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:covid_mobile/views/county_screen.dart';
+import 'package:covid_mobile/views/favorites_screen.dart';
+import 'package:covid_mobile/views/forgot_password_screen.dart';
 import 'package:covid_mobile/views/login_screen.dart';
+import 'package:covid_mobile/views/register_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -35,10 +38,9 @@ class MyApp extends StatelessWidget {
       //   future: SharedPreferences.getInstance(),
       //   builder: (context, snapshot) {
       //     if(snapshot.hasData){
-      //       String prefsKey = 'email';
-      //       var email = snapshot.data.getString(prefsKey);
-      //       print("$email");
-      //       return (email == null) ? LogInScreen() : HomeScreen();
+      //       String prefsKey = 'userName';
+      //       var user = snapshot.data.getString(prefsKey);
+      //       return (user == null) ? LogInScreen() : HomeScreen();
       //     }else{
       //       return LogInScreen();
       //     }
@@ -47,9 +49,12 @@ class MyApp extends StatelessWidget {
 
       routes: <String, WidgetBuilder> {
         '/login': (BuildContext context) => LogInScreen(),
+        '/forgot': (BuildContext context) => PasswordScreen(),
+        '/register': (BuildContext context) => RegisterScreen(), 
         '/home': (BuildContext context) => HomeScreen(),
         '/map': (BuildContext context) => MapScreen(),
         '/list': (BuildContext context) => SearchScreen(),
+        '/favorites':  (BuildContext context) => FavoritesScreen(),
         '/county_screen': (BuildContext context) => CountyScreen()
       }
     );
