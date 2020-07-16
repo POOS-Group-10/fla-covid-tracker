@@ -29,25 +29,15 @@ const Home = () =>
     .then((res) => res.json())
     .then((json) => {
         console.log("json in home.js json.county: " + json[0] + " "  + json.county)
-        console.log('isLoggedIn: top ' + isLoggedIn)
-        // if (json.userName == '') {
-        //     console.log('setting to false bitch')
-        //     setLoggedIn(false)}
-        // if (json.userName != '') {
-        //     console.log('setting to true bitch')
-        //     setLoggedIn(true)  
-        // }
-        const json2 = json
 
+        // Prevent from going to home without a session
+        const json2 = json
         if ( JSON.stringify(json2) == '{}' ) {
             console.log('setting to false bitch') 
-            setLoggedIn(false)}
-        // if ( !json[0] ) {
-        //     console.log('setting to true bitch')
-        //     setLoggedIn(true)  
-        // }
+            setLoggedIn(false)
+        }        
         
-        setUserName(json.userName)
+            setUserName(json.userName)
 
     })
     .catch(err => 
@@ -61,7 +51,6 @@ const Home = () =>
             fetchData();
         }, []);
 
-    console.log('isLoggedIn: bottom ' + isLoggedIn)
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }

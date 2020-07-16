@@ -71,7 +71,7 @@ const {
   NODE_ENV = 'production',
   SESS_NAME = 'sid',
   SESS_SECRET = 'ssh!quiet,itsasecret!',
-  SESS_LIFETIME = 60000 //TWO_HOURS
+  SESS_LIFETIME = TWO_HOURS
 } = process.env
 
 // const IN_PROD = NODE_ENV === 'production'
