@@ -17,12 +17,6 @@ const Login = () => {
       userName: userName,
       password: password,
     };
-    
-    // const response = await fetch("../api/Login", {
-    //   method:'POST',
-    //   body:JSON.stringify(payload),
-    //   headers:{'Content-Type': 'application/json'}
-    // })
     axios({
       url: '../api/Login', // React app is communicating with the server by this route
       method: "POST", // GET is used by default
