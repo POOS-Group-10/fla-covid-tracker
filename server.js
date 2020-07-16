@@ -269,7 +269,7 @@ app.post('/api/SignUp', async (req, res) => {
         expiresIn: '1d',
       },
       (err, emailToken) => {
-        const url = `http://localhost:3000/EmailVerification/${emailToken}`
+        const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
         
         console.log(emailToken)
         const output = `
