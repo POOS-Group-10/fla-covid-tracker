@@ -300,13 +300,12 @@ app.post('/api/SignUp', async (req, res) => {
   catch(e)
   {
     console.log('failure: ' + e);
+    return res.status(500)
   }
 
-});
+  return res.status(200)
 
-app.get('/', (req, res) => {
-  console.log('get works')
-})
+});
 
 app.put('/api/EmailVerification/:token', (req, res) => {
   console.log(req.params.token)
