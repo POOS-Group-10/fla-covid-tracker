@@ -38,10 +38,10 @@ const Home = () =>
         //     setLoggedIn(true)  
         // }
         
-        if ( json[0] ) {
-            console.log('setting to false bitch') //jQuery.isEmptyObject(json)
+        if ( jQuery.isEmptyObject(json) ) {
+            console.log('setting to false bitch') 
             setLoggedIn(false)}
-        if ( !json[0] ) {
+        if ( !jQuery.isEmptyObject(json) ) {
             console.log('setting to true bitch')
             setLoggedIn(true)  
         }
