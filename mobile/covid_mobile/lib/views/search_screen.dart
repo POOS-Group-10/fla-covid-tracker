@@ -1,10 +1,12 @@
 import 'package:covid_mobile/business_logic/view_models/search.dart';
 import 'package:covid_mobile/services/service_locator.dart';
 import 'package:covid_mobile/views/county_screen.dart';
+import 'package:covid_mobile/views/favorites_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key key}) : super(key: key);
@@ -40,14 +42,47 @@ class _SearchScreen extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        headingContainer(),
-        buildListView(model),
-      ],
-    )));
+        appBar: AppBar(
+          centerTitle: false,
+          title: Text("Search",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+              )),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Color.fromRGBO(127, 127, 213, 1),
+                  Color.fromRGBO(134, 168, 231, 1)
+                ])),
+          ),
+          actions: <Widget>[
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FavoritesScreen()),
+                    );
+                  },
+                  icon: Icon(Icons.favorite, color: Colors.red),
+              ),
+            )
+          ],
+        ),
+        body: Container(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            // headingContainer(),
+            buildListView(model),
+          ],
+        )));
   }
 
   Widget headingContainer() {
@@ -76,31 +111,50 @@ class _SearchScreen extends State<SearchScreen> {
                         fontWeight: FontWeight.bold)),
               )
             ],
-          ),          
+          ),
           Spacer(),
-          Column(
-            children: [
+          Column(children: [
             Container(
-              // color: Colors.black,
-              padding: const EdgeInsets.fromLTRB(0, 39.0, 15.0, 0.0),
+                // child: FlatButton.icon(
+                //     onPressed: () {
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => FavoritesScreen()),
+                //       );
+                //     },
+                //     icon: Icon(Icons.favorite),
+                //     label: Text("Favorites")),
+                ),
+            // Container(
+            //   child: RaisedButton(
+            //     child: Text("Logout"),
+            //     onPressed: () async {
+            //       SharedPreferences prefs = await SharedPreferences.getInstance();
+            //       prefs.remove('userName');
+            //       Navigator.pushReplacementNamed(context, '/login');
+            //     }
+
+            //   )
+            // ),
+            Container(
+                // color: Colors.black,
+                padding: const EdgeInsets.fromLTRB(0, 39.0, 15.0, 0.0),
                 child: Row(children: [
                   Container(
-                    padding: EdgeInsets.only(top: 5.0),
-                  child:
-                  Text("Orange",
-                    style: TextStyle(
-                        color: Colors.blue[400],
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700)
-                      )), 
-                    Container(padding: EdgeInsets.only(left: 7.0)),
-                    Icon(
-                      Icons.location_on,
-                      color: Colors.blue[400],
-                      size: 25,
-                    )
-                ])
-              )
+                      padding: EdgeInsets.only(top: 5.0),
+                      child: Text("Orange",
+                          style: TextStyle(
+                              color: Colors.blue[400],
+                              fontSize: 18.5,
+                              fontWeight: FontWeight.w600))),
+                  Container(padding: EdgeInsets.only(left: 7.0)),
+                  Icon(
+                    Icons.location_on,
+                    color: Colors.blue[400],
+                    size: 24,
+                  )
+                ]))
           ])
         ]),
       ),
@@ -126,15 +180,13 @@ class _SearchScreen extends State<SearchScreen> {
                                 .contains(filter.toLowerCase())
                             ? cardView(index)
                             : new Container();
-                  })
-            )
-        ])
-      );
+                  }))
+        ]));
   }
 
   Widget buildTextField(SearchViewModel viewModel) {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(15.0, 20.0, 10.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(15.0, 20.0, 10.0, 20.0),
         child: Container(
             decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -145,7 +197,8 @@ class _SearchScreen extends State<SearchScreen> {
               controller: _controller,
               decoration: InputDecoration(
                   hintStyle: TextStyle(fontSize: 17.0),
-                  prefixIcon: Icon(Icons.search, color: Colors.grey[500], size: 20.0),
+                  prefixIcon:
+                      Icon(Icons.search, color: Colors.grey[500], size: 20.0),
                   hintText: 'Search County',
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.only(top: 13.0)),
@@ -173,8 +226,8 @@ class _SearchScreen extends State<SearchScreen> {
           style: TextStyle(fontSize: 15)),
       trailing: new IconButton(
           icon: (model.choices[index].isFavorite)
-              ? Icon(Icons.favorite, color: Colors.blue[300])
-              : Icon(Icons.favorite_border, color: Colors.blue[300]),
+              ? Icon(Icons.favorite, color: Colors.red)
+              : Icon(Icons.favorite_border, color: Colors.red),
           onPressed: () {
             model.toggleFavoriteStatus(index);
           }),

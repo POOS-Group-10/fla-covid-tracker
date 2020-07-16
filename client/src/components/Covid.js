@@ -16,7 +16,7 @@ const Covid = () =>
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
     // const url2 ='http://localhost:3000/api/profile';
-    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
     var floridaCounties = 
     ["Alachua",
@@ -123,15 +123,14 @@ const Covid = () =>
         // //   })
         // .then((res) => res.json())
         // .then((json) => {
-        //     // const json_conv =  "'" + json + "'" 
-        //     // const data = JSON.parse(json);
-        //     console.log("In Covid.js: " + json + " json.county is " + json.county)
-        //     // setUserCounty(json.county);
+            // const json_conv =  "'" + json + "'" 
+            // const data = JSON.parse(json);
+            // console.log("In Covid.js: " + json + " json.county is " + json.county)
+            // setUserCounty(json.county);
         //     setUserCounty(json.county);
         //     setUserInfo({userName: json.userName, county: json.county})
         // })
         // .catch(err => console.log(err))
-        // }
         fetchData();
     }, []);
 //    currentCounty = userInfo.userName

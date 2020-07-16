@@ -1,5 +1,6 @@
 import 'package:covid_mobile/business_logic/view_models/favorites.dart';
 import 'package:covid_mobile/business_logic/view_models/search.dart';
+import 'package:covid_mobile/services/auth/auth.dart';
 import 'package:covid_mobile/services/counties/county_service.dart';
 import 'package:covid_mobile/services/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class FavoritesScreen extends StatefulWidget {
 
 class _FavoritesScreen extends State<FavoritesScreen> {
   FavoritesViewModel model = serviceLocator<FavoritesViewModel>();
+  final AuthService _authService = serviceLocator<AuthService>();
 
   @override
   void initState() {
@@ -25,8 +27,12 @@ class _FavoritesScreen extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          centerTitle: true,
-          title: Text("Favorites"),
+          centerTitle: false,
+          title: Text("My Favorites",
+          style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+              )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -38,18 +44,53 @@ class _FavoritesScreen extends State<FavoritesScreen> {
                 ])),
           ),
         ),
-        body: buildListView(model));
+        body: Container(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [buildListView(model)])));
+  }
+
+  Widget checkView() {
+    return Container(child: Center(child: Text("")));
+  }
+
+  Widget headingContainer() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(15.0, 70.0, 10.0, 0),
+      child: Row(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              // padding: EdgeInsets.fromLTRB(0, 0, 0, 30.0),
+              child: Text("My Favorites",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold)),
+            ),
+          ],
+        ),
+      ]),
+    );
   }
 
   Widget buildListView(FavoritesViewModel viewModel) {
     return ChangeNotifierProvider<FavoritesViewModel>(
         create: (context) => viewModel,
-        child: Consumer<FavoritesViewModel>(
-            builder: (context, model, child) => ListView.builder(
-                itemCount: model.favorites.length,
-                itemBuilder: (context, index) {
-                  return viewContainer(index);
-      })));
+        child: new Column(children: [
+          Container(
+              // padding: EdgeInsets.fromLTRB(0,10,0,0),
+              color: Colors.grey[300]),
+          Consumer<FavoritesViewModel>(
+              builder: (context, model, child) => ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: model.favorites.length,
+                  itemBuilder: (context, index) {
+                    return viewContainer(index);
+                  }))
+        ]));
   }
 
   Widget viewContainer(int index) {
