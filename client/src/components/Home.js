@@ -12,7 +12,7 @@ const Home = () =>
     // const url = 'http://localhost:3000/api/profile';
     const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userName, setUserName] = useState('');
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(true);
     var list = []
   
     async function fetchData(){
@@ -29,11 +29,14 @@ const Home = () =>
     .then((res) => res.json())
     .then((json) => {
         console.log("json in home.js json.county: " + json + " "  + json.county)
-        // if (json.userName == '{}') {
-        //     setLoggedIn(false)}
+        console.log('isLoggedIn: ' + isLoggedIn)
+        if (json.userName == '{}') {
+            console.log('setting to false bitch')
+            setLoggedIn(false)}
         if (json.userName != '{}') {
-            setLoggedIn(true)
             console.log('setting to true bitch')
+            setLoggedIn(true)
+            
         }
         
         setUserName(json.userName)
@@ -50,9 +53,9 @@ const Home = () =>
             fetchData();
         }, []);
 
-
+    console.log('isLoggedIn: ' + isLoggedIn)
     if (!isLoggedIn) {
-        return <Redirect to='/Login' />;
+        return <Redirect to='/Login' />
         }
 
     return(
