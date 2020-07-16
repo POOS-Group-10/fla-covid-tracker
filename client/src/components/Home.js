@@ -28,7 +28,7 @@ const Home = () =>
     //   })
     .then((res) => res.json())
     .then((json) => {
-        console.log("json in home.js json.county: " + json + " "  + json.county)
+        console.log("json in home.js json.county: " + json[0] + " "  + json.county)
         console.log('isLoggedIn: top ' + isLoggedIn)
         // if (json.userName == '') {
         //     console.log('setting to false bitch')
