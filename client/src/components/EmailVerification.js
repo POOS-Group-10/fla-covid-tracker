@@ -5,14 +5,15 @@ import '../App.css';
 
 const EmailVerification = () =>
 {
-    const BASE_URL = 'https://florida-covid-tracking.herokuapp.com/';
-    const length = BASE_URL.length;
+    const URL = window.location.pathname;
+    const emailURL = 'EmailVerification/';
 
     const doEmailVerification = async (event) =>
     {
-        console.log(window.location.pathname.slice(length));
+        console.log('the current page is ' + window.location.pathname);
+        console.log('the sliced page is ' + window.location.pathname.slice(URL.indexOf(emailURL) + emailURL.length));
         axios({
-            url: '../api/EmailVerification/' + window.location.pathname.slice(length),
+            url: '../api/EmailVerification/' + window.location.pathname.slice(URL.indexOf(emailURL) + emailURL.length),
             method: 'PUT'
         })
         .then(() => {

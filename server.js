@@ -271,7 +271,7 @@ app.post('/api/SignUp', async (req, res) => {
       (err, emailToken) => {
         const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
         
-        console.log(emailToken)
+        console.log('email token is ' + emailToken)
         const output = `
           <p>Hi ${req.body.firstName},</p></ br>
           <p>Welcome to fla-covid-tracking.</p>
