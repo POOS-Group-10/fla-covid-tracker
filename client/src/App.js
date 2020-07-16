@@ -13,6 +13,7 @@ import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import EmailVerificationPage from './pages/EmailVerificationPage';
 
 import './App.css';
 
@@ -34,6 +35,9 @@ const App = () => {
         </Route>
         <Route path="/PasswordReset">
           <PasswordResetPage />
+        </Route>
+        <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>
+          <EmailVerificationPage />
         </Route>
         <Redirect to="/" />
       </Switch>

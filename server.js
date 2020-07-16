@@ -2,8 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
-const axios = require('axios');
-const fetch = require("node-fetch");
+const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
@@ -77,23 +76,23 @@ const {
 // const IN_PROD = NODE_ENV === 'production'
 
 // Create email functionality
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.EMAIL,
-//     pass: process.env.PASSWORD
-//   }
-// });
-//
-// transporter.verify(function(error, success) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Server is ready to take our messages");
-//   }
-// });
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+});
+
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
 
 // Starting Sessions
 app.use(session({
@@ -245,39 +244,6 @@ app.post('/api/SignUp', async (req, res) => {
       });
       console.log('user is: ' + user)
 
-  // try
-  // {
-  //   const output = `
-  //     <p>Hi ${req.body.firstName},</p></ br>
-  //     <p>Welcome to fla-covid-tracking.</p>
-  //     <h1>Please click the link below to verify your email address:</h1>
-  //     <p>https://florida-covid-tracking.herokuapp.com/Home</p>
-  //     `;
-
-  //   const emailVerificationData = {
-  //     from: process.env.EMAIL,
-  //     to: req.body.email,
-  //     subject: 'Please verify your email',
-  //     text: 'text',
-  //     html: output
-  //   };
-
-  //   transporter.sendMail(emailVerificationData, (error, info) => {
-  //     if (error) {
-  //       return res.json({
-  //         msg: "Something broke. Did you enter your email correctly?"
-  //       });
-  //     }
-  //     return res.json({
-  //       msg: "Check your email to verify your account and log in."
-  //     });
-  //   });
-  // }
-  // catch(e)
-  // {
-  //   console.log('failure: ' + e);
-  // }
-
   // Saves the user into the database. Will hook this up to 
   // the link in the email later.
   user.save((error) => {
@@ -290,11 +256,85 @@ app.post('/api/SignUp', async (req, res) => {
     else {
       console.log("Has been Saved! " + user)
     }
-    return res.json({
-      msg: 'Your data has been saved!'
-    });
   });
+
+  try
+  {
+    jwt.sign(
+      {
+        user: req.body.userName
+      },
+      process.env.EMAIL_SECRET,
+      {
+        expiresIn: '1d',
+      },
+      (err, emailToken) => {
+        const url = `http://localhost:3000/EmailVerification/${emailToken}`
+        
+        console.log(emailToken)
+        const output = `
+          <p>Hi ${req.body.firstName},</p></ br>
+          <p>Welcome to fla-covid-tracking.</p>
+          <h1>Please click the link below to verify your email address:</h1>
+          <a href="${url}">${url}</a>
+          `;
+
+        const emailVerificationData = {
+          from: process.env.EMAIL,
+          to: req.body.email,
+          subject: 'Please verify your email',
+          text: 'text',
+          html: output
+        };
+
+        transporter.sendMail(emailVerificationData, (error, info) => {
+          if (error) {
+            return res.json({
+              msg: "Something broke. Did you enter your email correctly?"
+            });
+          }
+        });
+      }
+    )
+  }
+  catch(e)
+  {
+    console.log('failure: ' + e);
+  }
+
 });
+
+app.get('/', (req, res) => {
+  console.log('get works')
+})
+
+app.put('/api/EmailVerification/:token', (req, res) => {
+  console.log(req.params.token)
+  console.log(jwt.verify(req.params.token, process.env.EMAIL_SECRET))
+  try {
+    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
+    console.log('id is ' + userId.user);
+    Users.findOneAndUpdate(
+      { userName: userId.user }, { $set: { verified: true }
+    })
+    .then((data) => {
+      console.log('success somehow! ' + data)
+    })
+    .catch((e) => {
+      console.log('failure retrieving data ' + e)
+    })
+  }
+  catch(e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "you are a failure."
+    })
+  }
+
+  return res.status(200).json({
+    msg: "success"
+  })
+})
 
 app.post('/api/PasswordRecovery', (req, res) => 
 {
