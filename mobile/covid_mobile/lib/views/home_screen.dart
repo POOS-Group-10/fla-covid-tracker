@@ -1,3 +1,4 @@
+import 'package:covid_mobile/views/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:covid_mobile/views/search_screen.dart';
 import 'package:covid_mobile/views/map_screen.dart';
@@ -11,9 +12,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   final List<Widget> _pages = [
-    new MapScreen(key: PageStorageKey('MapPage')),
+    new SearchScreen(key: PageStorageKey('MapPage')),
     new SearchScreen(key: PageStorageKey('SearchPage')),
-    new FavoritesScreen(key: PageStorageKey('FavoritesPage'))
+    // new FavoritesScreen(key: PageStorageKey('FavoritesPage')), 
+    new ProfileScreen(key: PageStorageKey('ProfilePage'))
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -50,8 +52,10 @@ class _HomeScreen extends State<HomeScreen> {
         BottomNavigationBarItem(icon: Icon(Icons.map), title: Text('Map')),
         BottomNavigationBarItem(
             icon: Icon(Icons.search), title: Text('Search')),
+        // BottomNavigationBarItem(
+        //     icon: Icon(Icons.favorite_border), title: Text('Favorites')),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border), title: Text('Favorites')),
+            icon: Icon(Icons.favorite_border), title: Text('Profile')),
       ],
       currentIndex: _currentIndex,
       selectedItemColor: Color.fromRGBO(127, 127, 213, 1),
