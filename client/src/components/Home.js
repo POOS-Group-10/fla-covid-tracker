@@ -22,8 +22,6 @@ const Home = () =>
     })
     .then((res) => res.json())
     .then((json) => {
-        console.log("json in home.js json.county: " + json[0] + " "  + json.county)
-
         // Prevent from going to home without a session
         const json2 = json
         if ( JSON.stringify(json2) == '{}' ) {
@@ -32,7 +30,6 @@ const Home = () =>
         }        
         
             setUserName(json.userName)
-
     })
     .catch(err => 
     {
