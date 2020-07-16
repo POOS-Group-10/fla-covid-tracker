@@ -30,7 +30,8 @@ const SignUp = () =>
             firstName: firstName,
             lastName: lastName,
             userCounty: userCounty,
-            email: email
+            email: email,
+            verified: false
         };
         
         console.log("About to enter axios, payload is: " + payload.userName);

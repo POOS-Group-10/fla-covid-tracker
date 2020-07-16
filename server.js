@@ -233,7 +233,6 @@ app.post('/api/SignUp', async (req, res) => {
   console.log("Paylod is " + req.body)
   console.log('body.userName' + req.body.userName)
   console.log('body.password' + req.body.password)
-  const data = req.body;
   const hashPassword = await bcrypt.hash(req.body.password, 10)
   const user = new Users( {              
         userName: req.body.userName,
@@ -241,7 +240,8 @@ app.post('/api/SignUp', async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         userCounty: req.body.userCounty,
-        password: hashPassword
+        password: hashPassword,
+        verified: req.body.verified
       });
       console.log('user is: ' + user)
 
