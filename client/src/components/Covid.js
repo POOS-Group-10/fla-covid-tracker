@@ -99,9 +99,10 @@ const Covid = () =>
     }
 
     useEffect(() => {
-
-        fetchData();
-    }, []);
+		fetchData();
+		makeRequest();
+	}, []);
+	
     async function makeRequest() {
         // console.log("User county in covid.js bitch:" + userInfo.userCounty)
         // for(var counties in floridaCounties)
@@ -128,7 +129,7 @@ const Covid = () =>
         // }
     };
 
-   makeRequest();
+//    makeRequest();
 
     return (
         <div>

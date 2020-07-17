@@ -112,9 +112,10 @@ const News = () =>
 		})
 		.then((res) => res.json())
 		.then((json) => {
-			var j = json.message[0]
-			listStorage.push(j)
-			setCountyNews(listStorage);
+			// var j = json.message[0]
+			console.log(JSON.stringify(json))
+			// listStorage.push(j)
+			// setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
 	}
