@@ -1,14 +1,21 @@
 import React from 'react';
 import Login from '../components/Login';
 import PageTitle from '../components/PageTitle';
+import Header from '../components/Header';
 
 const LoginPage = () =>
 {
     return(
-        <div>
-            <h1>From the fla-covid-tracking attempt 1</h1>
-            <PageTitle />
-                <Login />
+        <div class="covidBorder">
+            <div class="padding">
+                <div class="textBorder"> 
+                <PageTitle />      
+                     <div class="padding"></div>
+                     <h1><strong>Login</strong></h1>
+                   
+                     <Login />
+                </div> 
+            </div>
         </div>
     );
 }

@@ -1,15 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import '../App.css';
+import { Link } from "react-router-dom";
+import LoginHub from "./LoginHub";
+import FLmap from './FL/FLmap.js';
 
 const Home = () =>
 {
 
     return(
         <div>
-            <h1>We logged in!</h1> 
-            <Link to='/'>Log out</Link>
+            <LoginHub />
+            <h1>Your County:</h1>
+            <script>
+            </script>
+            <h1>Confirmed Cases:</h1>
+            <script>
+            </script>
+            <h1>Cases Today:</h1>
+            <script>
+            </script>
+            <h1>Cases Yesterday:</h1>
         </div>
     );
 }

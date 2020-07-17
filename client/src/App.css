@@ -1,9 +1,105 @@
-.app {
-  padding: 10px;
+
+.textBorder {
+border-radius: 25px;
+background-color: red;
+border: 2px solid black;
+width: 50%;
+text-align: center;
+transform: translateX(50%);
+
 }
 
-#title {
-  padding: 10px;
+.padding{
+  padding-top: 50px; 
+}
+
+.right{
+  text-align: right;
+}
+.upright{
+  margin-top: -20px; 
+  text-align: right;
+}
+.downleft {
+
+  text-align: left;
+}
+
+h1{
+  color:black;
+  text-align: center;
+}
+.covidBorder{
+  height: 100vh;
+  background-image: url(images/COVID-19.png);
+  background-position: center center;
+}
+.floridaBorder{
+  height: 110vh;
+  background-image: url(images/FLorida_MAP.png);
+  background-repeat: no-repeat;
+  background-position: center center;  
+  
+}
+.app {
+  padding: 50px;
+}
+
+.space{
+  text-indent: 100em;
+}
+
+html, body{
+  background-image: url(images/black-radial-gradient.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;  
+min-height: 100%;
+width: 100%;
+padding: 0;
+margin: 0;
+}
+#Box{
+  width: 900px;
+  height: 100%;
+  margin: 0px auto;
+}
+
+#blog {
+  transform: translateX(15%);
+  border: 1px solid black;
+  border-radius: 25px;
+  background: #da6c50;
+  padding: 20px;
+  min-width: 50%;
+  max-width: 70%;
+  min-height: 40%;
+  position: relative;
+  text-align: center;
+  word-break: break-all;
+}
+
+#blogFull
+{
+  border: 1px solid black;
+  border-radius: 25px;
+  background: #da6c50;
+  padding: 20px;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  text-align: center;
+  word-break: break-all;
+}
+
+#outline {
+  border: 1px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  width: 200px;
+  position: relative;
+  text-align: center;
+  left: 25%;
 }
 
 form {
@@ -11,7 +107,7 @@ form {
 }
 
 .form-input{
-  margin: 10px 0px;
+  margin: 20px 20px;
 }
 
 .form-input input, .form-input textarea {
@@ -22,16 +118,50 @@ form {
   border: 1px solid lightgray;
   padding: .375rem .75rem;
   outline: none;
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+}
+
+.form-input-left input{
+  
+  left: 50%;
+  width: 75%;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  border: 1px solid lightgray;
+  padding: .375rem .75rem;
+  outline: none;
+}
+
+.form-input-large input{
+  height:200px;
+  word-break: break-all;
+  left: 50%;
+  width: 75%;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  border: 1px solid lightgray;
+  padding: .375rem .75rem;
+  outline: none;
+}
+
+#isLeft{
+  left: 50%;
 }
 
 button {
-  background-color: #007bff;
-  color: #fff;
+  background-color: #d11919;
+
+  color: rgb(17, 15, 15);
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
   cursor: pointer;
+  margin: 10%;
+  position: relative;
 }
 
 .blog-post__display {
@@ -40,3 +170,4 @@ button {
   border-radius: 4px;
   padding: 10px;
 }
+

@@ -11,9 +11,11 @@ import {
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
+import BlogPage from './pages/BlogPage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
-
+import PostPage from './pages/PostPage';
+import CreatePostPage from './pages/CreatePostPage';
 import './App.css';
 
 const App = () => {
@@ -35,6 +37,15 @@ const App = () => {
         <Route path="/PasswordReset">
           <PasswordResetPage />
         </Route>
+        <Route path="/Blog">
+          <BlogPage />
+        </Route>
+        <Route path="/Post">
+          <PostPage />
+          </Route>
+          <Route path="/CreatePost">
+          <CreatePostPage />
+         </Route>
         <Redirect to="/" />
       </Switch>
     </Router>

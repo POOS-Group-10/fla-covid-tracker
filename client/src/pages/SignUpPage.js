@@ -6,8 +6,14 @@ const SignUpPage = () =>
 {
     return(
         <div>
+                 <div class="covidBorder">
+            <div class="padding">
+                <div class="textBorder">  
             <PageTitle /> 
                 <SignUp />
+            </div>
+            </div>
+            </div>
         </div>
     );
 }
