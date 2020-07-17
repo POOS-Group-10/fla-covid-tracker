@@ -120,6 +120,7 @@ const News = () =>
 		.catch(err => console.log(err))
 	}
 		count ++
+		console.log(count)
 		if ( count < 3 )
 			makeRequest();
 

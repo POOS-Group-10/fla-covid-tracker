@@ -24,7 +24,6 @@ const EmailVerification = () =>
         });
     }
 
-
     doEmailVerification();
 
     return(

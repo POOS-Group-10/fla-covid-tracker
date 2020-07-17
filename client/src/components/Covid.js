@@ -5,6 +5,8 @@ import axios from 'axios';
 import fetch from 'node-fetch';
 import { json } from 'body-parser';
 
+var count = 0
+
 const Covid = () =>
 {
     const [countyInfo, setCountyInfo] = useState([]);
@@ -100,10 +102,9 @@ const Covid = () =>
 
     useEffect(() => {
 		fetchData();
-		makeRequest();
 	}, []);
 	
-    async function makeRequest() {
+	const makeRequest = async (event) =>{
         // console.log("User county in covid.js bitch:" + userInfo.userCounty)
         // for(var counties in floridaCounties)
         // {
@@ -129,7 +130,11 @@ const Covid = () =>
         // }
     };
 
-//    makeRequest();
+	// count ++
+	// console.log(count)
+	// if ( count < 10 )
+		makeRequest();
+
 
     return (
         <div>
