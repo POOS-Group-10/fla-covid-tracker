@@ -351,12 +351,39 @@ app.put('/api/EmailVerification/:token', (req, res) => {
   })
 })
 
+app.put('/api/PasswordReset/:token', async (req, res) => {
+  try {
+    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+    console.log(userId)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    Users.findOneAndUpdate(
+      { _id: userId.id }, { $set: { password: hashedPassword }
+    })
+    .then((data) => {
+      console.log('success somehow! ' + data)
+    })
+    .catch((e) => {
+      console.log('failure retrieving data ' + e)
+    })
+  }
+  catch(e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "you are a failure."
+    })
+  }
+
+  return res.status(200).json({
+    msg: "success"
+  })
+})
+
 app.post('/api/PasswordRecovery', (req, res) => 
 {
   console.log("The email is " + req.body.email);
   Users.find({email: req.body.email})
     .then((data) => {
-      console.log('password recovery data is ' + data)
+      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data.userName)
       if (data.length > 0)
       {
         try
@@ -364,7 +391,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
 
           jwt.sign(
             {
-              id: data._id
+              id: data[0]._id
             },
             process.env.EMAIL_SECRET,
             {
