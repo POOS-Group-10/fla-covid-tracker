@@ -17,8 +17,6 @@ const SignUp = () =>
     const [userCounty, setCounty] = useState('');
     const [isRegistered, setRegistered] = useState(false);
 
-
-
     const doSignUp = async event => 
     {    
         console.log("Ented the doSignUp Function");
@@ -53,14 +51,14 @@ const SignUp = () =>
                     data: payload
                 })
                 // These are promises
-                    .then((response) => {
+                .then((response) => {
                         // setRegistered(true)
-                    console.log("data is: " + typeof(response))
-                      setMessage(response.data.msg);
-                    })
-                    .catch((e) => {
-                      console.log('Internal server error: ' + e);
-                    });
+                console.log("data is: " + typeof(response))
+                setMessage(response.data.msg);
+                })
+                .catch((e) => {
+                   console.log('Internal server error: ' + e);
+                });
             }
         })
         .catch((error) => {
