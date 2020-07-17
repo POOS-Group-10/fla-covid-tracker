@@ -17,12 +17,6 @@ const Login = () => {
       userName: userName,
       password: password,
     };
-    
-    // const response = await fetch("../api/Login", {
-    //   method:'POST',
-    //   body:JSON.stringify(payload),
-    //   headers:{'Content-Type': 'application/json'}
-    // })
     axios({
       url: '../api/Login', // React app is communicating with the server by this route
       method: "POST", // GET is used by default
@@ -33,7 +27,7 @@ const Login = () => {
         if (response.data.auth == "0"){
           setLoggedIn(false);
         } else{
-          console.log('loggin to true')
+          console.log('loggin to accepted')
           setLoggedIn(true)}
               
       })
@@ -71,7 +65,7 @@ const Login = () => {
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
       <Link to="/Home">Go to the dashboard</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
-      <Link to="/PasswordReset">Go to the Password Reset page</Link>
+      <Link to="/PasswordReset/5">Go to the Password Reset page</Link>
     </div>
   );
 };

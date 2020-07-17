@@ -2,8 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const path = require('path');
-const axios = require('axios');
-const fetch = require("node-fetch");
+const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const app = express();
 const PORT = process.env.PORT || 8080; // 8080 is just for local testing
@@ -71,29 +70,29 @@ const {
   NODE_ENV = 'production',
   SESS_NAME = 'sid',
   SESS_SECRET = 'ssh!quiet,itsasecret!',
-  SESS_LIFETIME = 60000 //TWO_HOURS
+  SESS_LIFETIME = TWO_HOURS
 } = process.env
 
 // const IN_PROD = NODE_ENV === 'production'
 
 // Create email functionality
-// const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer');
 
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.EMAIL,
-//     pass: process.env.PASSWORD
-//   }
-// });
-//
-// transporter.verify(function(error, success) {
-//   if (error) {
-//     console.log(error);
-//   } else {
-//     console.log("Server is ready to take our messages");
-//   }
-// });
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD
+  }
+});
+
+transporter.verify(function(error, success) {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
 
 // Starting Sessions
 app.use(session({
@@ -144,12 +143,10 @@ app.use(session({
 
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  // var retVal = {county:req.session.userCounty, userName: req.session.userName}
-//  return {county: "Polk" , userName: "DemoGod"}
-  return res.json({county: req.session.userCounty , userName: req.session.userName})
-    // return res.json()
+  console.log('session id ' + session._id)
 
-  // return retVal.json()
+  return res.json({county: req.session.userCounty , userName: req.session.userName})
+  
 })
 
 
@@ -161,6 +158,7 @@ app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName })
     .then(async (data) => {
+      console.log('returned login data: ' + data)
       if (data.length < 1)
       { 
         console.log("User name not found")
@@ -168,6 +166,12 @@ app.post('/api/Login', (req, res) => {
           message: "UserName not found."
         })
       } 
+      // else if (!data.verified)
+      // {
+      //   return res.json({
+      //     msg: "Please verify your email first."
+      //   })
+      // }
       else {
           console.log('req..passw: ' + req.body.password)
           console.log('data[0].passw: ' + data[0].password)
@@ -186,7 +190,15 @@ app.post('/api/Login', (req, res) => {
             req.session.userName = data[0].userName;
             req.session.userCounty = data[0].userCounty;
             console.log("Server.js Recorded County: " + req.session.userCounty)
-            return res.status(200).json({msg: "Password matched", auth: "1"})
+            return res.status(200).json({ 
+              _id: data[0]._id,           
+              userName: data[0].userName,
+              firstName: data[0].firstName,
+              lastName: data[0].lastName,
+              email: data[0].email,
+              userCounty: data[0].userCounty,
+              auth: "1"
+              })
           }
 
       }
@@ -227,7 +239,6 @@ app.post('/api/SignUp', async (req, res) => {
   console.log("Paylod is " + req.body)
   console.log('body.userName' + req.body.userName)
   console.log('body.password' + req.body.password)
-  const data = req.body;
   const hashPassword = await bcrypt.hash(req.body.password, 10)
   const user = new Users( {              
         userName: req.body.userName,
@@ -235,90 +246,186 @@ app.post('/api/SignUp', async (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         userCounty: req.body.userCounty,
-        password: hashPassword
+        password: hashPassword,
+        verified: req.body.verified
       });
       console.log('user is: ' + user)
 
-  // try
-  // {
-  //   const output = `
-  //     <p>Hi ${req.body.firstName},</p></ br>
-  //     <p>Welcome to fla-covid-tracking.</p>
-  //     <h1>Please click the link below to verify your email address:</h1>
-  //     <p>https://florida-covid-tracking.herokuapp.com/Home</p>
-  //     `;
-
-  //   const emailVerificationData = {
-  //     from: process.env.EMAIL,
-  //     to: req.body.email,
-  //     subject: 'Please verify your email',
-  //     text: 'text',
-  //     html: output
-  //   };
-
-  //   transporter.sendMail(emailVerificationData, (error, info) => {
-  //     if (error) {
-  //       return res.json({
-  //         msg: "Something broke. Did you enter your email correctly?"
-  //       });
-  //     }
-  //     return res.json({
-  //       msg: "Check your email to verify your account and log in."
-  //     });
-  //   });
-  // }
-  // catch(e)
-  // {
-  //   console.log('failure: ' + e);
-  // }
-
   // Saves the user into the database. Will hook this up to 
   // the link in the email later.
-  user.save((error) => {
-    if (error) {
-      console.log("Error in code here");
-      console.log(error)
-      res.status(500).json({ msg: 'Sorry, internal server errors'});
-      return;
-    }
-    else {
-      console.log("Has been Saved! " + user)
-    }
-    return res.json({
-      msg: 'Your data has been saved!'
-    });
-  });
+  Users.create(user)
+      .then((data) => {
+        console.log('we sent the data: ' + data._id)
+
+        try
+        {
+          jwt.sign(
+            {
+              id: data._id
+            },
+            process.env.EMAIL_SECRET,
+            {
+              expiresIn: '1d',
+            },
+            (err, emailToken) => {
+              const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
+              
+              console.log('email token is ' + emailToken)
+              const output = `
+                <p>Hi ${req.body.firstName},</p></ br>
+                <p>Welcome to fla-covid-tracking.</p>
+                <h1>Please click the link below to verify your email address:</h1>
+                <a href="${url}">${url}</a>
+                `;
+                
+              console.log('we made it here but something broke anyway.1')
+              const emailVerificationData = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Please verify your email',
+                text: 'text',
+                html: output
+              };
+
+              console.log('we made it here but something broke anyway.2')
+              transporter.sendMail(emailVerificationData, (error, info) => {
+                if (error) {
+                  return res.json({
+                    msg: "Something broke. Did you enter your email correctly?"
+                  });
+                }
+              });
+
+              console.log('we made it here but something broke anyway.3');
+              return res.status(200).json({
+                msg: "whoa it finally worked!"
+              });
+            })
+        }
+        catch(e)
+        {
+          console.log('failure: ' + e);
+          return res.status(500)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    // if (error) {
+    //   console.log("Error in code here");
+    //   console.log(error)
+    //   res.status(500).json({ msg: 'Sorry, internal server errors'});
+    //   return;
+    // }
+    // else {
+    //   console.log("Has been Saved! " + user)
+    // }
+
 });
+
+app.put('/api/EmailVerification/:token', (req, res) => {
+  console.log(req.params.token)
+  console.log(jwt.verify(req.params.token, process.env.EMAIL_SECRET))
+  try {
+    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
+    console.log('id is ' + userId.id);
+    Users.findOneAndUpdate(
+      { _id: userId.id }, { $set: { verified: true }
+    })
+    .then((data) => {
+      console.log('success somehow! ' + data)
+    })
+    .catch((e) => {
+      console.log('failure retrieving data ' + e)
+    })
+  }
+  catch(e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "you are a failure."
+    })
+  }
+
+  return res.status(200).json({
+    msg: "success"
+  })
+})
+
+app.put('/api/PasswordReset/:token', async (req, res) => {
+  try {
+    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+    console.log(userId)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    Users.findOneAndUpdate(
+      { _id: userId.id }, { $set: { password: hashedPassword }
+    })
+    .then((data) => {
+      console.log('success somehow! ' + data)
+    })
+    .catch((e) => {
+      console.log('failure retrieving data ' + e)
+    })
+  }
+  catch(e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "you are a failure."
+    })
+  }
+
+  return res.status(200).json({
+    msg: "success"
+  })
+})
 
 app.post('/api/PasswordRecovery', (req, res) => 
 {
   console.log("The email is " + req.body.email);
   Users.find({email: req.body.email})
     .then((data) => {
-      if (data.length > 1)
+      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data.userName)
+      if (data.length > 0)
       {
-        // try
-        // {
-        //   const passwordResetData = {
-        //     from: process.env.EMAIL,
-        //     to: req.body.email,
-        //     subject: 'Reset your password',
-        //     text: 'text',
-        //     html: `<a href="https://localhost:3000/PasswordReset">Click here to reset your password</a>`
-        //   };
+        try
+        {
 
-        //   transporter.sendMail(passwordResetData, (error, info) => {
-        //     if (error) {
-        //       return console.log(error);
-        //     }
-        //     console.log('Success!!');
-        //   });
-        // }
-        // catch(e)
-        // {
-        //   console.log('failure: ' + e);
-        // }
-        return res.json({
+          jwt.sign(
+            {
+              id: data[0]._id
+            },
+            process.env.EMAIL_SECRET,
+            {
+              expiresIn: '1d',
+            },
+            (err, resetToken) => {
+              const url = `https://florida-covid-tracking.herokuapp.com/PasswordReset/${resetToken}`
+              
+              console.log('email token is ' + resetToken)
+              
+              const passwordResetData = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Reset your password',
+                text: 'text',
+                html: `<p>Please click the following link to reset your password:</p>
+                        <a href=${url}">${url}</a>`
+              };
+      
+              transporter.sendMail(passwordResetData, (error, info) => {
+                if (error) {
+                  return res.json({
+                    msg: "Something broke. Did you enter your email correctly?"
+                  });
+                }
+              });
+            }
+          )
+        }
+        catch(e)
+        {
+          console.log('failure: ' + e);
+        }
+        return res.status(200).json({
           msg: "Email sent"
         });
       }
