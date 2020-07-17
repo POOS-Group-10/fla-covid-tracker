@@ -6,13 +6,13 @@ import 'package:covid_mobile/services/service_locator.dart';
 import 'package:covid_mobile/services/storage/storage_service.dart';
 
 class CountyServiceImplementation implements CountyService {
+
   StorageService _storageService = serviceLocator<StorageService>();
   WebAPI _webAPI = serviceLocator<WebAPI>();
 
-  static final defaultFavorites = [County(countyName: 'test', infected: 100000), County(countyName: 'test2', infected: 100000000)];
-
   Future<List<County>> getAllCountyData({String base}) async {
     List<County> webData = await _webAPI.fetchCountyData();
+  
     return webData;
   }
   
@@ -24,9 +24,9 @@ class CountyServiceImplementation implements CountyService {
       return [];
     }
 
-    for(County data in favorites){
-      print("county in favs: ${data.countyName}");
-    }
+    // for(County data in favorites){
+    //   print("county in favs: ${data.countyName}");
+    // }
 
     return favorites;
   }

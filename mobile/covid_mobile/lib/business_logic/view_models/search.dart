@@ -26,9 +26,9 @@ class SearchViewModel extends ChangeNotifier{
     final counties = await _countyService.getAllCountyData();
     _favorites = await _countyService.getFavoriteCounties(); 
 
-    for(County county in _favorites){
-      print("load data init from counties: ${county.countyName}");
-    }
+    // for(County county in _favorites){
+    //   print("load data init from counties: ${county.countyName}");
+    // }
 
     _preparePresentationChoice(counties);
     notifyListeners(); 
@@ -43,12 +43,28 @@ class SearchViewModel extends ChangeNotifier{
       bool isFavorite = _getFavoritesStatus(temp);
 
       list.add(FavoritesPresentation(
-        name: temp, 
-        infected: county.infected,
+        countyName: county.countyName,
+        stateName: county.stateName,
+        confirmed: county.confirmed,
+        newCases: county.newCases,
+        death: county.death,
+        newDeath: county.newDeath,
+        fatalityRate: county.fatalityRate,
+        latitude: county.latitude,
+        longitude: county.longitude,
         isFavorite: isFavorite
       ));
 
-      list2.add(County(countyName: county.countyName, infected: county.infected));
+      list2.add(County(        
+        countyName: county.countyName,
+        stateName: county.stateName,
+        confirmed: county.confirmed,
+        newCases: county.newCases,
+        death: county.death,
+        newDeath: county.newDeath,
+        fatalityRate: county.fatalityRate,
+        latitude: county.latitude,
+        longitude: county.longitude,));
 
     }
 
@@ -68,8 +84,8 @@ class SearchViewModel extends ChangeNotifier{
   void toggleFavoriteStatus(int index) {
 
     final isFavorite = !_choices[index].isFavorite;
-    final countyName = _choices[index].name; 
-    print("da county name: ${countyName} with index: $index");
+    final countyName = _choices[index].countyName; 
+    // print("da county name: ${countyName} with index: $index");
     final county = _choicesFav[index];
   
     _choices[index].isFavorite = isFavorite; 
@@ -77,10 +93,10 @@ class SearchViewModel extends ChangeNotifier{
 
     if(isFavorite){
       _addToFavorites(county);
-      print("${countyName} added to favorites");
+      // print("${countyName} added to favorites");
     }else{
       _removeFromFavorites(county);
-      print("${countyName} removed from favorites");
+      // print("${countyName} removed from favorites");
     }
 
     notifyListeners(); 
@@ -104,10 +120,16 @@ class SearchViewModel extends ChangeNotifier{
 }
 
 class FavoritesPresentation {
-  final String name; 
-  final int infected; 
+  final String countyName; 
+  final String stateName; 
+  final int confirmed; 
+  final int newCases; 
+  final int death; 
+  final int newDeath; 
+  final String fatalityRate; 
+  final double latitude; 
+  final double longitude; 
   bool isFavorite; 
 
-  FavoritesPresentation({this.name, this.infected, this.isFavorite});
-
+  FavoritesPresentation({this.countyName, this.stateName, this.confirmed, this.newCases, this.death, this.newDeath, this.fatalityRate, this.latitude, this.longitude, this.isFavorite}); 
 }

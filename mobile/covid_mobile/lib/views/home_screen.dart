@@ -52,8 +52,6 @@ class _HomeScreen extends State<HomeScreen> {
         BottomNavigationBarItem(icon: Icon(Icons.map), title: Text('Map')),
         BottomNavigationBarItem(
             icon: Icon(Icons.search), title: Text('Search')),
-        // BottomNavigationBarItem(
-        //     icon: Icon(Icons.favorite_border), title: Text('Favorites')),
         BottomNavigationBarItem(
             icon: Icon(Icons.favorite_border), title: Text('Profile')),
       ],

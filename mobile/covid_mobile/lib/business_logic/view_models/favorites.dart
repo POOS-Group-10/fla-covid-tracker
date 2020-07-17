@@ -22,11 +22,17 @@ class FavoritesViewModel extends ChangeNotifier{
     List<FavoritesPresentation> list = [];
 
     for(County county in data){
-      String temp = county.countyName;
-
+      print(county.countyName);
       list.add(FavoritesPresentation(
-        name: temp, 
-        infected: county.infected,
+        countyName: county.countyName,
+        stateName: county.stateName,
+        confirmed: county.confirmed,
+        newCases: county.newCases,
+        death: county.death,
+        newDeath: county.newDeath,
+        fatalityRate: county.fatalityRate,
+        latitude: county.latitude,
+        longitude: county.longitude,
       ));
 
     }
@@ -36,10 +42,16 @@ class FavoritesViewModel extends ChangeNotifier{
 }
 
 class FavoritesPresentation {
-  final String name; 
-  final int infected; 
+  final String countyName; 
+  final String stateName; 
+  final int confirmed; 
+  final int newCases; 
+  final int death; 
+  final int newDeath; 
+  final String fatalityRate; 
+  final double latitude; 
+  final double longitude; 
 
-  FavoritesPresentation({this.name, this.infected});
-
+  FavoritesPresentation({this.countyName, this.stateName, this.confirmed, this.newCases, this.death, this.newDeath, this.fatalityRate, this.latitude, this.longitude}); 
 }
 

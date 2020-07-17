@@ -15,7 +15,6 @@ class FavoritesScreen extends StatefulWidget {
 
 class _FavoritesScreen extends State<FavoritesScreen> {
   FavoritesViewModel model = serviceLocator<FavoritesViewModel>();
-  final AuthService _authService = serviceLocator<AuthService>();
 
   @override
   void initState() {
@@ -29,9 +28,9 @@ class _FavoritesScreen extends State<FavoritesScreen> {
         appBar: AppBar(
           centerTitle: false,
           title: Text("My Favorites",
-          style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
               )),
           flexibleSpace: Container(
             decoration: BoxDecoration(
@@ -103,15 +102,22 @@ class _FavoritesScreen extends State<FavoritesScreen> {
           child: Padding(
               padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
               child: ListTile(
-                title: Text('${model.favorites[index].name}',
+                title: Text('${model.favorites[index].countyName}',
                     style:
                         TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-                subtitle: Text('${model.favorites[index].infected}',
+                subtitle: Text('${model.favorites[index].confirmed}',
                     style: TextStyle(fontSize: 15)),
                 onTap: () {
                   Navigator.pushNamed(context, '/county_screen', arguments: {
-                    'countyName': model.favorites[index].name,
-                    'infected': model.favorites[index].infected,
+                    'countyName': model.favorites[index].countyName,
+                    'stateName': model.favorites[index].stateName,
+                    'confirmed': model.favorites[index].confirmed,
+                    'newCases': model.favorites[index].newCases,
+                    'death': model.favorites[index].death,
+                    'newDeath': model.favorites[index].newDeath,
+                    'fatalityRate': model.favorites[index].fatalityRate,
+                    'latitude': model.favorites[index].latitude,
+                    'longitude': model.favorites[index].longitude
                   });
                 },
               )),

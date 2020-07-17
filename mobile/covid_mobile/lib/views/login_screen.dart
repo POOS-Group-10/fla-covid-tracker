@@ -38,8 +38,8 @@ class _LogInScreen extends State<LogInScreen> {
 
   Widget _buildLogIn() {
     return SafeArea(
-        child: Container(
-      padding: const EdgeInsets.fromLTRB(10.0, 170.0, 10.0, 0),
+      child: Container(
+      padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
       child: Column(
         children: <Widget>[
           Container(

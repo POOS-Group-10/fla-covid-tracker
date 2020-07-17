@@ -1,20 +1,112 @@
+import 'dart:convert';
+
 import 'package:covid_mobile/business_logic/models/county.dart';
 import 'package:covid_mobile/services/api/web_api.dart';
+import 'package:http/http.dart' as http;
 
-class FakeWebData implements WebAPI{
+
+class WebData implements WebAPI{
+  List<County> allCounty = [];
+  List<County> county = []; 
+  String lastUpdated = "";
+
+  // List<County> getCountyData() {
+  //     return county; 
+  // }
 
   @override 
   Future<List<County>> fetchCountyData() async {
-    List<County> county = [];
-    county.add(County(
-      countyName: 'Orlando',
-      infected: 20000
-    ));
-    county.add(County(
-      countyName: 'Daytona',
-      infected: 50000
-    ));
     
-    return county; 
+    String url = 'https://covid19-us-api.herokuapp.com/county';
+
+    print("url: $url");
+
+    var floridaCounties = 
+    ["Alachua",
+    "Baker",
+    "Bay",
+    "Bradford",
+    "Brevard",
+    "Broward",
+    "Calhoun",
+    "Charlotte",
+    "Citrus",
+    "Clay",
+    "Collier",
+    "Columbia",
+    "Dixie",
+    "Duval",
+    "Escambia",
+    "Flagler",
+    "Franklin",
+    "Gadsden",
+    "Gilchrist",
+    "Glades",
+    "Gulf",
+    "Hamilton",
+    "Hardee",
+    "Hendry",
+    "Hernando",
+    "Highlands",
+    "Hillsborough",
+    "Holmes",
+    "Indian River",
+    "Jackson",
+    "Jefferson",
+    "Lafayette",
+    "Lake",
+    "Lee",
+    "Leon",
+    "Levy",
+    "Liberty",
+    "Madison",
+    "Manatee",
+    "Marion",
+    "Martin",
+    "Miami-Dade",
+    "Monroe",
+    "Nassau",
+    "Okaloosa",
+    "Okeechobee",
+    "Orange",
+    "Osceola",
+    "Palm Beach",
+    "Pasco",
+    "Pinellas",
+    "Polk",
+    "Putnam",
+    "Santa Rosa",
+    "Sarasota",
+    "Seminole",
+    "St. Johns",
+    "St. Lucie",
+    "Sumter",
+    "Suwannee",
+    "Taylor",
+    "Union",
+    "Volusia",
+    "Wakulla",
+    "Walton",
+    "Washington"];
+
+    for (var temp in floridaCounties){
+      var body = jsonEncode({"state": "FL", "county": temp});
+      var headers = {'Content-Type': 'application/json'};
+      var res = await http.post(url, body: body, headers: headers);
+ 
+      if(res.statusCode == 200){
+        var json = jsonDecode(res.body);
+        var temp = json['message'][0];
+        var s = County.fromJson(temp);
+        print(s.countyName);
+        allCounty.add(s);
+      }
+    }
+
+    county = allCounty;
+    
+    return allCounty; 
+ 
   }
+
 }

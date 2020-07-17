@@ -16,7 +16,7 @@ void setupServiceLocator(){
   serviceLocator.registerLazySingleton<StorageService>(() => StorageSerivceImplementation());
 
   // Every time we request a lazy singleton means the service won't be instantiated until you need it for the first time. 
-  serviceLocator.registerLazySingleton<WebAPI>(() => FakeWebData());
+  serviceLocator.registerLazySingleton<WebAPI>(() => WebData());
   serviceLocator.registerLazySingleton<CountyService>(() => CountyServiceImplementation());
   serviceLocator.registerLazySingleton<AuthService>(() => AuthServiceImplementation());
 
