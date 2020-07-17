@@ -112,12 +112,15 @@ const News = () =>
 		})
 		.then((res) => res.json())
 		.then((json) => {
-
-		for (var x in json.articles){	
-			var j = json.articles[x]
-			listStorage.push(j)
-		}
-			setCountyNews(listStorage);
+		
+			
+			var temp = (JSON.stringify(json))
+			console.log(temp.articles[0])
+		// for (var x in json.articles){	
+		// 	var j = json.articles[0]
+		// 	listStorage.push(j)
+		// }
+		// 	setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
 	}
@@ -130,7 +133,7 @@ const News = () =>
 		<div>
 			<div>
 				<h1>{userName} News for {userCounty} County: </h1> 
-				{countyNews.map(res => <div>title: {res.articles[0].title}</div>)}
+				{/* {countyNews.map(res => <div>title: {res.articles[0].title}</div>)}
 				{countyNews.map(res => <div>description: {res.articles[0].description}</div>)}
 				{countyNews.map(res => <div>url: {res.articles[0].url}</div>)}
 
@@ -140,7 +143,7 @@ const News = () =>
 
 				{countyNews.map(res => <div>title: {res.articles[2].title}</div>)}
 				{countyNews.map(res => <div>description: {res.articles[2].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[2].url}</div>)}
+				{countyNews.map(res => <div>url: {res.articles[2].url}</div>)} */}
 				
 			</div>
 		</div>
