@@ -158,6 +158,7 @@ app.post('/api/Login', (req, res) => {
 
   Users.find({ userName: req.body.userName })
     .then(async (data) => {
+      console.log('returned login data: ' + data)
       if (data.length < 1)
       { 
         console.log("User name not found")
@@ -165,6 +166,12 @@ app.post('/api/Login', (req, res) => {
           message: "UserName not found."
         })
       } 
+      // else if (!data.verified)
+      // {
+      //   return res.json({
+      //     msg: "Please verify your email first."
+      //   })
+      // }
       else {
           console.log('req..passw: ' + req.body.password)
           console.log('data[0].passw: ' + data[0].password)
@@ -269,9 +276,9 @@ app.post('/api/SignUp', async (req, res) => {
         expiresIn: '1d',
       },
       (err, emailToken) => {
-        const url = `http://localhost:3000/EmailVerification/${emailToken}`
+        const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
         
-        console.log(emailToken)
+        console.log('email token is ' + emailToken)
         const output = `
           <p>Hi ${req.body.firstName},</p></ br>
           <p>Welcome to fla-covid-tracking.</p>
@@ -300,13 +307,12 @@ app.post('/api/SignUp', async (req, res) => {
   catch(e)
   {
     console.log('failure: ' + e);
+    return res.status(500)
   }
 
-});
+  return res.status(200)
 
-app.get('/', (req, res) => {
-  console.log('get works')
-})
+});
 
 app.put('/api/EmailVerification/:token', (req, res) => {
   console.log(req.params.token)
@@ -343,27 +349,45 @@ app.post('/api/PasswordRecovery', (req, res) =>
     .then((data) => {
       if (data.length > 1)
       {
-        // try
-        // {
-        //   const passwordResetData = {
-        //     from: process.env.EMAIL,
-        //     to: req.body.email,
-        //     subject: 'Reset your password',
-        //     text: 'text',
-        //     html: `<a href="https://localhost:3000/PasswordReset">Click here to reset your password</a>`
-        //   };
+        try
+        {
 
-        //   transporter.sendMail(passwordResetData, (error, info) => {
-        //     if (error) {
-        //       return console.log(error);
-        //     }
-        //     console.log('Success!!');
-        //   });
-        // }
-        // catch(e)
-        // {
-        //   console.log('failure: ' + e);
-        // }
+          jwt.sign(
+            {
+              user: req.body.userName
+            },
+            process.env.EMAIL_SECRET,
+            {
+              expiresIn: '1d',
+            },
+            (err, resetToken) => {
+              const url = `https://florida-covid-tracking.herokuapp.com/PasswordReset/${resetToken}`
+              
+              console.log('email token is ' + resetToken)
+              
+              const passwordResetData = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Reset your password',
+                text: 'text',
+                html: `<p>Please click the following link to reset your password:</p>
+                        <a href=${url}">${url}</a>`
+              };
+      
+              transporter.sendMail(passwordResetData, (error, info) => {
+                if (error) {
+                  return res.json({
+                    msg: "Something broke. Did you enter your email correctly?"
+                  });
+                }
+              });
+            }
+          )
+        }
+        catch(e)
+        {
+          console.log('failure: ' + e);
+        }
         return res.json({
           msg: "Email sent"
         });

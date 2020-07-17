@@ -16,29 +16,19 @@ const Home = () =>
     var list = []
   
     async function fetchData(){
-        const response = await fetch("../api/profile", {
+        const response = await fetch(url, {
         method:'POST',
         headers:{'Content-Type': 'application/json'}
     })
-
-    
-    // axios({
-    //     url: "../../api/profile", // React app is communicating with the server by this route
-    //     method: "GET" // GET is used by default
-    //   })
     .then((res) => res.json())
     .then((json) => {
-        console.log("json in home.js json.county: " + json[0] + " "  + json.county)
-
         // Prevent from going to home without a session
         const json2 = json
         if ( JSON.stringify(json2) == '{}' ) {
             console.log('setting to false bitch') 
             setLoggedIn(false)
         }        
-        
             setUserName(json.userName)
-
     })
     .catch(err => 
     {
@@ -47,10 +37,12 @@ const Home = () =>
     })
     }
 
-    useEffect(() => {
-            fetchData();
-        }, []);
+    // useEffect(() => {
+    //         fetchData();
+    //     }, []);
 
+    fetchData();
+    
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
@@ -58,7 +50,7 @@ const Home = () =>
     return(
         <div >
             <h1 >Welcome {userName}</h1> 
-            <Link to='/'>Log out jack_branch</Link>
+            <Link to='/'>Log out</Link>
         </div>
     );
 }

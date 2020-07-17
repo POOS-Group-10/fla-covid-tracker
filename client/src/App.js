@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/PasswordRecovery" exact>
           <PasswordRecoveryPage />
         </Route>
-        <Route path="/PasswordReset">
+        <Route path="/PasswordReset/:id" component={PasswordResetPage} exact>
           <PasswordResetPage />
         </Route>
         <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>

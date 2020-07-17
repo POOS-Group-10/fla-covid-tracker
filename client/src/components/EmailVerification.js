@@ -5,11 +5,15 @@ import '../App.css';
 
 const EmailVerification = () =>
 {
+    const URL = window.location.pathname;
+    const emailURL = 'EmailVerification/';
+
     const doEmailVerification = async (event) =>
     {
-        console.log(window.location.pathname.slice(19));
+        console.log('the current page is ' + window.location.pathname);
+        console.log('the sliced page is ' + window.location.pathname.slice(URL.indexOf(emailURL) + emailURL.length));
         axios({
-            url: '../api/EmailVerification/' + window.location.pathname.slice(19),
+            url: '../api/EmailVerification/' + window.location.pathname.slice(URL.indexOf(emailURL) + emailURL.length),
             method: 'PUT'
         })
         .then(() => {
