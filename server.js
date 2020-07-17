@@ -357,7 +357,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
   Users.find({email: req.body.email})
     .then((data) => {
       console.log('password recovery data is ' + data)
-      if (data.length > 1)
+      if (data.length > 0)
       {
         try
         {
