@@ -130,9 +130,9 @@ const Covid = () =>
         // }
     };
 
-	// count ++
-	// console.log(count)
-	// if ( count < 10 )
+	count ++
+	console.log(count)
+	if ( count < 10 )
 		makeRequest();
 
 
