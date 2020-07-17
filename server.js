@@ -253,62 +253,67 @@ app.post('/api/SignUp', async (req, res) => {
 
   // Saves the user into the database. Will hook this up to 
   // the link in the email later.
-  user.save((error) => {
-    if (error) {
-      console.log("Error in code here");
-      console.log(error)
-      res.status(500).json({ msg: 'Sorry, internal server errors'});
-      return;
-    }
-    else {
-      console.log("Has been Saved! " + user)
-    }
-  });
+  Users.create(user)
+      .then((data) => {
+        console.log('we sent the data: ' + data._id)
 
-  try
-  {
-    jwt.sign(
-      {
-        user: req.body.userName
-      },
-      process.env.EMAIL_SECRET,
-      {
-        expiresIn: '1d',
-      },
-      (err, emailToken) => {
-        const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
-        
-        console.log('email token is ' + emailToken)
-        const output = `
-          <p>Hi ${req.body.firstName},</p></ br>
-          <p>Welcome to fla-covid-tracking.</p>
-          <h1>Please click the link below to verify your email address:</h1>
-          <a href="${url}">${url}</a>
-          `;
+        try
+        {
+          jwt.sign(
+            {
+              id: data._id
+            },
+            process.env.EMAIL_SECRET,
+            {
+              expiresIn: '1d',
+            },
+            (err, emailToken) => {
+              const url = `https://florida-covid-tracking.herokuapp.com/EmailVerification/${emailToken}`
+              
+              console.log('email token is ' + emailToken)
+              const output = `
+                <p>Hi ${req.body.firstName},</p></ br>
+                <p>Welcome to fla-covid-tracking.</p>
+                <h1>Please click the link below to verify your email address:</h1>
+                <a href="${url}">${url}</a>
+                `;
 
-        const emailVerificationData = {
-          from: process.env.EMAIL,
-          to: req.body.email,
-          subject: 'Please verify your email',
-          text: 'text',
-          html: output
-        };
+              const emailVerificationData = {
+                from: process.env.EMAIL,
+                to: req.body.email,
+                subject: 'Please verify your email',
+                text: 'text',
+                html: output
+              };
 
-        transporter.sendMail(emailVerificationData, (error, info) => {
-          if (error) {
-            return res.json({
-              msg: "Something broke. Did you enter your email correctly?"
-            });
-          }
-        });
-      }
-    )
-  }
-  catch(e)
-  {
-    console.log('failure: ' + e);
-    return res.status(500)
-  }
+              transporter.sendMail(emailVerificationData, (error, info) => {
+                if (error) {
+                  return res.json({
+                    msg: "Something broke. Did you enter your email correctly?"
+                  });
+                }
+              });
+            }
+          )
+        }
+        catch(e)
+        {
+          console.log('failure: ' + e);
+          return res.status(500)
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    // if (error) {
+    //   console.log("Error in code here");
+    //   console.log(error)
+    //   res.status(500).json({ msg: 'Sorry, internal server errors'});
+    //   return;
+    // }
+    // else {
+    //   console.log("Has been Saved! " + user)
+    // }
 
   return res.status(200)
 

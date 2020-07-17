@@ -14,7 +14,7 @@ const SignUp = () =>
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [userCounty, setCounty] = useState('');
+    const [userCounty, setCounty] = useState('Alachua');
     const [isRegistered, setRegistered] = useState(false);
 
     const doSignUp = async event => 
