@@ -296,7 +296,7 @@ app.post('/api/SignUp', async (req, res) => {
                 }
               });
 
-              console.log('we made it here but something broke anyway.3')\
+              console.log('we made it here but something broke anyway.3')
               return res.status(200)
             })
         }
