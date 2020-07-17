@@ -28,7 +28,6 @@ const Home = () =>
             console.log('setting to false bitch') 
             setLoggedIn(false)
         }        
-        
             setUserName(json.userName)
     })
     .catch(err => 
@@ -38,10 +37,12 @@ const Home = () =>
     })
     }
 
-    useEffect(() => {
-            fetchData();
-        }, []);
+    // useEffect(() => {
+    //         fetchData();
+    //     }, []);
 
+    fetchData();
+    
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
