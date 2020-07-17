@@ -277,7 +277,8 @@ app.post('/api/SignUp', async (req, res) => {
                 <h1>Please click the link below to verify your email address:</h1>
                 <a href="${url}">${url}</a>
                 `;
-
+                
+              console.log('we made it here but something broke anyway.1')
               const emailVerificationData = {
                 from: process.env.EMAIL,
                 to: req.body.email,
@@ -286,6 +287,7 @@ app.post('/api/SignUp', async (req, res) => {
                 html: output
               };
 
+              console.log('we made it here but something broke anyway.2')
               transporter.sendMail(emailVerificationData, (error, info) => {
                 if (error) {
                   return res.json({
@@ -293,8 +295,9 @@ app.post('/api/SignUp', async (req, res) => {
                   });
                 }
               });
-            }
-          )
+
+              console.log('we made it here but something broke anyway.3')
+            })
         }
         catch(e)
         {
@@ -324,9 +327,9 @@ app.put('/api/EmailVerification/:token', (req, res) => {
   console.log(jwt.verify(req.params.token, process.env.EMAIL_SECRET))
   try {
     const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
-    console.log('id is ' + userId.user);
+    console.log('id is ' + userId.id);
     Users.findOneAndUpdate(
-      { userName: userId.user }, { $set: { verified: true }
+      { _id: userId.id }, { $set: { verified: true }
     })
     .then((data) => {
       console.log('success somehow! ' + data)

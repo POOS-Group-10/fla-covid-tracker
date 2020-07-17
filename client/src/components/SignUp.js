@@ -65,14 +65,8 @@ const SignUp = () =>
             console.log("did not like ajax responsef")
             console.log(error);
         });
-        
-        setRegistered(true);
     
     };
-
-    if (isRegistered) {
-        return <Redirect to='/Login' />;
-      }
 
         return(
             <div className="app">
