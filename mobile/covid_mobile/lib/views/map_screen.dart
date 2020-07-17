@@ -343,10 +343,10 @@ class _MapScreen extends State<MapScreen> {
           child: Padding(
               padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
               child: ListTile(
-                title: Text('${model.choices[index].name}',
+                title: Text('${model.choices[index].countyName}',
                     style:
                     TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-                subtitle: Text('${model.choices[index].infected}',
+                subtitle: Text('${model.choices[index].death}',
                     style: TextStyle(fontSize: 15)),
                 trailing: new IconButton(
                     icon: (model.choices[index].isFavorite)
@@ -357,8 +357,8 @@ class _MapScreen extends State<MapScreen> {
                     }),
                 onTap: () {
                   Navigator.pushNamed(context, '/county_screen', arguments: {
-                    'countyName': model.choices[index].name,
-                    'infected': model.choices[index].infected,
+                    'countyName': model.choices[index].countyName,
+                    'infected': model.choices[index].death,
                   });
                 },
               )),

@@ -75,107 +75,30 @@ class _SearchScreen extends State<SearchScreen> {
             )
           ],
         ),
-        body: Container(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            // headingContainer(),
-            buildListView(model),
-          ],
-        )));
-  }
-
-  Widget headingContainer() {
-    DateTime now = DateTime.now();
-    String formatter = DateFormat('MMMMd').format(now);
-
-    return Container(
-      padding: EdgeInsets.fromLTRB(15.0, 24.0, 10.0, 0),
-      child: SafeArea(
-        child: Row(children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Text("Search",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold)),
-              ),
-              Container(
-                child: Text(formatter,
-                    style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              )
-            ],
-          ),
-          Spacer(),
-          Column(children: [
-            Container(
-                // child: FlatButton.icon(
-                //     onPressed: () {
-                //       Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => FavoritesScreen()),
-                //       );
-                //     },
-                //     icon: Icon(Icons.favorite),
-                //     label: Text("Favorites")),
-                ),
-            // Container(
-            //   child: RaisedButton(
-            //     child: Text("Logout"),
-            //     onPressed: () async {
-            //       SharedPreferences prefs = await SharedPreferences.getInstance();
-            //       prefs.remove('userName');
-            //       Navigator.pushReplacementNamed(context, '/login');
-            //     }
-
-            //   )
-            // ),
-            Container(
-                // color: Colors.black,
-                padding: const EdgeInsets.fromLTRB(0, 39.0, 15.0, 0.0),
-                child: Row(children: [
-                  Container(
-                      padding: EdgeInsets.only(top: 5.0),
-                      child: Text("Orange",
-                          style: TextStyle(
-                              color: Colors.blue[400],
-                              fontSize: 18.5,
-                              fontWeight: FontWeight.w600))),
-                  Container(padding: EdgeInsets.only(left: 7.0)),
-                  Icon(
-                    Icons.location_on,
-                    color: Colors.blue[400],
-                    size: 24,
-                  )
-                ]))
-          ])
-        ]),
-      ),
-    );
+        body: SingleChildScrollView(child: Column(
+          children: [
+            buildTextField(model),
+            buildListView(model)
+          ]
+        )
+    ));
   }
 
   Widget buildListView(SearchViewModel viewModel) {
     return ChangeNotifierProvider.value(
         value: viewModel,
         // create: (context) => viewModel,
-        child: new Column(children: <Widget>[
-          buildTextField(model),
+          child: Column(children: [
+          // buildTextField(model),
           Consumer<SearchViewModel>(
               builder: (context, model, child) => ListView.builder(
-                  scrollDirection: Axis.vertical,
+        physics: const AlwaysScrollableScrollPhysics(), // new
                   shrinkWrap: true,
                   itemCount: model.choices.length,
                   itemBuilder: (context, index) {
                     return filter == null || filter == ""
                         ? cardView(index)
-                        : model.choices[index].name
+                        : model.choices[index].countyName
                                 .toLowerCase()
                                 .contains(filter.toLowerCase())
                             ? cardView(index)
@@ -211,18 +134,17 @@ class _SearchScreen extends State<SearchScreen> {
         height: 115.0,
         width: MediaQuery.of(context).size.width,
         child: Card(
-          elevation: 3.0,
-          child: Padding(
-              padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
-              child: buildTile(index)),
-        ));
+          elevation: 4.0,
+          child: buildTile(index)),
+        );
   }
 
   Widget buildTile(int index) {
     return ListTile(
-      title: Text('${model.choices[index].name}',
+      contentPadding: EdgeInsets.fromLTRB(20, 5, 15, 0),
+      title: Text('${model.choices[index].countyName}',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-      subtitle: Text('${model.choices[index].infected}',
+      subtitle: Text('Confirmed cases: ${model.choices[index].confirmed}',
           style: TextStyle(fontSize: 15)),
       trailing: new IconButton(
           icon: (model.choices[index].isFavorite)
@@ -233,8 +155,15 @@ class _SearchScreen extends State<SearchScreen> {
           }),
       onTap: () {
         Navigator.pushNamed(context, '/county_screen', arguments: {
-          'countyName': model.choices[index].name,
-          'infected': model.choices[index].infected,
+          'countyName': model.choices[index].countyName,
+          'stateName': model.choices[index].stateName,
+          'confirmed': model.choices[index].confirmed, 
+          'newCases': model.choices[index].newCases, 
+          'death': model.choices[index].death, 
+          'newDeath': model.choices[index].newDeath, 
+          'fatalityRate': model.choices[index].fatalityRate, 
+          'latitude': model.choices[index].latitude, 
+          'longitude': model.choices[index].longitude
         });
       },
     );

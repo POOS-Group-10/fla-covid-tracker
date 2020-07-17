@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:covid_mobile/services/api/web_api.dart';
 import 'package:covid_mobile/views/county_screen.dart';
 import 'package:covid_mobile/views/favorites_screen.dart';
 import 'package:covid_mobile/views/forgot_password_screen.dart';
@@ -18,6 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   setupServiceLocator();
+  // WebAPI _webAPI = serviceLocator<WebAPI>();
+  // _webAPI.fetchCountyData();
   runApp(MyApp());
 }
 
@@ -33,20 +36,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LogInScreen(),
-      // home: FutureBuilder<SharedPreferences> (
-      //   future: SharedPreferences.getInstance(),
-      //   builder: (context, snapshot) {
-      //     if(snapshot.hasData){
-      //       String prefsKey = 'userName';
-      //       var user = snapshot.data.getString(prefsKey);
-      //       return (user == null) ? LogInScreen() : HomeScreen();
-      //     }else{
-      //       return LogInScreen();
-      //     }
-      //   }
-      // ),
-
+      // home: LogInScreen(),
+      home: FutureBuilder<SharedPreferences> (
+        future: SharedPreferences.getInstance(),
+        builder: (context, snapshot) {
+          if(snapshot.hasData){
+            String prefsKey = 'userName';
+            var user = snapshot.data.getString(prefsKey);
+            return (user == null) ? LogInScreen() : HomeScreen();
+          }else{
+            return LogInScreen();
+          }
+        }
+      ),
       routes: <String, WidgetBuilder> {
         '/login': (BuildContext context) => LogInScreen(),
         '/forgot': (BuildContext context) => PasswordScreen(),
