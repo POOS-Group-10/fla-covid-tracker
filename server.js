@@ -356,6 +356,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
   console.log("The email is " + req.body.email);
   Users.find({email: req.body.email})
     .then((data) => {
+      console.log('password recovery data is ' + data)
       if (data.length > 1)
       {
         try
@@ -363,7 +364,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
 
           jwt.sign(
             {
-              user: req.body.userName
+              id: data._id
             },
             process.env.EMAIL_SECRET,
             {
@@ -397,7 +398,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
         {
           console.log('failure: ' + e);
         }
-        return res.json({
+        return res.status(200).json({
           msg: "Email sent"
         });
       }
