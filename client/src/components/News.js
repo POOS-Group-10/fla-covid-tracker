@@ -113,7 +113,7 @@ const News = () =>
 		.then((res) => res.json())
 		.then((json) => {
 
-		for (x in json.articles){	
+		for (var x in json.articles){	
 			var j = json.articles[x]
 			listStorage.push(j)
 		}
