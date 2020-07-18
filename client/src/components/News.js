@@ -114,7 +114,7 @@ const News = () =>
 		.then((json) => {
 		
 			
-			var temp = (JSON.stringify(json))
+			var temp = ((json))
 			console.log('temp: ' + temp)
 			console.log('temp.articles: ' + temp[0].articles)
 			console.log('temp.articles and some bitch: ' + temp[0].articles[0])
@@ -122,7 +122,7 @@ const News = () =>
 		// 	var j = json.articles[0]
 		// 	listStorage.push(j)
 		// }
-		// 	setCountyNews(listStorage);
+			// setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
 	}
