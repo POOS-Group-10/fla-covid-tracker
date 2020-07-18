@@ -104,19 +104,19 @@ const News = () =>
 	async function makeRequest() {
 		//https://gnews.io/api/v3/search?q=Florida&token=9716fdf90959ffffecdf3cc1237c63c7
 		const url ='https://gnews.io/api/v3/search?q=Florida '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7' 
+		const url2 = 'https://gnews.io/api/v3/search?q=Florida '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
 		console.log('url: ' + url)
 	
-		const response = await fetch(url, {
+		const response = await fetch(url2, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})
 		.then((res) => res.json())
 		.then((json) => {
-
-		for (var x in json.articles){	
-			var j = json.articles[x]
+	
+			var j = json.articles
 			listStorage.push(j)
-		}
+
 			setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
@@ -126,22 +126,24 @@ const News = () =>
 		if ( count < 3 )
 			makeRequest();
 
-	return (
+	return (		
 		<div>
 			<div>
 				<h1>{userName} News for {userCounty} County: </h1> 
-				{countyNews.map(res => <div>title: {res.articles[0].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[0].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[0].url}</div>)}
-
-				{countyNews.map(res => <div>title: {res.articles[1].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[1].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[1].url}</div>)}
-
-				{countyNews.map(res => <div>title: {res.articles[2].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[2].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[2].url}</div>)}
-				
+				{countyNews.map(res => <div>{res[0].title}</div>)}
+				{countyNews.map(res => <div>{res[0].description}</div>)}
+				{countyNews.map(res => <div><a href={res[0].url}>{res[0].url}</a></div>)}
+				{countyNews.map(res => <div>{res[0].publishedAt}</div>)}
+				<br></br>
+				{countyNews.map(res => <div>{res[1].title}</div>)}
+				{countyNews.map(res => <div>{res[1].description}</div>)}
+				{countyNews.map(res => <div><a href={res[1].url}>{res[1].url}</a></div>)}
+				{countyNews.map(res => <div>{res[1].publishedAt}</div>)}
+				<br></br>
+				{countyNews.map(res => <div>{res[2].title}</div>)}
+				{countyNews.map(res => <div>{res[2].description}</div>)}
+				{countyNews.map(res => <div><a href={res[2].url}>{res[2].url}</a></div>)}
+				{countyNews.map(res => <div>{res[2].publishedAt}</div>)}
 			</div>
 		</div>
 	)

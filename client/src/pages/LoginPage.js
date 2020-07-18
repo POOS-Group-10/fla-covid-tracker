@@ -5,11 +5,17 @@ import PageTitle from '../components/PageTitle';
 const LoginPage = () =>
 {
     return(
-        <div>
-            <h1>From the fla-covid-tracking attempt 7</h1>
-            <PageTitle />
-                <Login />
+        <div class="covidBorder">
+        <div class="padding">
+            <div class="textBorder"> 
+            <PageTitle />      
+                 <div class="padding"></div>
+                 <h1><strong>Login</strong></h1>
+               
+                 <Login />
+            </div> 
         </div>
+    </div>
     );
 }
 

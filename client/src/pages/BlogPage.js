@@ -1,16 +1,16 @@
 import React from 'react';
-import SignUp from '../components/SignUp';
+import Blog from '../components/Blog';
 import PageTitle from '../components/PageTitle';
 
-const SignUpPage = () =>
+const BlogPage = () =>
 {
     return(
         <div>
                  <div class="covidBorder">
             <div class="padding">
                 <div class="textBorder">  
-            <PageTitle /> 
-                <SignUp />
+                <PageTitle />
+                <Blog />
             </div>
             </div>
             </div>
@@ -18,4 +18,4 @@ const SignUpPage = () =>
     );
 }
 
-export default SignUpPage;
+export default BlogPage;
