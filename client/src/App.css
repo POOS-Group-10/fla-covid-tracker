@@ -34,13 +34,7 @@
     background-image: url(images/COVID-19.png);
     background-position: center center;
   }
-  .floridaBorder{
-    height: 110vh;
-    background-image: url(images/FLorida_MAP.png);
-    background-repeat: no-repeat;
-    background-position: center center;  
-    
-  }
+ 
   .app {
     padding: 50px;
   }

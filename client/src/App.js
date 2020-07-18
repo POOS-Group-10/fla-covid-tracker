@@ -33,6 +33,15 @@ const App = () => {
         <Route path="/PasswordRecovery" exact>
           <PasswordRecoveryPage />
         </Route>
+        <Route path="/Blog">
+          <BlogPage />
+        </Route>
+        <Route path="/Post">
+          <PostPage />
+          </Route>
+          <Route path="/CreatePost">
+          <CreatePostPage />
+          </Route>
         <Route path="/PasswordReset/:id" component={PasswordResetPage} exact>
           <PasswordResetPage />
         </Route>
