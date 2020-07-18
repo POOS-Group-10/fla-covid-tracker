@@ -25,24 +25,18 @@ const Home = () =>
         // Prevent from going to home without a session
         const json2 = json
         if ( JSON.stringify(json2) == '{}' ) {
-            console.log('setting to false bitch') 
             setLoggedIn(false)
         }        
             setUserName(json.userName)
     })
     .catch(err => 
     {
-        console.log("catch block of api/profile")
         console.log(err)
     })
-    }
-
-    // useEffect(() => {
-    //         fetchData();
-    //     }, []);
+}
 
     fetchData();
-    
+
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
