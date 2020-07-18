@@ -116,7 +116,7 @@ const News = () =>
 			
 			var temp = ((json))
 			console.log('temp: ' + temp)
-			console.log('temp.articles: ' + temp[0].articles)
+			console.log('temp.articles: ' + temp.articles[0])
 			console.log('temp.articles and some bitch: ' + temp[0].articles[0])
 		// for (var x in json.articles){	
 		// 	var j = json.articles[0]
