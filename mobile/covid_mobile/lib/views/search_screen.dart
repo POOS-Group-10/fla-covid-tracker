@@ -87,7 +87,7 @@ class _SearchScreen extends State<SearchScreen> {
   Widget buildListView(SearchViewModel viewModel) {
     return ChangeNotifierProvider.value(
         value: viewModel,
-          child:Consumer<SearchViewModel>(
+          child: Expanded(child: Consumer<SearchViewModel>(
               builder: (context, model, child) => ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(), // new
                   shrinkWrap: true,
@@ -101,7 +101,7 @@ class _SearchScreen extends State<SearchScreen> {
                             ? cardView(index)
                             : new Container();
                   }))
-        );
+        ));
   }
 
   Widget buildTextField(SearchViewModel viewModel) {
