@@ -112,16 +112,10 @@ const News = () =>
 		})
 		.then((res) => res.json())
 		.then((json) => {
-		
-			var temp = ((json))
-			// console.log('temp: ' + JSON.stringify(temp))
-			console.log('temp.articles: ' + temp.articles[1].title)
-			console.log(JSON.stringify('temmp.astricles[1].title: ' + temp.articles[1].title))
-			// console.log('temp.articles and some bitch: ' + temp[0].articles[0])
-		// for (var x in json.articles){	
+	
 			var j = json.articles
 			listStorage.push(j)
-		// }
+
 			setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
@@ -131,23 +125,24 @@ const News = () =>
 		if ( count < 3 )
 			makeRequest();
 
-	return (
+	return (		
 		<div>
 			<div>
 				<h1>{userName} News for {userCounty} County: </h1> 
+				{countyNews.map(res => <div>{res[0].title}</div>)}
+				{countyNews.map(res => <div>{res[0].description}</div>)}
+				{countyNews.map(res => <div>{res[0].url}</div>)}
+				{countyNews.map(res => <div>{res[0].publishedAt}</div>)}
+
 				{countyNews.map(res => <div>{res[1].title}</div>)}
-				{/* {countyNews.map(res => <div>title: {res.articles[0].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[0].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[0].url}</div>)}
+				{countyNews.map(res => <div>{res[1].description}</div>)}
+				{countyNews.map(res => <div>{res[1].url}</div>)}
+				{countyNews.map(res => <div>{res[1].publishedAt}</div>)}
 
-				{countyNews.map(res => <div>title: {res.articles[1].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[1].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[1].url}</div>)}
-
-				{countyNews.map(res => <div>title: {res.articles[2].title}</div>)}
-				{countyNews.map(res => <div>description: {res.articles[2].description}</div>)}
-				{countyNews.map(res => <div>url: {res.articles[2].url}</div>)} */}
-				
+				{countyNews.map(res => <div>{res[2].title}</div>)}
+				{countyNews.map(res => <div>{res[2].description}</div>)}
+				{countyNews.map(res => <div>{res[2].url}</div>)}
+				{countyNews.map(res => <div>{res[2].publishedAt}</div>)}
 			</div>
 		</div>
 	)
