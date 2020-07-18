@@ -131,7 +131,7 @@ const News = () =>
 				<h1>{userName} News for {userCounty} County: </h1> 
 				{countyNews.map(res => <div>{res[0].title}</div>)}
 				{countyNews.map(res => <div>{res[0].description}</div>)}
-				{countyNews.map(res => <div><a href={res[0].url.toString()}></a>Article</div>)}
+				{countyNews.map(res => <div><a href={res[0].url}></a>Article</div>)}
 				{countyNews.map(res => <div>{res[0].publishedAt}</div>)}
 
 				{countyNews.map(res => <div>{res[1].title}</div>)}
