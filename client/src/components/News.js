@@ -115,9 +115,10 @@ const News = () =>
 		
 			
 			var temp = ((json))
-			console.log('temp: ' + temp)
-			console.log('temp.articles: ' + temp.articles[0])
-			console.log('temp.articles and some bitch: ' + temp[0].articles[0])
+			console.log('temp: ' + JSON.stringify(temp))
+			console.log('temp.articles: ' + temp.articles[1].title)
+			console.log(JSON.stringify('temmp.astricles[1].title: ' + temp.articles[1].title))
+			// console.log('temp.articles and some bitch: ' + temp[0].articles[0])
 		// for (var x in json.articles){	
 		// 	var j = json.articles[0]
 		// 	listStorage.push(j)
