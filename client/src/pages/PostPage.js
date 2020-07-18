@@ -1,21 +1,23 @@
 import React from 'react';
-import SignUp from '../components/SignUp';
 import PageTitle from '../components/PageTitle';
+import LoginHub from '../components/LoginHub';
+import CreatePost from '../components/CreatePost';
 
-const SignUpPage = () =>
+const PostPage = () =>
 {
     return(
         <div>
                  <div class="covidBorder">
             <div class="padding">
                 <div class="textBorder">  
-            <PageTitle /> 
-                <SignUp />
-            </div>
+                <PageTitle />
+                <LoginHub />
+                </div>
+                <CreatePost />
             </div>
             </div>
         </div>
     );
 }
 
-export default SignUpPage;
+export default PostPage;
