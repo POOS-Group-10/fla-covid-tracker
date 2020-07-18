@@ -141,6 +141,7 @@ app.use(session({
 //   next()
 // })
 
+//------------------ PROFILE -----------------------
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   console.log('session id ' + session._id)
@@ -150,7 +151,7 @@ app.post('/api/profile', (req, res) => {
 })
 
 
-// Login
+//-------------------- LOGIN ----------------------
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
@@ -208,6 +209,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
+//---------------- FIND USER ------------------
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   console.log('userName we are looking for: ' + req.body.userName)
@@ -234,6 +236,7 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
+//----------------- SINGUP ---------------------
 app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
@@ -323,6 +326,7 @@ app.post('/api/SignUp', async (req, res) => {
 
 });
 
+//--------------- EMAIL VERIFICATION -----------------------
 app.put('/api/EmailVerification/:token', (req, res) => {
   console.log(req.params.token)
   console.log(jwt.verify(req.params.token, process.env.EMAIL_SECRET))
@@ -351,6 +355,7 @@ app.put('/api/EmailVerification/:token', (req, res) => {
   })
 })
 
+// ------------- PASSWORD RESET ----------------------
 app.put('/api/PasswordReset/:token', async (req, res) => {
   try {
     const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
@@ -378,6 +383,7 @@ app.put('/api/PasswordReset/:token', async (req, res) => {
   })
 })
 
+//---------- PASSWORD RECOVERY ----------------
 app.post('/api/PasswordRecovery', (req, res) => 
 {
   console.log("The email is " + req.body.email);
