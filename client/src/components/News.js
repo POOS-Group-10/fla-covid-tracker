@@ -104,9 +104,10 @@ const News = () =>
 	async function makeRequest() {
 		//https://gnews.io/api/v3/search?q=Florida&token=9716fdf90959ffffecdf3cc1237c63c7
 		const url ='https://gnews.io/api/v3/search?q=Florida '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7' 
+		const url2 = 'https://gnews.io/api/v3/search?q=Florida '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
 		console.log('url: ' + url)
 	
-		const response = await fetch(url, {
+		const response = await fetch(url2, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})
