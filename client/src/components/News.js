@@ -113,17 +113,16 @@ const News = () =>
 		.then((res) => res.json())
 		.then((json) => {
 		
-			
 			var temp = ((json))
 			// console.log('temp: ' + JSON.stringify(temp))
 			console.log('temp.articles: ' + temp.articles[1].title)
 			console.log(JSON.stringify('temmp.astricles[1].title: ' + temp.articles[1].title))
 			// console.log('temp.articles and some bitch: ' + temp[0].articles[0])
 		// for (var x in json.articles){	
-		// 	var j = json.articles[0]
-		// 	listStorage.push(j)
+			var j = json.articles
+			listStorage.push(j)
 		// }
-			setCountyNews(json.articles);
+			setCountyNews(listStorage);
 		})
 		.catch(err => console.log(err))
 	}
@@ -135,10 +134,8 @@ const News = () =>
 	return (
 		<div>
 			<div>
-				
 				<h1>{userName} News for {userCounty} County: </h1> 
-				<h1> News for title please work {countyNews[0].title}  </h1> 
-				{/* {countyNews.map(res => <div>{res.articles[0].title}</div>)} */}
+				{countyNews.map(res => <div>{res[1].title}</div>)}
 				{/* {countyNews.map(res => <div>title: {res.articles[0].title}</div>)}
 				{countyNews.map(res => <div>description: {res.articles[0].description}</div>)}
 				{countyNews.map(res => <div>url: {res.articles[0].url}</div>)}
