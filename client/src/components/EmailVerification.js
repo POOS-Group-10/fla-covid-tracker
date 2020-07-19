@@ -32,4 +32,4 @@ const EmailVerification = () =>
 }
 
 export default EmailVerification;
-module.exports = doEmailVerification;
+// module.exports = doEmailVerification;

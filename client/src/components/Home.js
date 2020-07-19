@@ -50,4 +50,4 @@ const Home = () =>
 }
 
 export default Home;
-module.exports = fetchData;
+// module.exports = fetchData;

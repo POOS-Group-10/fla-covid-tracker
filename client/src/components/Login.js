@@ -71,4 +71,4 @@ const Login = () => {
 };
 
 export default Login;
-module.exports = doLogin;
+// module.exports = doLogin;
