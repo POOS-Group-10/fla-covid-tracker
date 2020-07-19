@@ -409,9 +409,19 @@ app.post('/api/CreatePost', (req, res) => {
     user: req.body.user,
     county: req.body.county,
   });
+  console.log(post.title + ' ' + post.body + ' ' + post.user + ' ' + post.county)
   BlogPosts.create(post)
     .then((data) => {
       console.log(data)
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        msg: "error in create post " + error
+      })
+    })
+
+    return res.status(200).json({
+      msg: "post created"
     })
 })
 
