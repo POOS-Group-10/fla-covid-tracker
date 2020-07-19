@@ -30,7 +30,7 @@ const CreatePost = () =>
     })
     }
 
-    const savePost = async () =>
+    const savePost = async (event) =>
     {
         event.preventDefault();
 
