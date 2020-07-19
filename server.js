@@ -96,9 +96,6 @@ transporter.verify(function(error, success) {
   }
 });
 
-<<<<<<< HEAD
-// Login API
-=======
 // Starting Sessions
 app.use(session({
   name: SESS_NAME,
@@ -121,7 +118,6 @@ app.post('/api/profile', (req, res) => {
 
 
 // Login
->>>>>>> master
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
