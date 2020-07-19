@@ -11,14 +11,13 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
-
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+// app.get('/', function(req, res) {
+//   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
 
 const routes = require('./routes/api');
 
@@ -32,12 +31,12 @@ const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FL
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-mongoose.connect('mongodb://localhost/fla-covid-tracking', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// mongoose.connect('mongodb://localhost/fla-covid-tracking', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
-// mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // test functions
 

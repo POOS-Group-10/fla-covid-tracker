@@ -84,5 +84,4 @@ const Covid = () =>
 };
 
 export default Covid;
-// module.exports = makeRequest;
 
