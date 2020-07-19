@@ -426,6 +426,7 @@ app.post('/api/CreatePost', (req, res) => {
 })
 
 app.get('/api/getPosts', (req, res) => {
+  consolelog('made it to getPosts')
   BlogPosts.find({ userName: req.session.userName })
     .then((data) => {
       res.json(data);
