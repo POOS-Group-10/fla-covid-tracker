@@ -56,7 +56,7 @@ const CreatePost = () =>
                     type="text"
                     name="postTitle"
                     placeholder="Post Header"
-                    onChange={e => postTitle(e.target.value)}
+                    onChange={e => setPostTitle(e.target.value)}
                     />
                 </div>
                 <br></br>
