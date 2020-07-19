@@ -24,6 +24,8 @@ const routes = require('./routes/api');
 require('dotenv').config();
 
 const Users = require('./models/user');
+const BlogPosts = require('./models/blogPost');
+const Comments = require('./models/comment')
 // const routes = require('./routes/api');
 
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
@@ -407,5 +409,26 @@ app.post('/api/PasswordRecovery', (req, res) =>
 
 });
 
+app.post('/api/CreatePost', (req, res) => {
+
+  const post = new BlogPosts( {              
+    title: req.body.title,
+    body: req.body.body,
+    user: req.body.user,
+    county: req.body.county,
+  });
+  BlogPosts.create(post)
+    .then((data) => {})
+})
+
+app.get('/api/getPosts', (req, res) => {
+  BlogPosts.find({ userName: req.session.userName })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
