@@ -4,8 +4,7 @@ import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
 const CreatePost = () => 
-{   
-    event.preventDefault();
+{  
 
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
@@ -33,6 +32,8 @@ const CreatePost = () =>
 
     const savePost = async () =>
     {
+        event.preventDefault();
+
         console.log(postTitle + ' ' + postBody + ' ' + userName + ' ' + userCounty)
         const payload = {
             title: postTitle,
