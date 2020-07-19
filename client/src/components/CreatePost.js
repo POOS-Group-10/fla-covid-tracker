@@ -52,6 +52,8 @@ const CreatePost = () =>
         })
     }
         
+    fetchData();
+
         return(
             <div className="app">
                 <form onSubmit={savePost}>
