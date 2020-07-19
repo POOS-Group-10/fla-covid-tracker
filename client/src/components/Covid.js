@@ -14,76 +14,9 @@ const Covid = () =>
     const [userCounty, setUserCounty] = useState("");
 
     const url = 'https://covid19-us-api.herokuapp.com/county';
-    // const url2 ='http://localhost:3000/api/profile';
-    const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url2 ='http://localhost:3000/api/profile';
+    // const url2 ='https://florida-covid-tracking.herokuapp.com/api/profile';
     
-    var floridaCounties = 
-    ["Alachua",
-    "Baker",
-    "Bay",
-    "Bradford",
-    "Brevard",
-    "Broward",
-    "Calhoun",
-    "Charlotte",
-    "Citrus",
-    "Clay",
-    "Collier",
-    "Columbia",
-    "Dixie",
-    "Duval",
-    "Escambia",
-    "Flagler",
-    "Franklin",
-    "Gadsden",
-    "Gilchrist",
-    "Glades",
-    "Gulf",
-    "Hamilton",
-    "Hardee",
-    "Hendry",
-    "Hernando",
-    "Highlands",
-    "Hillsborough",
-    "Holmes",
-    "Indian River",
-    "Jackson",
-    "Jefferson",
-    "Lafayette",
-    "Lake",
-    "Lee",
-    "Leon",
-    "Levy",
-    "Liberty",
-    "Madison",
-    "Manatee",
-    "Marion",
-    "Martin",
-    "Miami-Dade",
-    "Monroe",
-    "Nassau",
-    "Okaloosa",
-    "Okeechobee",
-    "Orange",
-    "Osceola",
-    "Palm Beach",
-    "Pasco",
-    "Pinellas",
-    "Polk",
-    "Putnam",
-    "Santa Rosa",
-    "Sarasota",
-    "Seminole",
-    "St. Johns",
-    "St. Lucie",
-    "Sumter",
-    "Suwannee",
-    "Taylor",
-    "Union",
-    "Volusia",
-    "Wakulla",
-    "Walton",
-    "Washington"]
     var listStorage = []
 
     async function fetchData(){
@@ -125,7 +58,7 @@ const Covid = () =>
                 setCountyInfo(listStorage);
             })
             .catch(err => console.log(err))
-            
+
     };
 
 	count ++
@@ -151,4 +84,5 @@ const Covid = () =>
 };
 
 export default Covid;
+module.exports = makeRequest;
 
