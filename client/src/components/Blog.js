@@ -13,11 +13,13 @@ const Blog = () =>
     const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
 
     const getBlogPosts = () => {
+      console.log('inside getblogposts')
       axios({
         url: '../api/getPosts',
         method: 'GET'
       })
       .then((response) => {
+        console.log(response)
         setPosts(response)
       })
       .catch((error) => {
