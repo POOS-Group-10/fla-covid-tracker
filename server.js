@@ -410,7 +410,9 @@ app.post('/api/CreatePost', (req, res) => {
     county: req.body.county,
   });
   BlogPosts.create(post)
-    .then((data) => {})
+    .then((data) => {
+      console.log(data)
+    })
 })
 
 app.get('/api/getPosts', (req, res) => {
