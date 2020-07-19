@@ -13,6 +13,7 @@ import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import EmailVerificationPage from './pages/EmailVerificationPage';
 
 import './App.css';
 
@@ -32,8 +33,11 @@ const App = () => {
         <Route path="/PasswordRecovery" exact>
           <PasswordRecoveryPage />
         </Route>
-        <Route path="/PasswordReset">
+        <Route path="/PasswordReset/:id" component={PasswordResetPage} exact>
           <PasswordResetPage />
+        </Route>
+        <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>
+          <EmailVerificationPage />
         </Route>
         <Redirect to="/" />
       </Switch>

@@ -17,16 +17,19 @@ const Login = () => {
       userName: userName,
       password: password,
     };
-    
     axios({
-      url: "../api/Login", // React app is communicating with the server by this route
+      url: '../api/Login', // React app is communicating with the server by this route
       method: "POST", // GET is used by default
       data: payload,
     })
-      // These are promises
       .then((response) => {
-        console.log(response);
-        setLoggedIn(true);
+        console.log('response to login api: ' + response)
+        if (response.data.auth == "0"){
+          setLoggedIn(false);
+        } else{
+          console.log('loggin to accepted')
+          setLoggedIn(true)}
+              
       })
       .catch((e) => {
         console.log("Internal server error " + e);
@@ -62,7 +65,7 @@ const Login = () => {
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
       <Link to="/Home">Go to the dashboard</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
-      <Link to="/PasswordReset">Go to the Password Reset page</Link>
+      <Link to="/PasswordReset/5">Go to the Password Reset page</Link>
     </div>
   );
 };

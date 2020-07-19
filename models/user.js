@@ -11,6 +11,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  userCounty: {
+    type: String,
+    required: true
+  },
   firstName: {
     type: String,
     required: false
@@ -22,6 +26,11 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true
+  },
+  verified: {
+    type: Boolean,
+    default: false,
+    required: true 
   },
   date: {
     type: String,
