@@ -425,10 +425,11 @@ app.post('/api/CreatePost', (req, res) => {
     })
 })
 
-app.get('/api/getPosts', (req, res) => {
+app.post('/api/getPosts', (req, res) => {
   consolelog('made it to getPosts')
   BlogPosts.find({ userName: req.session.userName })
     .then((data) => {
+      console.log('in get posts data is ' + data + ' ' + data[0])
       res.json(data);
     })
     .catch((error) => {

@@ -16,7 +16,7 @@ const Blog = () =>
       console.log('inside getblogposts')
       axios({
         url: '../api/getPosts',
-        method: 'GET'
+        method: 'POST'
       })
       .then((response) => {
         console.log(response)
