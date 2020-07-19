@@ -112,7 +112,7 @@ app.use(session({
 
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  console.log('session id ' + session._id)
+  console.log('session id ' + req.session._id)
 
   return res.json({county: req.session.userCounty , userName: req.session.userName})
   
@@ -427,10 +427,10 @@ app.post('/api/CreatePost', (req, res) => {
 
 app.post('/api/getPosts', (req, res) => {
   console.log('made it to getPosts')
-  BlogPosts.find({ userName: req.session.userName })
+  BlogPosts.find({ user: req.session.userName })
     .then((data) => {
-      console.log('in get posts data is ' + data + ' ' + data[0])
-      res.json(data);
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
     })
     .catch((error) => {
       console.log('error getting posts')

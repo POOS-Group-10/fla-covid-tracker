@@ -10,7 +10,8 @@ const Blog = () =>
     const [posts, setPosts] = useState([]);
     const [userName, setUserName] = useState('');
 
-    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    const url = 'http://localhost:3000/api/profile'
 
     const getBlogPosts = () => {
       console.log('inside getblogposts')
@@ -19,7 +20,7 @@ const Blog = () =>
         method: 'POST'
       })
       .then((response) => {
-        console.log(response)
+        console.log('getblogpost response: ' + response + ' ' + response.data)
         setPosts(response)
       })
       .catch((error) => {
