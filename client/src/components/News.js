@@ -107,7 +107,7 @@ const News = () =>
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
 		console.log('url: ' + url)
 	
-		const response = await fetch(url2, {
+		const response = await fetch(url, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})

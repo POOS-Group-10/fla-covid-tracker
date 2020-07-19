@@ -10,8 +10,10 @@ const Blog = () =>
     const [posts, setPosts] = useState([]);
     const [userName, setUserName] = useState('');
 
-    // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
-    const url = 'http://localhost:3000/api/profile'
+    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+    // const url = 'http://localhost:3000/api/profile'
+
+    var postList = []
 
     const getBlogPosts = () => {
       console.log('inside getblogposts')
@@ -20,8 +22,13 @@ const Blog = () =>
         method: 'POST'
       })
       .then((response) => {
-        console.log('getblogpost response: ' + response + ' ' + response.data)
-        setPosts(response)
+        console.log('getblogpost response: ' + response + ' ' + response.data[0].user)
+        var x;
+        for (x in response.data)
+          postList.push(response.data[x])
+        console.log('post list array is: ' + postList)
+        setPosts(postList)
+        console.log('posts state is: ' + posts)
       })
       .catch((error) => {
         console.log('error getting blog posts ' + error)
