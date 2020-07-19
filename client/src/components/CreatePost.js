@@ -48,7 +48,7 @@ const CreatePost = () =>
     }
         
         return(
-            <div  className="app">
+            <div className="app">
                 <form onSubmit={savePost}>
                 <div className = "form-input-left">
                     <input

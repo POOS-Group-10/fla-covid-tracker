@@ -25,6 +25,17 @@ const Blog = () =>
       })
     }
 
+    displayBlogPost = (posts) => {
+      if (!posts.length) return null; // end function if 'posts' is empty.
+  
+      return posts.map((post, index) => (
+        <div key={index} className="blog-post__display">
+          <h3>{post.title}</h3>
+          <p>{post.body}</p>
+        </div>
+      ));
+    };
+
     useEffect(() => {
       getBlogPosts();
     })
@@ -69,7 +80,11 @@ const Blog = () =>
         <br />
         <Post />
         <br />
+        <div className="blog-">
+          {displayBlogPost(state.posts)}
         </div>
+        </div>
+
     );
 }
 
