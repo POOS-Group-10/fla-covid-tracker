@@ -116,6 +116,7 @@ app.use(session({
   }
 }))
 
+//------------- PROFILE -----------------
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   console.log('session id ' + session._id)
@@ -125,7 +126,7 @@ app.post('/api/profile', (req, res) => {
 })
 
 
-// Login
+//-------------- LOGIN -------------------
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
@@ -183,7 +184,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
-// 
+//----------- FIND USER -------------------
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   console.log('userName we are looking for: ' + req.body.userName)
@@ -210,6 +211,7 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
+//------------------ SIGNUP ----------------
 app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
