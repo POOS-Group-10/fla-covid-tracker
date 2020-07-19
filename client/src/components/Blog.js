@@ -39,7 +39,7 @@ const Blog = () =>
     useEffect(() => {
       getBlogPosts();
       console.log(posts);
-    })
+    }, [])
 
     async function fetchData(){
       const response = await fetch(url, {
