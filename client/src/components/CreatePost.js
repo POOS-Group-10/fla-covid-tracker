@@ -19,8 +19,9 @@ const CreatePost = () =>
     })
     .then((res) => res.json())
     .then((json) => {
+        console.log('in create post, json is ' + json.userName + ' ' + json.county)
         setUserName(json.userName)
-        setUserCounty(json.userCounty)
+        setUserCounty(json.county)
     })
     .catch(err => 
     {
