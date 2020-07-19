@@ -11,19 +11,13 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// })
-
-const routes = require('./routes/api');
+// const routes = require('./routes/api');
 
 require('dotenv').config();
 
 const Users = require('./models/user');
+const BlogPosts = require('./models/blogPost');
+const Comments = require('./models/comment')
 // const routes = require('./routes/api');
 
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
@@ -48,9 +42,9 @@ mongoose.connection.on('error', function(error){
   console.log("errrr:" + error);
 })
 
-// mongoose.connection.on('connected', () => {
-//   console.log('Mongoose is connected!');
-// });
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose is connected!');
+});
 
 // This is a middleware in express that will parse every json
 // app.use(express.json());
@@ -119,7 +113,7 @@ app.use(session({
 //------------- PROFILE -----------------
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  console.log('session id ' + session._id)
+  console.log('session id ' + req.session._id)
 
   return res.json({county: req.session.userCounty , userName: req.session.userName})
   
@@ -409,5 +403,40 @@ app.post('/api/PasswordRecovery', (req, res) =>
 
 });
 
+app.post('/api/CreatePost', (req, res) => {
+
+  const post = new BlogPosts( {              
+    title: req.body.title,
+    body: req.body.body,
+    user: req.body.user,
+    county: req.body.county,
+  });
+  console.log(post.title + ' ' + post.body + ' ' + post.user + ' ' + post.county)
+  BlogPosts.create(post)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        msg: "error in create post " + error
+      })
+    })
+
+    return res.status(200).json({
+      msg: "post created"
+    })
+})
+
+app.post('/api/getPosts', (req, res) => {
+  console.log('made it to getPosts, ' + req.session.userName)
+  BlogPosts.find({ user: req.session.userName })
+    .then((data) => {
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));

@@ -44,7 +44,9 @@ const Home = () =>
     return(
         <div >
             <h1 >Welcome {userName}</h1> 
-            <Link to='/'>Log out</Link>
+            <Link to='/'>Log out</Link><br />
+            <Link to='/CreatePost'>Create a post</Link><br />
+            <Link to='/Blog'>Go to your posts</Link>
         </div>
     );
 }

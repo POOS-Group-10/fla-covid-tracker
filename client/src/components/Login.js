@@ -66,6 +66,7 @@ const Login = () => {
       <Link to="/Home">Go to the dashboard</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
       <Link to="/PasswordReset/5">Go to the Password Reset page</Link>
+      
     </div>
   );
 };
