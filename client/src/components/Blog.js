@@ -25,7 +25,7 @@ const Blog = () =>
       })
     }
 
-    displayBlogPost = (posts) => {
+    const displayBlogPosts = (posts) => {
       if (!posts.length) return null; // end function if 'posts' is empty.
   
       return posts.map((post, index) => (
@@ -81,7 +81,7 @@ const Blog = () =>
         <Post />
         <br />
         <div className="blog-">
-          {displayBlogPost(state.posts)}
+          {displayBlogPosts(posts)}
         </div>
         </div>
 
