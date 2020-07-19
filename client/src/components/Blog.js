@@ -38,6 +38,7 @@ const Blog = () =>
 
     useEffect(() => {
       getBlogPosts();
+      console.log(posts);
     })
 
     async function fetchData(){
@@ -78,7 +79,6 @@ const Blog = () =>
         <button>Search</button>
         </div>
         <br />
-        <Post />
         <br />
         <div className="blog-">
           {displayBlogPosts(posts)}
