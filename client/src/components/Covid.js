@@ -105,9 +105,7 @@ const Covid = () =>
 	}, []);
 	
 	const makeRequest = async (event) =>{
-        // console.log("User county in covid.js bitch:" + userInfo.userCounty)
-        // for(var counties in floridaCounties)
-        // {
+
             var js = {
                 state: "FL",
                 county: userCounty
@@ -127,7 +125,7 @@ const Covid = () =>
                 setCountyInfo(listStorage);
             })
             .catch(err => console.log(err))
-        // }
+            
     };
 
 	count ++
