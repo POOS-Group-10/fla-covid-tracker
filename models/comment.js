@@ -2,11 +2,9 @@ const mongoose = require('mongoose');
 
 // Schema
 const Schema = mongoose.Schema;
-const BlogPostSchema = new Schema({
-  title: String,
+const commentSchema = new Schema({
   body: String,
   user: String,
-  county: String,
   date: {
     type: String,
     default: Date.now()
@@ -14,6 +12,6 @@ const BlogPostSchema = new Schema({
 });
 
 // Model
-const BlogPost = mongoose.model('blogPost', BlogPostSchema);
+const Comment = mongoose.model('comment', commentSchema);
 
-module.exports = BlogPost;
+module.exports = Comment;
