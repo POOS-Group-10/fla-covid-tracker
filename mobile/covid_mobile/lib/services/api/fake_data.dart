@@ -7,12 +7,11 @@ import 'package:http/http.dart' as http;
 
 class WebData implements WebAPI{
   List<County> allCounty = [];
-  List<County> county = []; 
   String lastUpdated = "";
 
-  // List<County> getCountyData() {
-  //     return county; 
-  // }
+  List<County> getCountyData() {
+      return allCounty; 
+  }
 
   @override 
   Future<List<County>> fetchCountyData() async {
@@ -88,7 +87,8 @@ class WebData implements WebAPI{
     "Wakulla",
     "Walton",
     "Washington"];
-
+  
+  if (allCounty.length == 0){
     for (var temp in floridaCounties){
       var body = jsonEncode({"state": "FL", "county": temp});
       var headers = {'Content-Type': 'application/json'};
@@ -102,11 +102,11 @@ class WebData implements WebAPI{
         allCounty.add(s);
       }
     }
+  }else{
+    print("getting from cache");
+  }
 
-    county = allCounty;
-    
     return allCounty; 
- 
   }
 
 }

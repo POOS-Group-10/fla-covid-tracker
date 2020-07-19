@@ -11,6 +11,17 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+const routes = require('./routes/api');
+
 require('dotenv').config();
 
 const Users = require('./models/user');
@@ -21,12 +32,12 @@ const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FL
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-// mongoose.connect('mongodb://localhost/fla-covid-tracking', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
+mongoose.connect('mongodb://localhost/fla-covid-tracking', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 // test functions
 
@@ -106,41 +117,6 @@ app.use(session({
   }
 }))
 
-// app.use(session({
-//   // genid: (req) => {
-//   //   console.log('Inside the session middleware')
-//   //   console.log(req.sessionID)
-//   //   return uuid() // use UUIDs for session IDs
-//   // },
-//   secret: 'keyboard cat',
-//   // resave: false,
-//   saveUninitialized: true,
-//   resave: true,  // connect-mongo update JR
-//   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
-// }))
-
- 
-// app.use(function (req, res, next) {
-  // console.log("Line 76")
-  // if (!req.session.userId) {
-  //   console.log("Inside if statement - Line 78")
-  //   req.session.userId = 0;
-  // }
-
-//   Users.find({userName: req.body.userName})
-//   .then((data) => {
-//     if (data.length > 1)
-//     {
-//      console.log("id is  " + data._id)
-//     }
-//   })
-//   .catch(e)
-//   {
-//     console.log("Error: " + e)
-//   }
-//   next()
-// })
-
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   console.log('session id ' + session._id)
@@ -208,6 +184,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
+// 
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   console.log('userName we are looking for: ' + req.body.userName)
@@ -311,16 +288,6 @@ app.post('/api/SignUp', async (req, res) => {
       .catch((error) => {
         console.log(error)
       })
-    // if (error) {
-    //   console.log("Error in code here");
-    //   console.log(error)
-    //   res.status(500).json({ msg: 'Sorry, internal server errors'});
-    //   return;
-    // }
-    // else {
-    //   console.log("Has been Saved! " + user)
-    // }
-
 });
 
 app.put('/api/EmailVerification/:token', (req, res) => {

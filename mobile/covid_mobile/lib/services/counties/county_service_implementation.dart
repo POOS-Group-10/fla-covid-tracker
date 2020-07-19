@@ -11,7 +11,7 @@ class CountyServiceImplementation implements CountyService {
   WebAPI _webAPI = serviceLocator<WebAPI>();
 
   Future<List<County>> getAllCountyData({String base}) async {
-    List<County> webData = await _webAPI.fetchCountyData();
+    List<County> webData = await _webAPI.getCountyData();
   
     return webData;
   }

@@ -19,8 +19,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   setupServiceLocator();
-  // WebAPI _webAPI = serviceLocator<WebAPI>();
-  // _webAPI.fetchCountyData();
+  WebAPI _webAPI = serviceLocator<WebAPI>();
+  _webAPI.fetchCountyData();
   runApp(MyApp());
 }
 
