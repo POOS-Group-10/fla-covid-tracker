@@ -11,13 +11,13 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+// app.get('/', function(req, res) {
+//   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// })
 
 const routes = require('./routes/api');
 
