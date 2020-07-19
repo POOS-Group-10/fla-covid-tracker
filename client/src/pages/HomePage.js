@@ -8,10 +8,15 @@ const HomePage = () =>
 {
     return(
         <div>
+                 <div class="padding">
+                <div class="textBorder">
             <PageTitle />
                 <Home />
                 <Covid />
+                </div>
+                <br></br>
                 <News />
+                </div>
         </div>
     );
 }

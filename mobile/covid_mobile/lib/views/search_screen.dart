@@ -75,24 +75,21 @@ class _SearchScreen extends State<SearchScreen> {
             )
           ],
         ),
-        body: SingleChildScrollView(child: Column(
+        body: Column(
           children: [
             buildTextField(model),
             buildListView(model)
           ]
         )
-    ));
+    );
   }
 
   Widget buildListView(SearchViewModel viewModel) {
     return ChangeNotifierProvider.value(
         value: viewModel,
-        // create: (context) => viewModel,
-          child: Column(children: [
-          // buildTextField(model),
-          Consumer<SearchViewModel>(
+          child: Expanded(child: Consumer<SearchViewModel>(
               builder: (context, model, child) => ListView.builder(
-        physics: const AlwaysScrollableScrollPhysics(), // new
+              physics: const AlwaysScrollableScrollPhysics(), // new
                   shrinkWrap: true,
                   itemCount: model.choices.length,
                   itemBuilder: (context, index) {
@@ -104,7 +101,7 @@ class _SearchScreen extends State<SearchScreen> {
                             ? cardView(index)
                             : new Container();
                   }))
-        ]));
+        ));
   }
 
   Widget buildTextField(SearchViewModel viewModel) {

@@ -1,8 +1,9 @@
 import React from 'react';
-import SignUp from '../components/SignUp';
+import LoginHub from '../components/LoginHub';
 import PageTitle from '../components/PageTitle';
+import CreatePost from '../components/CreatePost';
 
-const SignUpPage = () =>
+const CreatePostPage = () =>
 {
     return(
         <div>
@@ -10,7 +11,8 @@ const SignUpPage = () =>
             <div class="padding">
                 <div class="textBorder">  
             <PageTitle /> 
-                <SignUp />
+            <LoginHub />
+                <CreatePost />
             </div>
             </div>
             </div>
@@ -18,4 +20,4 @@ const SignUpPage = () =>
     );
 }
 
-export default SignUpPage;
+export default CreatePostPage;
