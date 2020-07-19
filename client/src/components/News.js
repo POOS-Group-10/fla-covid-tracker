@@ -150,4 +150,4 @@ const News = () =>
 };
 
 export default News;
-
+// module.exports = makeRequest;
