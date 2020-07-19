@@ -1,5 +1,5 @@
 import '../App.css';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -51,8 +51,10 @@ const CreatePost = () =>
             return <Redirect to='/Blog' />
         })
     }
-        
-    fetchData();
+
+    useEffect(() => {
+        fetchData();
+    }, [])
 
         return(
             <div className="app">
