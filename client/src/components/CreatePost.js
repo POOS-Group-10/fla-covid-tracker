@@ -5,6 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 const CreatePost = () => 
 {   
+    event.preventDefault();
+
     const [postTitle, setPostTitle] = useState('');
     const [postBody, setPostBody] = useState('');
     const [userName, setUserName] = useState('');
