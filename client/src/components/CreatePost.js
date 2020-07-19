@@ -28,8 +28,9 @@ const CreatePost = () =>
     })
     }
 
-    const savePost = async  =>
+    const savePost = async () =>
     {
+        console.log(postTitle + ' ' + postBody + ' ' + userName + ' ' + userCounty)
         const payload = {
             title: postTitle,
             body: postBody,
@@ -42,7 +43,7 @@ const CreatePost = () =>
             method: 'POST',
             data: payload
         })
-        .then((response) => {
+        .then(() => {
             return <Redirect to='/Blog' />
         })
     }
@@ -53,7 +54,7 @@ const CreatePost = () =>
                 <div className = "form-input-left">
                     <input
                     type="text"
-                    name="firstName"
+                    name="postTitle"
                     placeholder="Post Header"
                     onChange={e => postTitle(e.target.value)}
                     />
@@ -65,7 +66,7 @@ const CreatePost = () =>
                     rows="20"
                     type="text"
                     placeholder="Post Content"
-                    name="email"
+                    name="postBody"
                     onChange={e => setPostBody(e.target.value)}
                     />
                 </div>
