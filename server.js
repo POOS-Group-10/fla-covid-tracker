@@ -11,7 +11,6 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
-
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
     if (err) {
@@ -49,9 +48,9 @@ mongoose.connection.on('error', function(error){
   console.log("errrr:" + error);
 })
 
-mongoose.connection.on('connected', () => {
-  console.log('Mongoose is connected!');
-});
+// mongoose.connection.on('connected', () => {
+//   console.log('Mongoose is connected!');
+// });
 
 // This is a middleware in express that will parse every json
 // app.use(express.json());
