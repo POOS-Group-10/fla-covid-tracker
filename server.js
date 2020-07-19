@@ -11,15 +11,7 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
-// app.get('/', function(req, res) {
-//   res.sendFile(path.join(__dirname, './client/public/index.html'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// })
-
-const routes = require('./routes/api');
+// const routes = require('./routes/api');
 
 require('dotenv').config();
 
@@ -50,9 +42,9 @@ mongoose.connection.on('error', function(error){
   console.log("errrr:" + error);
 })
 
-// mongoose.connection.on('connected', () => {
-//   console.log('Mongoose is connected!');
-// });
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose is connected!');
+});
 
 // This is a middleware in express that will parse every json
 // app.use(express.json());
