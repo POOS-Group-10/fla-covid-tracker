@@ -94,18 +94,18 @@ class _FavoritesScreen extends State<FavoritesScreen> {
 
   Widget viewContainer(int index) {
     return Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
         height: 115.0,
         width: double.maxFinite,
         child: Card(
-          elevation: 2.0,
+          elevation: 4.0,
           child: Padding(
-              padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
+              padding: EdgeInsets.fromLTRB(4.0, 20.0, 0, 1.0),
               child: ListTile(
                 title: Text('${model.favorites[index].countyName}',
                     style:
                         TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-                subtitle: Text('${model.favorites[index].confirmed}',
+                subtitle: Text("Confirmed Cases: ${model.favorites[index].confirmed}",
                     style: TextStyle(fontSize: 15)),
                 onTap: () {
                   Navigator.pushNamed(context, '/county_screen', arguments: {

@@ -15,7 +15,7 @@ class _HomeScreen extends State<HomeScreen> {
     new MapScreen(key: PageStorageKey('MapPage')),
     new SearchScreen(key: PageStorageKey('SearchPage')),
     // new FavoritesScreen(key: PageStorageKey('FavoritesPage')), 
-    new ProfileScreen(key: PageStorageKey('ProfilePage'))
+    new FavoritesScreen(key: PageStorageKey('ProfilePage'))
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();
@@ -53,7 +53,7 @@ class _HomeScreen extends State<HomeScreen> {
         BottomNavigationBarItem(
             icon: Icon(Icons.search), title: Text('Search')),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border), title: Text('Profile')),
+            icon: Icon(Icons.favorite_border), title: Text('Favorites')),
       ],
       currentIndex: _currentIndex,
       selectedItemColor: Color.fromRGBO(127, 127, 213, 1),
