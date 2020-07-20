@@ -5,6 +5,8 @@ const Schema = mongoose.Schema;
 const BlogPostSchema = new Schema({
   title: String,
   body: String,
+  user: String,
+  county: String,
   date: {
     type: String,
     default: Date.now()
@@ -12,6 +14,6 @@ const BlogPostSchema = new Schema({
 });
 
 // Model
-const BlogPost = mongoose.model('Users', BlogPostSchema);
+const BlogPost = mongoose.model('blogPost', BlogPostSchema);
 
 module.exports = BlogPost;

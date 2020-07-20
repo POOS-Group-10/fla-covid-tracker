@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import fetch from 'node-fetch';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import fetch from 'node-fetch';
 
 
 import '../App.css';
