@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   final List<Widget> _pages = [
-    new SearchScreen(key: PageStorageKey('MapPage')),
+    new MapScreen(key: PageStorageKey('MapPage')),
     new SearchScreen(key: PageStorageKey('SearchPage')),
     // new FavoritesScreen(key: PageStorageKey('FavoritesPage')), 
     new ProfileScreen(key: PageStorageKey('ProfilePage'))
