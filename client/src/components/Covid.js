@@ -71,9 +71,11 @@ const Covid = () =>
         <div>
             <div>
                 <h1>From {userCounty} County</h1> 
-                {countyInfo.map(res => <div>Confirmed: {res.confirmed}</div>)} 
-                {countyInfo.map(res => <div>Deaths: {res.death}</div>)}   
-                {countyInfo.map(res => <div>New Death: {res.new_death}</div>)}   
+                <h1>
+                {countyInfo.map(res => <div>Confirmed Cases: {res.confirmed}</div>)} 
+                {countyInfo.map(res => <div>Total Deaths: {res.death}</div>)}   
+                {countyInfo.map(res => <div>Deaths Today: {res.new_death}</div>)}
+                </h1>                
                 {countyInfo.map(res => <div>Last Updated: {res.last_update}</div>)}           
             </div>
         </div>
