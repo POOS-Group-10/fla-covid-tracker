@@ -47,7 +47,7 @@ const Home = () =>
 */
     return(
         <div >
-            <h1 >Welcome </h1>
+            <h1 >Welcome {userName}.</h1>
             <button>
             <Link to='/'>Log out</Link></button> 
         </div>

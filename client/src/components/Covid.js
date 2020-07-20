@@ -70,9 +70,7 @@ const Covid = () =>
     return (
         <div>
             <div>
-                <h1>User County is {userCounty}</h1>
-                {countyInfo.map(res => <div>State: {res.state_name}</div>)}
-                {countyInfo.map(res => <div>County: {res.county_name}</div>)}  
+                <h1>In {userCounty} County.</h1> 
                 {countyInfo.map(res => <div>Confirmed: {res.confirmed}</div>)} 
                 {countyInfo.map(res => <div>Deaths: {res.death}</div>)}   
                 {countyInfo.map(res => <div>New Death: {res.new_death}</div>)}   
