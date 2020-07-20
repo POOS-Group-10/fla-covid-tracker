@@ -15,8 +15,8 @@ const SignUp = () =>
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [userCounty, setCounty] = useState('Alachua');
-    const [isRegistered, setRegistered] = useState(false);
     
+
     const doSignUp = async event => 
     {    
         console.log("Ented the doSignUp Function");
