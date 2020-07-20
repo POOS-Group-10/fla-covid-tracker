@@ -60,19 +60,7 @@ class _SearchScreen extends State<SearchScreen> {
                 ])),
           ),
           actions: <Widget>[
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FavoritesScreen()),
-                    );
-                  },
-                  icon: Icon(Icons.favorite, color: Colors.red),
-              ),
-            )
+            logout()
           ],
         ),
         body: Column(
@@ -138,7 +126,7 @@ class _SearchScreen extends State<SearchScreen> {
 
   Widget buildTile(int index) {
     return ListTile(
-      contentPadding: EdgeInsets.fromLTRB(20, 5, 15, 0),
+      contentPadding: EdgeInsets.fromLTRB(20, 20, 15, 0),
       title: Text('${model.choices[index].countyName}',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
       subtitle: Text('Confirmed cases: ${model.choices[index].confirmed}',
@@ -164,5 +152,17 @@ class _SearchScreen extends State<SearchScreen> {
         });
       },
     );
+  }
+
+  Widget logout() {
+    return Container(
+      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+        child: IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () async {
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              prefs.remove('userName');
+              Navigator.pushReplacementNamed(context, '/login');
+            }));
   }
 }
