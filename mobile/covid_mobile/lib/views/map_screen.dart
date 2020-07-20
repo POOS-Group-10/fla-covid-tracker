@@ -12,13 +12,28 @@ import 'package:covid_mobile/services/service_locator.dart';
 import 'package:covid_mobile/business_logic/view_models/search.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
-
+import 'package:flutter/services.dart' show rootBundle;
 
 class MapScreen extends StatefulWidget{
   const MapScreen({Key key}) : super(key: key);
 
   @override 
   _MapScreen createState() => _MapScreen(); 
+
+}
+
+class Counties {
+  List<dynamic> countyLines;
+  List<List<dynamic>> countyLines123;
+
+  void fillList(){
+
+  }
+
+  Counties(this.countyLines);
+
+  Counties.fromJson(Map<String, dynamic> json)
+    : countyLines = json['counties'];
 
 }
 
@@ -30,6 +45,11 @@ class _MapScreen extends State<MapScreen> {
   Set<Polygon> _tempPolygons = HashSet<Polygon>();
   List<List<LatLng>> polygonLatLngs = List<List<LatLng>>();
   String filter;
+
+  Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/countyLines1.json');
+  }
+
   List<String> countyNames = [
     "Alachua County",
     "Baker County",
@@ -222,20 +242,31 @@ class _MapScreen extends State<MapScreen> {
 
   Color calculateColor(int a){
     if(model.choices[reorder[a]].confirmed > 10000){
-      return Color.fromARGB(128, 255, ((3.44 - log(((model.choices[reorder[a]].confirmed-9999)/2000)+1))*74).toInt(), 0);
+      return Color.fromARGB(128, 255, ((3.83 - log(((model.choices[reorder[a]].confirmed-9999)/2000)+1))*66.5).toInt(), 0);
     }else{
       return Color.fromARGB(128,(log(model.choices[reorder[a]].confirmed)*27.68).toInt(), 255, 0);
     }
   }
 
   void _setPolygon() async{
+    Map<String, dynamic> countiiies = json.decode(await loadAsset());
+    //var poops = new Counties.fromJson(countiiies);
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    var coooont = new Counties.fromJson(countiiies);
+    String border;
+    List<String> pairs;
+    List<String> aupair;
     var rng = new Random();
-    for(int i = 0; i < 68; i++) {
+    for(int i = 0; i < coooont.countyLines.length ; i++) {
       polygonLatLngs.add(new List<LatLng>());
-      for (int j = 0; j < 2000; j++) {
+      border = coooont.countyLines[i].toString();
+      border = border.substring(2,border.length-2);
+      pairs = border.split("], [");
+      for (int j = 0; j < pairs.length; j++) {
+        aupair = pairs[j].split(", ");
         polygonLatLngs[i].add(
-            LatLng((8+40*rng.nextDouble()),
-                -104.3+(80*rng.nextDouble())));
+            LatLng(double.parse(aupair[1]),
+                double.parse(aupair[0])));
       }
       final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
       _polygons.add(Polygon(
@@ -261,7 +292,7 @@ class _MapScreen extends State<MapScreen> {
                               style:
                               TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.w400)),
-                          subtitle: Text("Condirmed cases: " + model.choices[reorder[i]].confirmed.toString(),
+                          subtitle: Text("ConFirmed cases: " + model.choices[reorder[i]].confirmed.toString(),
                               style: TextStyle(fontSize: 15)),
                           trailing: new IconButton(
                               icon: (model.choices[reorder[i]].isFavorite)
@@ -292,6 +323,11 @@ class _MapScreen extends State<MapScreen> {
       _polygonIdCounter++;
     }
     polygonLatLngs = null;
+    countiiies = null;
+    coooont = null;
+    border = null;
+    pairs = null;
+    aupair = null;
   }
 
   void _showCard(){
