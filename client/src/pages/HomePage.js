@@ -1,20 +1,26 @@
 import React from 'react';
 import Home from '../components/Home';
 import PageTitle from '../components/PageTitle';
-import FLmap from '../components/FL/FLmap.js';
+import Covid from '../components/Covid';
+import News from '../components/News';
+
 const HomePage = () =>
 {
     return(
-        <div>
-            <div class="padding">
+        <div class="covidBorder">
+                 <div class="padding">
                 <div class="textBorder">
-       
             <PageTitle />
                 <Home />
+                <Covid />
                 </div>
+                <br></br>
+                <div class="textBorder">
+                <News />    
                 </div>
-                <FLmap />
-        </div>        
+           
+                </div>
+        </div>
     );
 }
 

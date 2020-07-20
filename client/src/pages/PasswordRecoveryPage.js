@@ -1,7 +1,7 @@
 import React from "react";
 import PasswordRecovery from "../components/PasswordRecovery";
 import PageTitle from "../components/PageTitle";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const PasswordRecoveryPage = () => {
   return (
@@ -12,6 +12,7 @@ const PasswordRecoveryPage = () => {
       <PageTitle />
       <PasswordRecovery />
       <Link to="/">Go Back</Link>
+      <div id="padding"></div>
     </div>
     </div>
     </div>

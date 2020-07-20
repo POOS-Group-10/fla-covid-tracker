@@ -11,11 +11,13 @@ import {
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import HomePage from './pages/HomePage';
-import BlogPage from './pages/BlogPage';
 import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
+import EmailVerificationPage from './pages/EmailVerificationPage';
 import PostPage from './pages/PostPage';
 import CreatePostPage from './pages/CreatePostPage';
+import BlogPage from './pages/BlogPage';
+
 import './App.css';
 
 const App = () => {
@@ -34,9 +36,6 @@ const App = () => {
         <Route path="/PasswordRecovery" exact>
           <PasswordRecoveryPage />
         </Route>
-        <Route path="/PasswordReset">
-          <PasswordResetPage />
-        </Route>
         <Route path="/Blog">
           <BlogPage />
         </Route>
@@ -45,7 +44,13 @@ const App = () => {
           </Route>
           <Route path="/CreatePost">
           <CreatePostPage />
-         </Route>
+          </Route>
+        <Route path="/PasswordReset/:id" component={PasswordResetPage} exact>
+          <PasswordResetPage />
+        </Route>
+        <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>
+          <EmailVerificationPage />
+        </Route>
         <Redirect to="/" />
       </Switch>
     </Router>

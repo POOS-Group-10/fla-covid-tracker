@@ -1,61 +1,70 @@
 import '../App.css';
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link, Redirect } from 'react-router-dom';
 
 const CreatePost = () => 
-{   
-    /* const [title, setPostTitle] = useState('');
-    const [content, setPostContent] = useState('');
+{  
 
-    const doSignUp = async event => 
-    {    
-        event.preventDefault(); // Stops the browser from refreshing
-    
-        const payload = {
-            postTitle: title,
-            postContent: content,
-        };
+    const [postTitle, setPostTitle] = useState('');
+    const [postBody, setPostBody] = useState('');
+    const [userName, setUserName] = useState('');
+    const [userCounty, setUserCounty] = useState('');
+
+    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
         
+    async function fetchData(){
+        const response = await fetch(url, {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'}
+    })
+    .then((res) => res.json())
+    .then((json) => {
+        console.log('in create post, json is ' + json.userName + ' ' + json.county)
+        setUserName(json.userName)
+        setUserCounty(json.county)
+    })
+    .catch(err => 
+    {
+        console.log(err)
+    })
+    }
+
+    const savePost = async (event) =>
+    {
+        event.preventDefault();
+
+        console.log(postTitle + ' ' + postBody + ' ' + userName + ' ' + userCounty)
+        const payload = {
+            title: postTitle,
+            body: postBody,
+            user: userName,
+            county: userCounty    
+        }
+
         axios({
-            url: '../api/findUser',
+            url: '../api/createPost',
             method: 'POST',
-            data: {userName: payload.userName}
+            data: payload
         })
-        .then((response) => {
-            console.log(response.data.taken);
-            if (response.data.taken === "1") {
-                setMessage(response.data.msg);
-                return;
-            }
-            else {
-                axios({
-                    url: '../api/SignUp', // React app is communicating with the server by this route
-                    method: 'POST', // GET is used by default
-                    data: payload
-                })
-                // These are promises
-                    .then(() => {
-                      setMessage(response.data.msg);
-                    })
-                    .catch(() => {
-                      console.log('Internal server error');
-                    });
-            }
+        .then(() => {
+            return <Redirect to='/Blog' />
         })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
- */
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, [])
+
         return(
-            <div  className="app">
+            <div className="app">
+                <form onSubmit={savePost}>
                 <div className = "form-input-left">
                     <input
                     type="text"
-                    name="firstName"
+                    name="postTitle"
                     placeholder="Post Header"
-                   // onChange={e => setFirstName(e.target.value)}
+                    onChange={e => setPostTitle(e.target.value)}
                     />
                 </div>
                 <br></br>
@@ -65,11 +74,12 @@ const CreatePost = () =>
                     rows="20"
                     type="text"
                     placeholder="Post Content"
-                    name="email"
-                   // onChange={e => setEmail(e.target.value)}
+                    name="postBody"
+                    onChange={e => setPostBody(e.target.value)}
                     />
                 </div>
                 <button>Submit Post</button>
+                </form>
             </div>
         );
 
