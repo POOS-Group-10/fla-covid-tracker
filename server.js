@@ -11,9 +11,13 @@ var session = require('express-session');
 const bcrypt = require('bcrypt');
 
 
+// const routes = require('./routes/api');
+
 require('dotenv').config();
 
 const Users = require('./models/user');
+const BlogPosts = require('./models/blogPost');
+const Comments = require('./models/comment')
 // const routes = require('./routes/api');
 
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
@@ -38,9 +42,9 @@ mongoose.connection.on('error', function(error){
   console.log("errrr:" + error);
 })
 
-// mongoose.connection.on('connected', () => {
-//   console.log('Mongoose is connected!');
-// });
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose is connected!');
+});
 
 // This is a middleware in express that will parse every json
 // app.use(express.json());
@@ -106,44 +110,9 @@ app.use(session({
   }
 }))
 
-// app.use(session({
-//   // genid: (req) => {
-//   //   console.log('Inside the session middleware')
-//   //   console.log(req.sessionID)
-//   //   return uuid() // use UUIDs for session IDs
-//   // },
-//   secret: 'keyboard cat',
-//   // resave: false,
-//   saveUninitialized: true,
-//   resave: true,  // connect-mongo update JR
-//   store: new MongoStore({ mongooseConnection: mongoose.connection }) // connect-mongo update JR
-// }))
-
- 
-// app.use(function (req, res, next) {
-  // console.log("Line 76")
-  // if (!req.session.userId) {
-  //   console.log("Inside if statement - Line 78")
-  //   req.session.userId = 0;
-  // }
-
-//   Users.find({userName: req.body.userName})
-//   .then((data) => {
-//     if (data.length > 1)
-//     {
-//      console.log("id is  " + data._id)
-//     }
-//   })
-//   .catch(e)
-//   {
-//     console.log("Error: " + e)
-//   }
-//   next()
-// })
-
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
-  console.log('session id ' + session._id)
+  console.log('session id ' + req.session._id)
 
   return res.json({county: req.session.userCounty , userName: req.session.userName})
   
@@ -208,6 +177,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
+// 
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   console.log('userName we are looking for: ' + req.body.userName)
@@ -311,16 +281,6 @@ app.post('/api/SignUp', async (req, res) => {
       .catch((error) => {
         console.log(error)
       })
-    // if (error) {
-    //   console.log("Error in code here");
-    //   console.log(error)
-    //   res.status(500).json({ msg: 'Sorry, internal server errors'});
-    //   return;
-    // }
-    // else {
-    //   console.log("Has been Saved! " + user)
-    // }
-
 });
 
 app.put('/api/EmailVerification/:token', (req, res) => {
@@ -441,5 +401,40 @@ app.post('/api/PasswordRecovery', (req, res) =>
 
 });
 
+app.post('/api/CreatePost', (req, res) => {
+
+  const post = new BlogPosts( {              
+    title: req.body.title,
+    body: req.body.body,
+    user: req.body.user,
+    county: req.body.county,
+  });
+  console.log(post.title + ' ' + post.body + ' ' + post.user + ' ' + post.county)
+  BlogPosts.create(post)
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((error) => {
+      return res.status(400).json({
+        msg: "error in create post " + error
+      })
+    })
+
+    return res.status(200).json({
+      msg: "post created"
+    })
+})
+
+app.post('/api/getPosts', (req, res) => {
+  console.log('made it to getPosts, ' + req.session.userName)
+  BlogPosts.find({ user: req.session.userName })
+    .then((data) => {
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
