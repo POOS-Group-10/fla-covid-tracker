@@ -7,13 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:covid_mobile/services/counties/county_lines.dart';
+//import 'package:covid_mobile/services/counties/county_lines.dart';
 import 'package:covid_mobile/services/service_locator.dart';
 import 'package:covid_mobile/business_logic/view_models/search.dart';
 import 'package:provider/provider.dart';
-
-
-
+import 'dart:math';
+import 'package:flutter/services.dart' show rootBundle;
 
 class MapScreen extends StatefulWidget{
   const MapScreen({Key key}) : super(key: key);
@@ -23,13 +22,34 @@ class MapScreen extends StatefulWidget{
 
 }
 
+class Counties {
+  List<dynamic> countyLines;
+  List<List<dynamic>> countyLines123;
+
+  void fillList(){
+
+  }
+
+  Counties(this.countyLines);
+
+  Counties.fromJson(Map<String, dynamic> json)
+    : countyLines = json['counties'];
+
+}
+
 class _MapScreen extends State<MapScreen> {
+  final double logConstant = log(1.1);
   Completer<GoogleMapController> _controller = Completer();
   SearchViewModel model = serviceLocator<SearchViewModel>();
   Set<Polygon> _polygons = HashSet<Polygon>();
   Set<Polygon> _tempPolygons = HashSet<Polygon>();
   List<List<LatLng>> polygonLatLngs = List<List<LatLng>>();
   String filter;
+
+  Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/countyLines1.json');
+  }
+
   List<String> countyNames = [
     "Alachua County",
     "Baker County",
@@ -75,8 +95,7 @@ class _MapScreen extends State<MapScreen> {
     "Martin County",
     "Miami-Dade County",
     "Monroe County",
-    "Monroe County",
-    "Nassau County"
+    "Nassau County",
     "Okaloosa County",
     "Okeechobee County",
     "Orange County",
@@ -100,6 +119,9 @@ class _MapScreen extends State<MapScreen> {
     "Walton County",
     "Washington County",
   ];
+
+  List<int> reorder = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,
+    33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,57,58,54,55,56,59,60,61,62,63,64,65,66,67];
 
   String styleJSON = '''[
   {
@@ -207,74 +229,105 @@ class _MapScreen extends State<MapScreen> {
 ]''';
   int _polygonIdCounter = 1;
 
-  CountyLines lines = new CountyLines();
   static final CameraPosition _florida = CameraPosition(
     target: LatLng(28, -84.3),
     zoom: 6,
   );
 
   @override
-  void initState() {
-    model.loadData();
+  initState() {
+     model.loadData();
     super.initState();
   }
 
+  Color calculateColor(int a){
+    if(model.choices[reorder[a]].confirmed > 10000){
+      return Color.fromARGB(128, 255, ((3.83 - log(((model.choices[reorder[a]].confirmed-9999)/2000)+1))*66.5).toInt(), 0);
+    }else{
+      return Color.fromARGB(128,(log(model.choices[reorder[a]].confirmed)*27.68).toInt(), 255, 0);
+    }
+  }
 
-  void _setPolygon() {
-    for(int i = 0; i < lines.countyCoord.length; i++) {
+  void _setPolygon() async{
+    Map<String, dynamic> countiiies = json.decode(await loadAsset());
+    //var poops = new Counties.fromJson(countiiies);
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+    var coooont = new Counties.fromJson(countiiies);
+    String border;
+    List<String> pairs;
+    List<String> aupair;
+    var rng = new Random();
+    for(int i = 0; i < coooont.countyLines.length ; i++) {
       polygonLatLngs.add(new List<LatLng>());
-      for (int j = 0; j < lines.countyCoord[i].length; j++) {
+      border = coooont.countyLines[i].toString();
+      border = border.substring(2,border.length-2);
+      pairs = border.split("], [");
+      for (int j = 0; j < pairs.length; j++) {
+        aupair = pairs[j].split(", ");
         polygonLatLngs[i].add(
-            LatLng(lines.countyCoord[i][j][1], lines.countyCoord[i][j][0]));
+            LatLng(double.parse(aupair[1]),
+                double.parse(aupair[0])));
       }
       final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
       _polygons.add(Polygon(
-        polygonId: PolygonId(polygonIdVal),
-        consumeTapEvents: true,
-        points: polygonLatLngs[i],
-        strokeWidth: 1,
-        strokeColor: Colors.red,
-        fillColor: Colors.red.withOpacity(0.08),
-        onTap: (){showModalBottomSheet(
-            context: context,
-            builder: (context){ return Padding(
-                padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 70.0),
-            child: Card(
-              elevation: 0.0,
-              child: Padding(
-            padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
-              child: ListTile(
-              title: Text(countyNames[i],
-              style:
-              TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-              subtitle: Text('1',
-              style: TextStyle(fontSize: 15)),
-              trailing: new IconButton(
-              icon: (model.choices[0].isFavorite)
-              ? Icon(Icons.favorite, color: Colors.red)
-                  : Icon(Icons.favorite_border, color: Colors.red),
-              onPressed: () {
-              model.toggleFavoriteStatus(0);
-              }),
-              onTap: () {
-              Navigator.pushNamed(context, '/county_screen', arguments: {
-              'countyName': countyNames[i],
-              'infected': 1,
-              });
+          polygonId: PolygonId(polygonIdVal),
+          consumeTapEvents: true,
+          points: polygonLatLngs[i],
+          strokeWidth: 1,
+          strokeColor: Colors.black,
+          fillColor: calculateColor(i),
+          //Colors.red.withOpacity(((log(model.choices[reorder[i]].confirmed-30))/12.001)+.001),
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Padding(
+                  padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 70.0),
+                  child: Card(
+                    elevation: 0.0,
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
+                        child: ListTile(
+                          title: Text(countyNames[i],
+                              style:
+                              TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.w400)),
+                          subtitle: Text("ConFirmed cases: " + model.choices[reorder[i]].confirmed.toString(),
+                              style: TextStyle(fontSize: 15)),
+                          trailing: new IconButton(
+                              icon: (model.choices[reorder[i]].isFavorite)
+                                  ? Icon(Icons.favorite, color: Colors.red)
+                                  : Icon(
+                                  Icons.favorite_border, color: Colors.red),
+                              onPressed: () {
+                                model.toggleFavoriteStatus(0);
+                              }),
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, '/county_screen', arguments: {
+                              'countyName': countyNames[i],
+                              'infected': 1,
+                            });
+                          },
+                        )),
+                  ),
+                );
               },
-              )),
-              ),
+              backgroundColor: Colors.black.withOpacity(0.00),
+              elevation: 0.0,
+              barrierColor: Colors.black.withOpacity(0.01),
             );
-            },
-          backgroundColor: Colors.black.withOpacity(0.00),
-          elevation: 0.0,
-          barrierColor: Colors.black.withOpacity(0.01),
-      );}));
-      print(_polygonIdCounter);
+          }));
+      print(countyNames[i]);
+      print(model.choices[i].confirmed);
       _polygonIdCounter++;
     }
-    lines = null;
     polygonLatLngs = null;
+    countiiies = null;
+    coooont = null;
+    border = null;
+    pairs = null;
+    aupair = null;
   }
 
   void _showCard(){
@@ -337,19 +390,19 @@ class _MapScreen extends State<MapScreen> {
   }
 
 
-  Widget cardView(int index) {
+  /*Widget cardView(int index) {
     return Card(
           elevation: 1,
           child: Padding(
               padding: EdgeInsets.fromLTRB(4.0, 1.0, 0, 1.0),
               child: ListTile(
-                title: Text('${model.choices[index].countyName}',
+                title: Text('${model.choices[reorder[index]].countyName}',
                     style:
                     TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-                subtitle: Text('${model.choices[index].death}',
+                subtitle: Text('${model.choices[reorder[index]].death}',
                     style: TextStyle(fontSize: 15)),
                 trailing: new IconButton(
-                    icon: (model.choices[index].isFavorite)
+                    icon: (model.choices[reorder[index]].isFavorite)
                         ? Icon(Icons.favorite, color: Colors.red)
                         : Icon(Icons.favorite_border, color: Colors.red),
                     onPressed: () {
@@ -363,6 +416,6 @@ class _MapScreen extends State<MapScreen> {
                 },
               )),
         );
-  }
+  }*/
   
 }
