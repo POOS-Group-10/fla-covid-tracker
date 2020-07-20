@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:covid_mobile/services/counties/county_lines.dart';
+//import 'package:covid_mobile/services/counties/county_lines.dart';
 import 'package:covid_mobile/services/service_locator.dart';
 import 'package:covid_mobile/business_logic/view_models/search.dart';
 import 'package:provider/provider.dart';
@@ -229,12 +229,13 @@ class _MapScreen extends State<MapScreen> {
   }
 
   void _setPolygon() async{
-    for(int i = 0; i < CountyLines.countyCoord.length; i++) {
+    var rng = new Random();
+    for(int i = 0; i < 68; i++) {
       polygonLatLngs.add(new List<LatLng>());
-      for (int j = 0; j < CountyLines.countyCoord[i].length; j++) {
+      for (int j = 0; j < 2000; j++) {
         polygonLatLngs[i].add(
-            LatLng(CountyLines.countyCoord[i][j][1],
-                CountyLines.countyCoord[i][j][0]));
+            LatLng((8+40*rng.nextDouble()),
+                -104.3+(80*rng.nextDouble())));
       }
       final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
       _polygons.add(Polygon(
