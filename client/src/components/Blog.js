@@ -37,10 +37,10 @@ const Blog = () =>
 
     const displayBlogPosts = (posts) => {
       if (!posts.length) return null; // end function if 'posts' is empty.
-  
+      console.log('in display blog posts: ' + posts[0]._id)
       return posts.map((post, index) => (
         <div key={index} className="blog-post__display">
-          <h3>{post.title}</h3>
+          <a>{post.title}</a>
           <p>{post.body}</p>
         </div>
       ));
