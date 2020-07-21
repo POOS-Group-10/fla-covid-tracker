@@ -23,6 +23,7 @@
   .downleft {
   
     text-align: left;
+    margin-top: -40px;
   }
   
 
@@ -98,7 +99,7 @@
     width: 200px;
     position: relative;
     text-align: center;
-    left: 25%;
+    left: 35%;
   }
   
   form {

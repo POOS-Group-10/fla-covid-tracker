@@ -49,7 +49,11 @@ const Home = () =>
         <div >
             <h1 >Welcome {userName}</h1>
             <button>
-            <Link to='/'>Log out</Link></button> 
+            <Link to='/Blog'>Blog</Link>
+            </button>
+            <button>
+            <Link to='/'>Log out</Link>
+            </button>
         </div>
     );
 }

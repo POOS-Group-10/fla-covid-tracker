@@ -59,7 +59,7 @@ const CreatePost = () =>
         return(
             <div className="app">
                 <form onSubmit={savePost}>
-                <div className = "form-input-left">
+                <div className = "form-input">
                     <input
                     type="text"
                     name="postTitle"
@@ -68,7 +68,7 @@ const CreatePost = () =>
                     />
                 </div>
                 <br></br>
-                <div className = "form-input-left">
+                <div className = "form-input">
                     <textarea
                     cols="75"
                     rows="20"
