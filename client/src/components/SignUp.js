@@ -68,6 +68,9 @@ const SignUp = () =>
     
     };
 
+    if (message == "whoa it finally worked!") {
+        return <Redirect to='/Login' />;
+    }
         return(
             <div className="app">
             <form onSubmit={doSignUp}>

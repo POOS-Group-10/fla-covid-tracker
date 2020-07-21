@@ -129,7 +129,7 @@ const News = () =>
 	return (		
 		<div>
 			<div>
-				<h1>{userName} News for {userCounty} County: </h1> 
+				<h1>News for {userCounty} County: </h1> 
 				{countyNews.map(res => <div>{res[0].title}</div>)}
 				{countyNews.map(res => <div>{res[0].description}</div>)}
 				{countyNews.map(res => <div><a href={res[0].url}>{res[0].url}</a></div>)}
