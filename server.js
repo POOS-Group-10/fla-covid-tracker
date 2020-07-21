@@ -473,7 +473,7 @@ app.post('/api/postComment', (req, res) => {
 
 app.post('/api/getComments', (req, res) => {
   console.log('inside get comments')
-  Comments.find({ user: req.session.userName })
+  Comments.find({ postid: req.body.postid })
     .then((data) => {
       console.log('in get posts data is ' + data)
       return res.status(200).json(data);
