@@ -452,4 +452,35 @@ app.post('/api/getUserPost', (req, res) => {
   })
 })
 
+app.post('/api/postComment', (req, res) => {
+  console.log('inside post comment')
+  const comment = new Comments({              
+    body: req.body.body,
+    user: req.body.user,
+    postid: req.body.postid,
+  })
+
+  Comments.create(comment)
+    .then((data) => {
+      console.log(data + ' successful in api/postComment')
+      return res.status(200).json(data)
+    })
+    .catch((error) => {
+      console.log('error in postComment')
+    })
+
+})
+
+app.post('/api/getComments', (req, res) => {
+  console.log('inside get comments')
+  Comments.find({ user: req.session.userName })
+    .then((data) => {
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
