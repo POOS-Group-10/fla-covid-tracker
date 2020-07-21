@@ -78,7 +78,7 @@ const CreatePost = () =>
                     onChange={e => setPostBody(e.target.value)}
                     />
                 </div>
-                <button>Submit Post</button>
+                <button id="isLeft">Submit Post</button>
                 </form>
             </div>
         );
