@@ -105,9 +105,10 @@ const News = () =>
 		//https://gnews.io/api/v3/search?q=Florida&token=9716fdf90959ffffecdf3cc1237c63c7
 		const url ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7' 
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
+		const url3 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=235de6daa84373ceef012d8d27560d95'
 		console.log('url: ' + url)
 	
-		const response = await fetch(url, {
+		const response = await fetch(url3, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})

@@ -439,4 +439,17 @@ app.post('/api/getPosts', (req, res) => {
     })
 })
 
+app.post('/api/getUserPost', (req, res) => {
+  console.log('in getUserPost ' + req.body.userName + ' ' + req.body.date)
+  BlogPosts.find({ user: req.body.userName,
+                   date: req.body.date })
+  .then((data) => {
+    console.log('in getUserPosts data is: ' + data)
+    res.status(200).json(data);
+  })
+  .catch((error) => {
+    console.log('in getUserPosts error is: ' + error)
+  })
+})
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));

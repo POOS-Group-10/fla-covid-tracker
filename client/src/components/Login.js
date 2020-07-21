@@ -42,10 +42,10 @@ const Login = () => {
 
   return (
     <div className="app">
-      <audio autoplay>
+      {/* <audio autoplay>
         <source src="../music.mp3" type="audio/mpeg">
         </source>
-        </audio>
+        </audio> */}
   <form onSubmit={doLogin}>
         <div className="form-input">
           <input

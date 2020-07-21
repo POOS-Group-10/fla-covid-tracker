@@ -35,13 +35,22 @@ const Blog = () =>
     })
   }
 
+  const toPost = async (post, name) =>
+  {
+    console.log('post data is: ' + post + ' ' + name)
+    // const url = 'http://localhost:3000/Posts/' + userName + '/' + name
+    const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
+    console.log(url)
+    window.location = url;
+  }
+
   const displayBlogPosts = (posts) => {
     if (!posts.length) return null; // end function if 'posts' is empty.
     console.log('in display blog posts: ' + posts[0]._id)
     return posts.map((post, index) => (
       <div>
       <div key={index} id="blog">
-        <a>{post.title}</a>
+        <button value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>{post.title}</button>
         <p>{post.body}</p>
       </div>
       <br></br>
