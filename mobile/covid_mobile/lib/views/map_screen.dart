@@ -300,13 +300,21 @@ class _MapScreen extends State<MapScreen> {
                                   : Icon(
                                   Icons.favorite_border, color: Colors.red),
                               onPressed: () {
-                                model.toggleFavoriteStatus(0);
+                                setState(() {
+                                  model.toggleFavoriteStatus(reorder[i]);
+                                });
                               }),
                           onTap: () {
-                            Navigator.pushNamed(
-                                context, '/county_screen', arguments: {
-                              'countyName': countyNames[i],
-                              'infected': 1,
+                            Navigator.pushNamed(context, '/county_screen', arguments: {
+                              'countyName': model.choices[reorder[i]].countyName,
+                              'stateName': model.choices[reorder[i]].stateName,
+                              'confirmed': model.choices[reorder[i]].confirmed,
+                              'newCases': model.choices[reorder[i]].newCases,
+                              'death': model.choices[reorder[i]].death,
+                              'newDeath': model.choices[reorder[i]].newDeath,
+                              'fatalityRate': model.choices[reorder[i]].fatalityRate,
+                              'latitude': model.choices[reorder[i]].latitude,
+                              'longitude': model.choices[reorder[i]].longitude
                             });
                           },
                         )),
