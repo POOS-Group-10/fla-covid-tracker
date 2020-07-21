@@ -7,59 +7,70 @@ import axios from 'axios';
 
 const Blog = () =>
 {
-    const [posts, setPosts] = useState([]);
-    const [userName, setUserName] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [userName, setUserName] = useState('');
 
-    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+  const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+  // const url = 'http://localhost:3000/api/profile'
 
-    const getBlogPosts = () => {
-      axios({
-        url: '../api/getPosts',
-        method: 'GET'
-      })
-      .then((response) => {
-        setPosts(response)
-      })
-      .catch((error) => {
-        console.log('error getting blog posts ' + error)
-      })
-    }
+  var postList = []
 
-    const displayBlogPosts = (posts) => {
-      if (!posts.length) return null; // end function if 'posts' is empty.
-  
-      return posts.map((post, index) => (
-        <div key={index} className="blog-post__display">
-          <h3>{post.title}</h3>
-          <p>{post.body}</p>
-        </div>
-      ));
-    };
-
-    useEffect(() => {
-      getBlogPosts();
+  const getBlogPosts = () => {
+    console.log('inside getblogposts')
+    axios({
+      url: '../api/getPosts',
+      method: 'POST'
     })
+    .then((response) => {
+      console.log('getblogpost response: ' + response + ' ' + response.data[0].user)
+      var x;
+      for (x in response.data)
+        postList.push(response.data[x])
+      console.log('post list array is: ' + postList)
+      setPosts(postList)
+      console.log('posts state is: ' + posts)
+    })
+    .catch((error) => {
+      console.log('error getting blog posts ' + error)
+    })
+  }
 
-    async function fetchData(){
-      const response = await fetch(url, {
-      method:'POST',
-      headers:{'Content-Type': 'application/json'}
-      })
-      .then((res) => res.json())
-      .then((json) => {
-          setUserName(json.userName)
-      })
-      .catch(err => 
-      {
-          console.log(err)
-      })
-    }
+  const displayBlogPosts = (posts) => {
+    if (!posts.length) return null; // end function if 'posts' is empty.
+    console.log('in display blog posts: ' + posts[0]._id)
+    return posts.map((post, index) => (
+      <div key={index} className="blog-post__display">
+        <a>{post.title}</a>
+        <p>{post.body}</p>
+      </div>
+    ));
+  };
 
-    const toCreatePost = () => {
-      window.location.href = '/CreatePost'
-    }
+  useEffect(() => {
+    getBlogPosts();
+    console.log(posts);
+  }, [])
 
-    fetchData();
+  async function fetchData(){
+    const response = await fetch(url, {
+    method:'POST',
+    headers:{'Content-Type': 'application/json'}
+    })
+    .then((res) => res.json())
+    .then((json) => {
+        setUserName(json.userName)
+    })
+    .catch(err => 
+    {
+        console.log(err)
+    })
+  }
+
+  const toCreatePost = () => {
+    window.location.href = '/CreatePost'
+  }
+
+  fetchData();
 
     //function for username call goes after "weclome" 
     return(
