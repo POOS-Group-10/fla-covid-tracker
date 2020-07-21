@@ -35,7 +35,7 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 // test functions
 
 mongoose.connection.once('open', function(){
-  console.log("connected to mongo db");
+  // console.log("connected to mongo db");
 });
 
 mongoose.connection.on('error', function(error){
@@ -43,7 +43,7 @@ mongoose.connection.on('error', function(error){
 })
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose is connected!');
+  // console.log('Mongoose is connected!');
 });
 
 // This is a middleware in express that will parse every json
@@ -438,5 +438,6 @@ app.post('/api/getPosts', (req, res) => {
       console.log('error getting posts')
     })
 })
-// model.export = app;
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+module.exports = app; 

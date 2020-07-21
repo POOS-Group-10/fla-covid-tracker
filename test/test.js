@@ -1,11 +1,7 @@
-var assert = require('assert');
 var request = require('supertest');
 var server = require('../server.js');
 var expect = require('chai').expect;
-const { model } = require('../models/user.js');
-const nodemailer = require('nodemailer');
-
-// const { response } = require('express');
+const { response } = require('express');
 
 
 
@@ -26,24 +22,18 @@ describe('User Registration',function(done) {
     
     it('Should sign up a user', function(done){
 
-        agent.post('/api/SignUp').set(user1).send().expect(200).end(function(err, res){
-
-            if (err) return done(err); 
-            expect(res.statusCode).to.equal(200);
+        agent.post('/api/SignUp')
+        .set(user1)
+        .send()
+        .expect(200)
+        .expect(function(res, err) {
+            if (err) throw err; 
+            expect(res.body.error.should.equal(false));
+            expect(res.statusCode == 200);
+        })
+        .end(function(err){
+            if(err) return done(err);
         });
-
-        // agent.post('/api/SignUp')
-        // .set(user1)
-        // .send()
-        // .expect(200)
-        // .expect(function(res, err) {
-        //     if (err) throw err; 
-        //     expect(res.header['x-auth']).to.not.be.null;
-        //     expect(res.statusCode == 200);
-        // })
-        // .end(function(err){
-        //     if(err) return done(err);
-        // });
 
         done();
     })
