@@ -41,8 +41,9 @@ const Blog = () =>
     return posts.map((post, index) => (
       <div>
       <div key={index} id="blog">
-        <a>{post.title}</a>
-        <p>{post.body}</p>
+        <h1>{post.title}</h1>
+        <div class="divider"></div>
+        <h3>{post.body}</h3>
       </div>
       <br></br>
       </div>

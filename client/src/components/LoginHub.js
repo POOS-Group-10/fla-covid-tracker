@@ -40,7 +40,9 @@ const LoginHub = () =>
             <div class="right">
             <p styles="white-space: nowrap">Welcome {userName}</p>
             </div>
+            <p>
             <Link to='/Home'>HomePage</Link>
+            </p>
             <p class="upright">
             <Link to='/'>Log out</Link>
             </p>

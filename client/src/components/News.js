@@ -107,7 +107,7 @@ const News = () =>
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
 		console.log('url: ' + url)
 	
-		const response = await fetch(url2, {
+		const response = await fetch(url, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})
@@ -130,21 +130,23 @@ const News = () =>
 		<div>
 			<div>
 				<h1>News for {userCounty} County: </h1> 
-				{countyNews.map(res => <div>{res[0].title}</div>)}
-				{countyNews.map(res => <div>{res[0].description}</div>)}
+				<div class="divider"></div>
+				{countyNews.map(res => <h1>{res[0].title}</h1>)}
+				{countyNews.map(res => <h3>{res[0].description}</h3>)}
 				{countyNews.map(res => <div><a href={res[0].url}>{res[0].url}</a></div>)}
-				{countyNews.map(res => <div>{res[0].publishedAt}</div>)}
-				<br></br>
-				{countyNews.map(res => <div>{res[1].title}</div>)}
-				{countyNews.map(res => <div>{res[1].description}</div>)}
+				{countyNews.map(res => <h6>{res[0].publishedAt}</h6>)}
+				<div class="divider"></div>
+				{countyNews.map(res => <h1>{res[1].title}</h1>)}
+				{countyNews.map(res => <h3>{res[1].description}</h3>)}
 				{countyNews.map(res => <div><a href={res[1].url}>{res[1].url}</a></div>)}
-				{countyNews.map(res => <div>{res[1].publishedAt}</div>)}
-				<br></br>
-				{countyNews.map(res => <div>{res[2].title}</div>)}
-				{countyNews.map(res => <div>{res[2].description}</div>)}
+				{countyNews.map(res => <h6>{res[1].publishedAt}</h6>)}
+				<div class="divider"></div>
+				{countyNews.map(res => <h1>{res[2].title}</h1>)}
+				{countyNews.map(res => <h3>{res[2].description}</h3>)}
 				{countyNews.map(res => <div><a href={res[2].url}>{res[2].url}</a></div>)}
-				{countyNews.map(res => <div>{res[2].publishedAt}</div>)}
+				{countyNews.map(res => <h6>{res[2].publishedAt}</h6>)}
 			</div>
+			<div class="divider"></div>
 			<h6>If news doesn't load, please refresh page.</h6>
 		</div>
 	)

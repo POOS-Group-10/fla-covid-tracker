@@ -38,6 +38,14 @@ const Home = () =>
 
     fetchData(); 
 
+const toBlog = () => { 
+        window.location.href = '/Blog'
+ }
+ const toLogOut = () => {
+    window.location.href = '/'
+  }
+
+
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
@@ -48,11 +56,11 @@ const Home = () =>
     return(
         <div >
             <h1 >Welcome {userName}</h1>
-            <button>
-            <Link to='/Blog'>Blog</Link>
+            <button onClick={toBlog}>
+           Blog
             </button>
-            <button>
-            <Link to='/'>Log out</Link>
+            <button onClick={toLogOut}>
+            Log Out
             </button>
         </div>
     );
