@@ -39,9 +39,12 @@ const Blog = () =>
     if (!posts.length) return null; // end function if 'posts' is empty.
     console.log('in display blog posts: ' + posts[0]._id)
     return posts.map((post, index) => (
+      <div>
       <div key={index} id="blog">
         <a>{post.title}</a>
         <p>{post.body}</p>
+      </div>
+      <br></br>
       </div>
     ));
   };
