@@ -105,6 +105,8 @@ const News = () =>
 		//https://gnews.io/api/v3/search?q=Florida&token=9716fdf90959ffffecdf3cc1237c63c7
 		const url ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7'//jack@knights..
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31'//jack@gmail..
+		//john has url3 key
+		const url4 ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=affa7f570a57ef6a60a097b9d62b4811'//jack@live
 		
 		console.log('url: ' + url)
 	
