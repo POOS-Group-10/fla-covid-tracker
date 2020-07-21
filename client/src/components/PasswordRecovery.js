@@ -42,10 +42,9 @@ const PasswordRecovery = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button>Submit</button>
+        <button id="isLeft">Submit</button>
       </form>
       <p>{message}</p>
-      
     </div>
   );
 };

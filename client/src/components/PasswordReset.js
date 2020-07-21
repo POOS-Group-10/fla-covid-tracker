@@ -73,7 +73,7 @@ const PasswordReset = () =>
                 onChange={(e) => {setConfirmPassword(e.target.value, 0)}}
               />
             </div>
-            <button>Submit</button>
+            <button id="isLeft">Submit</button>
           </form>
           <p>{message}</p><br />
           <p>{password}</p><br />

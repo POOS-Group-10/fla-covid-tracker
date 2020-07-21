@@ -7,70 +7,73 @@ import axios from 'axios';
 
 const Blog = () =>
 {
-    const [posts, setPosts] = useState([]);
-    const [userName, setUserName] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [userName, setUserName] = useState('');
 
-    const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
-    // const url = 'http://localhost:3000/api/profile'
+  const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+  // const url = 'http://localhost:3000/api/profile'
 
-    var postList = []
+  var postList = []
 
-    const getBlogPosts = () => {
-      console.log('inside getblogposts')
-      axios({
-        url: '../api/getPosts',
-        method: 'POST'
-      })
-      .then((response) => {
-        console.log('getblogpost response: ' + response + ' ' + response.data[0].user)
-        var x;
-        for (x in response.data)
-          postList.push(response.data[x])
-        console.log('post list array is: ' + postList)
-        setPosts(postList)
-        console.log('posts state is: ' + posts)
-      })
-      .catch((error) => {
-        console.log('error getting blog posts ' + error)
-      })
-    }
+  const getBlogPosts = () => {
+    console.log('inside getblogposts')
+    axios({
+      url: '../api/getPosts',
+      method: 'POST'
+    })
+    .then((response) => {
+      console.log('getblogpost response: ' + response + ' ' + response.data[0].user)
+      var x;
+      for (x in response.data)
+        postList.push(response.data[x])
+      console.log('post list array is: ' + postList)
+      setPosts(postList)
+      console.log('posts state is: ' + posts)
+    })
+    .catch((error) => {
+      console.log('error getting blog posts ' + error)
+    })
+  }
 
-    const displayBlogPosts = (posts) => {
-      if (!posts.length) return null; // end function if 'posts' is empty.
-      console.log('in display blog posts: ' + posts[0]._id)
-      return posts.map((post, index) => (
-        <div key={index} className="blog-post__display">
-          <a>{post.title}</a>
-          <p>{post.body}</p>
-        </div>
-      ));
-    };
+  const displayBlogPosts = (posts) => {
+    if (!posts.length) return null; // end function if 'posts' is empty.
+    console.log('in display blog posts: ' + posts[0]._id)
+    return posts.map((post, index) => (
+      <div>
+      <div key={index} id="blog">
+        <a>{post.title}</a>
+        <p>{post.body}</p>
+      </div>
+      <br></br>
+      </div>
+    ));
+  };
 
-    useEffect(() => {
-      getBlogPosts();
-      console.log(posts);
-    }, [])
+  useEffect(() => {
+    getBlogPosts();
+    console.log(posts);
+  }, [])
 
-    async function fetchData(){
-      const response = await fetch(url, {
-      method:'POST',
-      headers:{'Content-Type': 'application/json'}
-      })
-      .then((res) => res.json())
-      .then((json) => {
-          setUserName(json.userName)
-      })
-      .catch(err => 
-      {
-          console.log(err)
-      })
-    }
+  async function fetchData(){
+    const response = await fetch(url, {
+    method:'POST',
+    headers:{'Content-Type': 'application/json'}
+    })
+    .then((res) => res.json())
+    .then((json) => {
+        setUserName(json.userName)
+    })
+    .catch(err => 
+    {
+        console.log(err)
+    })
+  }
 
-    const toCreatePost = () => {
-      window.location.href = '/CreatePost'
-    }
+  const toCreatePost = () => {
+    window.location.href = '/CreatePost'
+  }
 
-    fetchData();
+  fetchData();
 
     //function for username call goes after "weclome" 
     return(
@@ -88,9 +91,8 @@ const Blog = () =>
         </div>
         <button>Search</button>
         </div>
-        <br />
-        <br />
-        <div className="blog-">
+        <br></br>
+        <div>
           {displayBlogPosts(posts)}
         </div>
         </div>

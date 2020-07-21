@@ -13,7 +13,7 @@ const CreatePost = () =>
 
     // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const url = 'http://localhost:3000/api/profile';
-        
+
     async function fetchData(){
         const response = await fetch(url, {
         method:'POST',
@@ -60,7 +60,7 @@ const CreatePost = () =>
         return(
             <div className="app">
                 <form onSubmit={savePost}>
-                <div className = "form-input-left">
+                <div className = "form-input">
                     <input
                     type="text"
                     name="postTitle"
@@ -69,7 +69,7 @@ const CreatePost = () =>
                     />
                 </div>
                 <br></br>
-                <div className = "form-input-left">
+                <div className = "form-input">
                     <textarea
                     cols="75"
                     rows="20"
@@ -79,7 +79,7 @@ const CreatePost = () =>
                     onChange={e => setPostBody(e.target.value)}
                     />
                 </div>
-                <button>Submit Post</button>
+                <button id="isLeft">Submit Post</button>
                 </form>
                 <Link to='/Blog'>Go back to blogpost</Link>
             </div>

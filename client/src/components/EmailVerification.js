@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 const EmailVerification = () =>
@@ -27,7 +27,10 @@ const EmailVerification = () =>
     doEmailVerification();
 
     return(
+        <div>
         <p>Your email has been verified. You may now log in.</p>
+        <Link to='/'>OK</Link>
+        </div>
     );
 }
 

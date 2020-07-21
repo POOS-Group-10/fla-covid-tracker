@@ -12,6 +12,7 @@ const PasswordResetPage = () => {
     <PageTitle />
     <PasswordReset />
     <Link to="/">Go To Login Page</Link>
+    <div class="padding"></div>
     </div>
     </div>
     </div>

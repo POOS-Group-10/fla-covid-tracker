@@ -15,7 +15,7 @@ const SignUp = () =>
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [userCounty, setCounty] = useState('Alachua');
-    
+    const [isRegistered, setRegistered] = useState(false);
 
     const doSignUp = async event => 
     {    
@@ -67,12 +67,10 @@ const SignUp = () =>
         });
     
     };
-    
+
     if (message == "whoa it finally worked!") {
         return <Redirect to='/Login' />;
-      }
-    
-
+    }
         return(
             <div className="app">
             <form onSubmit={doSignUp}>
@@ -116,8 +114,9 @@ const SignUp = () =>
                     onChange={e => setEmail(e.target.value)}
                     />
                 </div>
-                <div className = "form-input">
-                    <select onChange={e => setCounty(e.target.value)}>
+                <div>
+                    <select  class="select-input" onChange={e => setCounty(e.target.value)}>
+                        <option selected="selected">Select a County</option>
                         <option value="Alachua" > Alachua  </option>
                         <option value="Baker" > Baker  </option>
                         <option value="Bay" > Bay  </option>
@@ -186,7 +185,8 @@ const SignUp = () =>
                         <option value="Washington"> Washington </option>
                     </select> 
                 </div>
-                <button>Submit</button>
+                <br></br>
+                <button id="isLeft">Submit</button>
             </form>
                 <Link to="/">Already have an account? Log in.</Link><br />
                 <p>{message}</p>

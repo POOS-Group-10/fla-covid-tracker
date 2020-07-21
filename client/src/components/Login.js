@@ -42,7 +42,11 @@ const Login = () => {
 
   return (
     <div className="app">
-      <form onSubmit={doLogin}>
+      <audio autoplay>
+        <source src="../music.mp3" type="audio/mpeg">
+        </source>
+        </audio>
+  <form onSubmit={doLogin}>
         <div className="form-input">
           <input
             type="text"
@@ -63,10 +67,7 @@ const Login = () => {
       </form>
 
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
-      <Link to="/Home">Go to the dashboard</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
-      <Link to="/PasswordReset/5">Go to the Password Reset page</Link>
-      
     </div>
   );
 };

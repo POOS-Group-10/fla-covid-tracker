@@ -7,7 +7,7 @@ import News from '../components/News';
 const HomePage = () =>
 {
     return(
-        <div>
+        <div class="covidBorder">
                  <div class="padding">
                 <div class="textBorder">
             <PageTitle />
@@ -15,7 +15,10 @@ const HomePage = () =>
                 <Covid />
                 </div>
                 <br></br>
-                <News />
+                <div class="textBorder">
+                <News />    
+                </div>
+           
                 </div>
         </div>
     );

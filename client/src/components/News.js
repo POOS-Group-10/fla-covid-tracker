@@ -107,7 +107,7 @@ const News = () =>
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31' 
 		console.log('url: ' + url)
 	
-		const response = await fetch(url, {
+		const response = await fetch(url2, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})
@@ -129,7 +129,7 @@ const News = () =>
 	return (		
 		<div>
 			<div>
-				<h1>{userName} News for {userCounty} County: </h1> 
+				<h1>News for {userCounty} County: </h1> 
 				{countyNews.map(res => <div>{res[0].title}</div>)}
 				{countyNews.map(res => <div>{res[0].description}</div>)}
 				{countyNews.map(res => <div><a href={res[0].url}>{res[0].url}</a></div>)}
@@ -145,6 +145,7 @@ const News = () =>
 				{countyNews.map(res => <div><a href={res[2].url}>{res[2].url}</a></div>)}
 				{countyNews.map(res => <div>{res[2].publishedAt}</div>)}
 			</div>
+			<h6>If news doesn't load, please refresh page.</h6>
 		</div>
 	)
 };

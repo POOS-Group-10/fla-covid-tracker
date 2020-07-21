@@ -9,7 +9,8 @@ import '../App.css';
 
 const Home = () =>
 {
-    // const url = 'http://localhost:3000/api/profile';
+    // const url = 'http://localhost:3000/api/profile'; 
+
     const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const [userName, setUserName] = useState('');
     const [isLoggedIn, setLoggedIn] = useState(true);
@@ -35,18 +36,24 @@ const Home = () =>
     })
 }
 
-    fetchData();
+    fetchData(); 
 
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
-
+// THIS GOES UNDER LOG OUT LINK:
+/*  
+  <Link to='/CreatePost'>Create a post</Link>
+*/
     return(
         <div >
-            <h1 >Welcome {userName}</h1> 
-            <Link to='/'>Log out</Link><br />
-            <Link to='/CreatePost'>Create a post</Link><br />
-            <Link to='/Blog'>Go to your posts</Link>
+            <h1 >Welcome {userName}</h1>
+            <button>
+            <Link to='/Blog'>Blog</Link>
+            </button>
+            <button>
+            <Link to='/'>Log out</Link>
+            </button>
         </div>
     );
 }
