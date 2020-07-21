@@ -33,7 +33,8 @@
              2px 2px 1px grey;
   }
   .covidBorder{
-
+    height: auto;
+    max-width: 100%;
     background-image: url(images/COVID-19.png);
     background-repeat: space;
     background-position: center center;
