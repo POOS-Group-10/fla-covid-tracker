@@ -438,5 +438,5 @@ app.post('/api/getPosts', (req, res) => {
       console.log('error getting posts')
     })
 })
-
+model.export = app;
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));

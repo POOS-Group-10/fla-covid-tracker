@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec",
     "build": "cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
@@ -28,6 +28,7 @@
     "jquery": "^3.5.1",
     "jsdom": "^16.3.0",
     "jsonwebtoken": "^8.5.1",
+    "model": "^6.0.1",
     "mongoose": "^5.9.20",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.0",
@@ -36,7 +37,8 @@
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "supertest": "^4.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
