@@ -51,6 +51,9 @@ const App = () => {
         <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>
           <EmailVerificationPage />
         </Route>
+        <Route path="/Posts/:user/:id">
+          <PostPage />
+        </Route>
         <Redirect to="/" />
       </Switch>
     </Router>
