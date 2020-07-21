@@ -66,12 +66,13 @@ const Covid = () =>
 	if ( count < 10 )
 		makeRequest();
 
-
+// {countyInfo.map(res => <div>State: {res.state_name}</div>)}
+// {countyInfo.map(res => <div>County: {res.county_name}</div>)} 
     return (
         <div>
             <div>
                 <h1>From {userCounty} County</h1> 
-                <h1>
+                <h1>               
                 {countyInfo.map(res => <div>Confirmed Cases: {res.confirmed}</div>)} 
                 {countyInfo.map(res => <div>Total Deaths: {res.death}</div>)}   
                 {countyInfo.map(res => <div>Deaths Today: {res.new_death}</div>)}

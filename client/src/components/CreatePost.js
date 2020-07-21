@@ -13,7 +13,7 @@ const CreatePost = () =>
 
     // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
     const url = 'http://localhost:3000/api/profile';
-       
+
     async function fetchData(){
         const response = await fetch(url, {
         method:'POST',
@@ -81,6 +81,7 @@ const CreatePost = () =>
                 </div>
                 <button id="isLeft">Submit Post</button>
                 </form>
+                <Link to='/Blog'>Go back to blogpost</Link>
             </div>
         );
 

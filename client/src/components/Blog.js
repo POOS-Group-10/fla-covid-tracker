@@ -39,7 +39,7 @@ const Blog = () =>
     if (!posts.length) return null; // end function if 'posts' is empty.
     console.log('in display blog posts: ' + posts[0]._id)
     return posts.map((post, index) => (
-      <div key={index} className="blog-post__display">
+      <div key={index} id="blog">
         <a>{post.title}</a>
         <p>{post.body}</p>
       </div>
@@ -89,7 +89,7 @@ const Blog = () =>
         <button>Search</button>
         </div>
         <br></br>
-        <div id="blog">
+        <div>
           {displayBlogPosts(posts)}
         </div>
         </div>
