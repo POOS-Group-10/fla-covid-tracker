@@ -5,7 +5,7 @@ import '../App.css'
 const PageTitle = () =>
 {
   return(
-    <h1 id="title">Stay Home!  </h1>
+    <h1 id="title">Florida COVID Tracker</h1>
   );
 };
 

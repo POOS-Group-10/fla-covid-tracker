@@ -8,6 +8,7 @@ const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [message, setMessage] = useState('');
 
 
   const doLogin = async (event) => {
@@ -33,6 +34,7 @@ const Login = () => {
       })
       .catch((e) => {
         console.log("Internal server error " + e);
+        setMessage('Wrong Username/Password :(')
       });
   };
 
@@ -42,7 +44,11 @@ const Login = () => {
 
   return (
     <div className="app">
-      <form onSubmit={doLogin}>
+      {/* <audio autoplay>
+        <source src="../music.mp3" type="audio/mpeg">
+        </source>
+        </audio> */}
+  <form onSubmit={doLogin}>
         <div className="form-input">
           <input
             type="text"
@@ -61,12 +67,9 @@ const Login = () => {
         </div>
         <button id="isLeft">Submit</button>
       </form>
-
+      <p>{message}</p>
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
-      <Link to="/Home">Go to the dashboard</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
-      <Link to="/PasswordReset/5">Go to the Password Reset page</Link>
-      
     </div>
   );
 };

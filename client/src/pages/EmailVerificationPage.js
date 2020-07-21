@@ -5,10 +5,14 @@ import EmailVerification from '../components/EmailVerification';
 const EmailVerificationPage = () =>
 {
     return(
-        <div>
-            <PageTitle />
-                <EmailVerification />
-        </div>
+        <div class="covidBorder">
+            <div class="padding">
+                <div class="textBorder">
+                    <PageTitle />
+                    <EmailVerification />
+                </div>
+            </div>
+         </div>        
     );
 }
 
