@@ -32,13 +32,7 @@
       text-shadow: 1px 1px 1px grey,
              2px 2px 1px grey;
   }
-  .covidBorder{
-    height: auto;
-    max-width: 100%;
-    background-image: url(images/COVID-19.png);
-    background-repeat: space;
-    background-position: center center;
-  }
+ 
  
   .app {
     padding: 50px;
@@ -49,14 +43,12 @@
   }
   
   html, body{
-    background-image: url(images/black-radial-gradient.jpg);
+    background-image:   url(images/COVID-19.png), url(images/black-radial-gradient.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;  
-  min-height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
+    height: 100%;
+    padding: 0;
+    margin: 0;
   }
   #Box{
     width: 900px;
