@@ -15,7 +15,7 @@ const SignUp = () =>
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [userCounty, setCounty] = useState('Alachua');
-    const [isRegistered, setRegistered] = useState(false);
+    
 
     const doSignUp = async event => 
     {    
@@ -67,6 +67,11 @@ const SignUp = () =>
         });
     
     };
+    
+    if (message == "whoa it finally worked!") {
+        return <Redirect to='/Login' />;
+      }
+    
 
         return(
             <div className="app">

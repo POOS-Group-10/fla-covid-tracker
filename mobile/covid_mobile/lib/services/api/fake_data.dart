@@ -33,6 +33,7 @@ class WebData implements WebAPI{
     "Clay",
     "Collier",
     "Columbia",
+    "DeSoto",
     "Dixie",
     "Duval",
     "Escambia",
