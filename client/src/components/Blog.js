@@ -88,10 +88,8 @@ const Blog = () =>
         </div>
         <button>Search</button>
         </div>
-        <br />
-        <Post />
-        <br />
-        <div className="blog-">
+        <br></br>
+        <div id="blog">
           {displayBlogPosts(posts)}
         </div>
         </div>
