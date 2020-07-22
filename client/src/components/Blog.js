@@ -9,6 +9,7 @@ const Blog = () =>
 {
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState('');
+  const [search, setSearch] = useState('');
 
   const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
   // const url = 'http://localhost:3000/api/profile'
@@ -42,6 +43,15 @@ const Blog = () =>
     const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
     console.log(url)
     window.location = url;
+  }
+
+  const searchPosts = (event) => {
+    event.preventDefault();
+    if (!search) return null;
+      // var url = 'http://localhost:3000/search/' + search;
+      var url = 'https://florida-covid-tracking.herokuapp.com/search/' + search;
+    console.log('inside search posts: ' + url)
+    window.location.href = '/search/' + search;
   }
 
   const displayBlogPosts = (posts) => {
@@ -90,15 +100,17 @@ const Blog = () =>
         <LoginHub />
         <div id="outline">
         <div className="form-input-left">
-          <button onClick={toCreatePost}>Create a Post</button>
-          
+          <button onClick={toCreatePost}>Create a Post</button> 
+        <form onSubmit={searchPosts}>
           <input
             type="text"
             placeholder="Find A Post"
-            name="username"
+            name="search"
+            onChange={e => setSearch(e.target.value)}
           />
-        </div>
         <button>Search</button>
+        </form>
+        </div>
         </div>
         <br></br>
         <div>

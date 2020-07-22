@@ -485,5 +485,24 @@ app.post('/api/getComments', (req, res) => {
     })
 })
 
+app.post('/api/searchPosts', (req, res) => {
+  console.log('inside searchPosts: ' + req.body.items)
+  var regex = []
+  for (var i = 0; i < req.body.items.length; i++) {
+    regex[i] = new RegExp(req.body.items[i]);
+  }
+  BlogPosts.find({$or:[{user: {$in : req.body.items}}, {county: {$in: req.body.items}}, 
+                       {title: {$in: regex }}  ]})
+  .sort('-date')
+  .limit(10)
+  .then((data) => {
+    console.log('we found data: ' + data)
+    return res.status(200).json(data)
+  })
+  .catch((e) => {
+    console.log('error getting data: ' + e)
+  })
+})
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
 module.exports = app; 

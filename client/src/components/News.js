@@ -110,7 +110,7 @@ const News = () =>
 		
 		console.log('url: ' + url)
 	
-		const response = await fetch(url2, {
+		const response = await fetch(url4, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})

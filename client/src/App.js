@@ -15,6 +15,7 @@ import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
 import EmailVerificationPage from './pages/EmailVerificationPage';
 import PostPage from './pages/PostPage';
+import PostSearchPage from './pages/PostSearchPage';
 import CreatePostPage from './pages/CreatePostPage';
 import BlogPage from './pages/BlogPage';
 
@@ -50,6 +51,9 @@ const App = () => {
         </Route>
         <Route path="/Posts/:user/:id" component={EmailVerificationPage} exact>
           <PostPage />
+        </Route>
+        <Route path="/search/:id" component={EmailVerificationPage} exact>
+          <PostSearchPage />
         </Route>
         <Redirect to="/" />
       </Switch>
