@@ -13,7 +13,6 @@ const bcrypt = require('bcrypt');
 
 // user registration 
 describe('User Registration',function(done) {
-    // Clear data before testing
     const user1 = {
         userName: 'yurt',
         password: 'yurt',
@@ -49,8 +48,24 @@ describe('User Registration',function(done) {
         user: 'ho',
         county: 'Polk'
     };
+    
+});
 
-    it('Creat new post', function(done){
+// create a new post 
+describe('Create a new Post', function(done) {
+    
+
+    user2 = {              
+        title: 'unit testing suck',
+        body: 'it really sucks',
+        user: 'ho',
+        county: 'Polk'
+    };
+
+    const agent = request.agent(server);
+
+
+    it('Send', function(done){
         
         agent.post('/api/CreatePost')
 
@@ -60,10 +75,12 @@ describe('User Registration',function(done) {
             if (err) throw err; 
             expect(res.statusCode == 200);
         })
+        .end(function(err){
+            if(err) return done(err);
+        });
 
         done();
     })
-    
 });
 
 
@@ -72,38 +89,4 @@ describe('User Registration',function(done) {
 
 
 
-
-
-   // function createUser1(cb){
-    //     agent1
-    //         .post('/api/SignUp')
-    //         .send(user1)
-    //         .expect(200)
-    //         .end(function(err, res){
-    //             if ( err ) throw err;
-
-    //             // loginUser1.call(null, cb);
-    //         });
-    // }
-
-    // function loginUser1(cb){
-    //     agent1
-    //         .post('/api/session')
-    //         .send({
-    //             email: user1.email
-    //             , password: user1.password
-    //         })
-    //         .expect(200)
-    //         .end(function(err, res){
-    //             if ( err ) throw err;
-
-    //             loggedInUser1 = res.body;
-
-    //             cb();
-    //         });
-    // }
-
-    // async.series([function(cb){
-    //     createUser1(cb);
-    // }], done);
 
