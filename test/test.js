@@ -160,7 +160,6 @@ describe('Find User form DB', function(done) {
         // .end(function(err){
         //     if(err) return done(err);
         // });
-
         done();
     })
 });
