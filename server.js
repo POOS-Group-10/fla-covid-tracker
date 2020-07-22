@@ -441,5 +441,49 @@ app.post('/api/getPosts', (req, res) => {
     })
 })
 
+app.post('/api/getUserPost', (req, res) => {
+  console.log('in getUserPost ' + req.body.userName + ' ' + req.body.date)
+  BlogPosts.find({ user: req.body.userName,
+                   date: req.body.date })
+  .then((data) => {
+    console.log('in getUserPosts data is: ' + data)
+    res.status(200).json(data);
+  })
+  .catch((error) => {
+    console.log('in getUserPosts error is: ' + error)
+  })
+})
+
+app.post('/api/postComment', (req, res) => {
+  console.log('inside post comment')
+  const comment = new Comments({              
+    body: req.body.body,
+    user: req.body.user,
+    postid: req.body.postid,
+  })
+
+  Comments.create(comment)
+    .then((data) => {
+      console.log(data + ' successful in api/postComment')
+      return res.status(200).json(data)
+    })
+    .catch((error) => {
+      console.log('error in postComment')
+    })
+
+})
+
+app.post('/api/getComments', (req, res) => {
+  console.log('inside get comments')
+  Comments.find({ postid: req.body.postid })
+    .then((data) => {
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
 module.exports = app; 
