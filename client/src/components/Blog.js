@@ -107,6 +107,7 @@ const Blog = () =>
         <div id="outline">
         <div className="form-input-left">
           <button onClick={toCreatePost}>Create a Post</button> 
+        <br></br>
         <form onSubmit={searchPosts}>
           <input
             type="text"
