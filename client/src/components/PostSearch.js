@@ -40,8 +40,8 @@ const PostSearch = () =>
     const toPost = async (search, date) =>
     {
         console.log('search data is: ' + search + ' ' + date)
-        const url = 'http://localhost:3000/Posts/' + search + '/' + date
-        // const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
+        // const url = 'http://localhost:3000/Posts/' + search + '/' + date
+        const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + search + '/' + date
         console.log(url)
         window.location = url;
     }

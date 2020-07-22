@@ -11,8 +11,8 @@ const Blog = () =>
   const [userName, setUserName] = useState('');
   const [search, setSearch] = useState('');
 
-  // const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
-  const url = 'http://localhost:3000/api/profile'
+  const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+  // const url = 'http://localhost:3000/api/profile'
 
   var postList = []
 
@@ -39,8 +39,8 @@ const Blog = () =>
   const toPost = async (post, name) =>
   {
     console.log('post data is: ' + post + ' ' + name)
-    const url = 'http://localhost:3000/Posts/' + userName + '/' + name
-    // const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
+    // const url = 'http://localhost:3000/Posts/' + userName + '/' + name
+    const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
     console.log(url)
     window.location = url;
   }
@@ -48,7 +48,8 @@ const Blog = () =>
   const searchPosts = (event) => {
     event.preventDefault();
     if (!search) return null;
-      var url = 'http://localhost:3000/search/' + search;
+      // var url = 'http://localhost:3000/search/' + search;
+      var url = 'https://florida-covid-tracking.herokuapp.com/search/' + search;
     console.log('inside search posts: ' + url)
     window.location.href = '/search/' + search;
   }
