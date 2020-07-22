@@ -39,6 +39,7 @@
     "react-scripts": "^3.4.1"
   },
   "devDependencies": {
+    "jest": "^26.1.0",
     "nodemon": "^2.0.4"
   },
   "devServer": {

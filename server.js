@@ -10,23 +10,19 @@ const TWO_HOURS = 1000 * 60 * 60 * 2 // 2 hours in milliseconds
 var session = require('express-session');
 const bcrypt = require('bcrypt');
 
-
-// const routes = require('./routes/api');
-
 require('dotenv').config();
 
 const Users = require('./models/user');
-// const routes = require('./routes/api');
 
 const MONGODB_URI = "mongodb+srv://Group10:Group10@cluster0-ldbdm.mongodb.net/FLTracking?retryWrites=true&w=majority";
 
 console.log(MONGODB_URI);
 
 // Local mongoose connection
-// mongoose.connect('mongodb://localhost/fla-covid-tracking', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
+mongoose.connect('mongodb://localhost/fla-covid-tracking', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
