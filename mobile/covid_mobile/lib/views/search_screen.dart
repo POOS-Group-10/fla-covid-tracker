@@ -148,7 +148,7 @@ class _SearchScreen extends State<SearchScreen> {
           'newDeath': model.choices[index].newDeath, 
           'fatalityRate': model.choices[index].fatalityRate, 
           'latitude': model.choices[index].latitude, 
-          'longitude': model.choices[index].longitude
+          'longitude': model.choices[index].longitude,
         });
       },
     );

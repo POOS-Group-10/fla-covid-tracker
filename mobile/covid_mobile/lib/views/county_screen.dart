@@ -1,5 +1,10 @@
+import 'dart:collection';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:covid_mobile/views/map_screen.dart';
 
 class CountyScreen extends StatefulWidget {
   @override
@@ -7,9 +12,26 @@ class CountyScreen extends StatefulWidget {
 }
 
 class _CountyScreen extends State<CountyScreen> {
+  int index;
+  //MapScreen1 test123;
+  Color tempColor;
+  List<LatLng> latLng1 = List<LatLng>();
+
+  /*Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/countyLines1.json');
+  }*/
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context).settings.arguments as Map;
+
+    tempColor = arguments['color'];
+    latLng1 = arguments['points'];
+    index = arguments['index'];
+
+    //print(latLng1);
+    //print(index);
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -33,16 +55,59 @@ class _CountyScreen extends State<CountyScreen> {
   Widget headingContainer(Map arguments) {
     GoogleMapController mapController;
 
-    print(arguments['newCases']);
+    //print(arguments['newCases']);
 
     final LatLng _location =
         new LatLng(arguments['latitude'], arguments['longitude']);
 
-    void _onMapCreated(GoogleMapController controller) {
-      mapController = controller;
+    Set<Polygon> border = new HashSet<Polygon>();
+
+
+    void _setBorder() {
+    //  Map<String, dynamic> countiiies = json.decode(await loadAsset());
+
+      //var coooont = new Counties.fromJson(countiiies);
+      /*String border1;
+      List<String> pairs;
+      List<String> aupair;
+      print(index);
+      print(" fspdijfnpidjf");
+
+        // Here you can write your code
+        border1 = coooont.countyLines[index].toString();
+        border1 = border1.substring(2,border1.length-2);
+        pairs = border1.split("], [");
+        for (int j = 0; j < pairs.length; j++) {
+          aupair = pairs[j].split(", ");
+          latLng1.add(
+              LatLng(double.parse(aupair[1]),
+                  double.parse(aupair[0])));
+        }
+
+        MapScreen1 test = new MapScreen1();
+        test.initState();*/
+
+
+        //print("OWIGBad0figb)ISDHBGSOUFgb@@@@@@@@@@@");
     }
 
+    void _onMapCreated(GoogleMapController controller) async{
+      mapController = controller;
+     _setBorder();
+    }
+
+    int _a = 1;
+
+    border.add((Polygon(
+      polygonId: PolygonId('polygon_id_$_a'),
+      points: latLng1,
+      strokeWidth: 1,
+      strokeColor: Colors.black,
+      fillColor: tempColor,
+    )));
+
     return Container(
+
       // padding: EdgeInsets.fromLTRB(15.0, 24.0, 10.0, 0),
       child: SafeArea(
         child: Container(
@@ -52,7 +117,20 @@ class _CountyScreen extends State<CountyScreen> {
                 mapType: MapType.normal,
                 onMapCreated: _onMapCreated,
                 initialCameraPosition:
-                    CameraPosition(target: _location, zoom: 7.0))),
+                    CameraPosition(target: _location, zoom: 8.4),
+               zoomControlsEnabled: false,
+              mapToolbarEnabled: false,
+              minMaxZoomPreference: MinMaxZoomPreference(8.4,8.4),
+              rotateGesturesEnabled: false,
+              scrollGesturesEnabled: false,
+              zoomGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              myLocationButtonEnabled: false,
+              polygons: border,
+
+            ),
+
+        ),
       ),
     );
   }

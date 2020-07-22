@@ -18,17 +18,12 @@ class MapScreen extends StatefulWidget{
   const MapScreen({Key key}) : super(key: key);
 
   @override 
-  _MapScreen createState() => _MapScreen(); 
+  MapScreen1 createState() => MapScreen1();
 
 }
 
 class Counties {
   List<dynamic> countyLines;
-  List<List<dynamic>> countyLines123;
-
-  void fillList(){
-
-  }
 
   Counties(this.countyLines);
 
@@ -37,11 +32,11 @@ class Counties {
 
 }
 
-class _MapScreen extends State<MapScreen> {
+class MapScreen1 extends State<MapScreen> {
   final double logConstant = log(1.1);
   Completer<GoogleMapController> _controller = Completer();
   SearchViewModel model = serviceLocator<SearchViewModel>();
-  Set<Polygon> _polygons = HashSet<Polygon>();
+  Set<Polygon> polygons = HashSet<Polygon>();
   Set<Polygon> _tempPolygons = HashSet<Polygon>();
   List<List<LatLng>> polygonLatLngs = List<List<LatLng>>();
   String filter;
@@ -256,7 +251,7 @@ class _MapScreen extends State<MapScreen> {
     String border;
     List<String> pairs;
     List<String> aupair;
-    var rng = new Random();
+
     for(int i = 0; i < coooont.countyLines.length ; i++) {
       polygonLatLngs.add(new List<LatLng>());
       border = coooont.countyLines[i].toString();
@@ -268,8 +263,15 @@ class _MapScreen extends State<MapScreen> {
             LatLng(double.parse(aupair[1]),
                 double.parse(aupair[0])));
       }
+
+      List<LatLng> passedPoints = new List<LatLng>();
+      for(int f = 0; f < polygonLatLngs[i].length; f++){
+        passedPoints.add(polygonLatLngs[i][f]);
+      }
+      Color color123 = calculateColor(i);
+
       final String polygonIdVal = 'polygon_id_$_polygonIdCounter';
-      _polygons.add(Polygon(
+      polygons.add(Polygon(
           polygonId: PolygonId(polygonIdVal),
           consumeTapEvents: true,
           points: polygonLatLngs[i],
@@ -292,7 +294,7 @@ class _MapScreen extends State<MapScreen> {
                               style:
                               TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.w400)),
-                          subtitle: Text("ConFirmed cases: " + model.choices[reorder[i]].confirmed.toString(),
+                          subtitle: Text("Confirmed cases: " + model.choices[reorder[i]].confirmed.toString(),
                               style: TextStyle(fontSize: 15)),
                           trailing: new IconButton(
                               icon: (model.choices[reorder[i]].isFavorite)
@@ -302,6 +304,10 @@ class _MapScreen extends State<MapScreen> {
                               onPressed: () {
                                 setState(() {
                                   model.toggleFavoriteStatus(reorder[i]);
+                                  child: new IconButton(icon: (model.choices[reorder[i]].isFavorite)
+                                      ? Icon(Icons.favorite, color: Colors.red)
+                                      : Icon(
+                                      Icons.favorite_border, color: Colors.red));
                                 });
                               }),
                           onTap: () {
@@ -314,7 +320,10 @@ class _MapScreen extends State<MapScreen> {
                               'newDeath': model.choices[reorder[i]].newDeath,
                               'fatalityRate': model.choices[reorder[i]].fatalityRate,
                               'latitude': model.choices[reorder[i]].latitude,
-                              'longitude': model.choices[reorder[i]].longitude
+                              'longitude': model.choices[reorder[i]].longitude,
+                              'index' : reorder[i],
+                              'points' : passedPoints,
+                              'color' : color123,
                             });
                           },
                         )),
@@ -382,7 +391,7 @@ class _MapScreen extends State<MapScreen> {
       body: GoogleMap(
       mapType: MapType.normal,
       initialCameraPosition: _florida,
-      polygons: _polygons,
+      polygons: polygons,
       //onCameraIdle: _setPolygonsVisible,
       //onCameraMoveStarted: _setPolygonsInvisible,
       onMapCreated: (GoogleMapController controller) {
