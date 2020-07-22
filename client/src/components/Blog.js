@@ -102,36 +102,55 @@ const Blog = () =>
 
     //function for username call goes after "weclome" 
     return(
+        // <div>
+        // <LoginHub />
+        // <div id="outline">
+        // <div className="form-input-left">
+        //   <button onClick={toCreatePost}>Create a Post</button> 
+        // <br></br>
+        // <form onSubmit={searchPosts}>
+        //   <input
+        //     type="text"
+        //     placeholder="Find A Post"
+        //     name="search"
+        //     onChange={e => setSearch(e.target.value)}
+        //   />
+        // <button>Search</button>
+        // </form>
+        // </div>
+        // </div>
+        // <br></br>
+        // <div>
+        //   {displayBlogPosts(posts)}
+        // </div>
+        // </div>
+
         <div>
         <LoginHub />
+        <br></br>
         <div id="outline">
         <div className="form-input-left">
-          <button onClick={toCreatePost}>Create a Post</button> 
-        <br></br>
-        <form onSubmit={searchPosts}>
+          <button onClick={toCreatePost}>Create a Post</button>
+          <br></br>
           <input
             type="text"
             placeholder="Find A Post"
-            name="search"
+            name="username"
             onChange={e => setSearch(e.target.value)}
           />
-        <button>Search</button>
-        </form>
         </div>
+        <button onClick={searchPosts}>Search</button>
         </div>
         <br></br>
         <div>
           {displayBlogPosts(posts)}
+          <br></br>
         </div>
-        </div>
+      </div> 
 
     );
 }
 
 export default Blog;
 
-{/* <div id = "blog" onClick={toBlogPost}>
-            <h1 class="up">This is a blog paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaost there</h1>
-            <div class="divider"></div>
-            <h3>test</h3>
-        </div> */}
+       
