@@ -1,39 +1,52 @@
+var assert = require('assert');
 var request = require('supertest');
 var server = require('../server.js');
 var expect = require('chai').expect;
-const { response } = require('express');
+const { model } = require('../models/user.js');
+const nodemailer = require('nodemailer');
+var session = require('express-session');
+const bcrypt = require('bcrypt');
+
+// const { response } = require('express');
 
 
 
 // user registration 
 describe('User Registration',function(done) {
     // Clear data before testing
-    user1 = {
+    const user1 = {
         userName: 'yurt',
         password: 'yurt',
         userCounty: 'Duval',
         firstName: 'yurt', 
         lastName: 'yurt',
         email: 'yurt@gmail.com',
-        verified: 'false',
+        verified: true
     };
 
+    user2 = {              
+        title: 'unit testing suck',
+        body: 'it really sucks',
+        user: 'ho',
+        county: 'Polk'
+      };
+
+      
     const agent = request.agent(server);
     
     it('Should sign up a user', function(done){
-
+        
         agent.post('/api/SignUp')
-        .set(user1)
-        .send()
+
+        .send(user1)
         .expect(200)
         .expect(function(res, err) {
             if (err) throw err; 
-            expect(res.body.error.should.equal(false));
             expect(res.statusCode == 200);
         })
-        .end(function(err){
-            if(err) return done(err);
-        });
+        // .end(function(err){
+        //     if(err) return done(err);
+        // });
 
         done();
     })
