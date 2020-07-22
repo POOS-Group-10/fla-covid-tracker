@@ -38,18 +38,19 @@ const LoginHub = () =>
             }
     return(
         <div>
-            <div className="right">
+            <div class="right">
             <p styles="white-space: nowrap">Welcome {userName}</p>
             </div>
+            <p>
             <Link to='/Home'>HomePage</Link>
-            <p className="upright">
+            </p>
+            <p class="upright">
             <Link to='/'>Log out</Link>
             </p>
-            <p className="downleft">
+            <p class="downleft">
             <Link to='/Blog'>Blog</Link>
             </p>
-            <script>
-            </script>
+            <div class="divider"></div>
         </div>
     );
 };
