@@ -38,6 +38,13 @@ const Home = () =>
 
     fetchData(); 
 
+    const toBlog = () => { 
+        window.location.href = '/Blog'
+    }
+    const toLogOut = () => {
+        window.location.href = '/'
+    }
+
     if (!isLoggedIn) {
         return <Redirect to='/Login' />
         }
