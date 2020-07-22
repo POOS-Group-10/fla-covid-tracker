@@ -58,12 +58,18 @@ const Blog = () =>
     if (!posts.length) return null; // end function if 'posts' is empty.
     console.log('in display blog posts: ' + posts[0]._id)
     return posts.map((post, index) => (
-      <div>
-      <div key={index} id="blog">
-        <button value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>{post.title}</button>
-        <p>{post.body}</p>
-      </div>
-      <br></br>
+      // <div>
+      // <div key={index} id="blog">
+      //   <button value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>{post.title}</button>
+      //   <p>{post.body}</p>
+      // </div>
+      // <br></br>
+      // </div>
+
+      <div id = "blog" value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>
+      <h1 class="up">{post.title}</h1>
+      <div class="divider"></div>
+      <h3>test</h3>
       </div>
     ));
   };
@@ -122,3 +128,9 @@ const Blog = () =>
 }
 
 export default Blog;
+
+{/* <div id = "blog" onClick={toBlogPost}>
+            <h1 class="up">This is a blog paaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaost there</h1>
+            <div class="divider"></div>
+            <h3>test</h3>
+        </div> */}
