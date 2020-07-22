@@ -2,6 +2,7 @@ import React from 'react';
 import PageTitle from '../components/PageTitle';
 import LoginHub from '../components/LoginHub';
 import CreatePost from '../components/CreatePost';
+import PostFull from '../components/PostFull';
 
 const PostPage = () =>
 {
@@ -13,7 +14,9 @@ const PostPage = () =>
                 <PageTitle />
                 <LoginHub />
                 </div>
-                <CreatePost />
+                <br></br>
+                <PostFull />
+
             </div>
             </div>
         </div>

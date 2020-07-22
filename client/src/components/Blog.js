@@ -80,10 +80,11 @@ const Blog = () =>
     return(
         <div>
         <LoginHub />
+        <br></br>
         <div id="outline">
         <div className="form-input-left">
           <button onClick={toCreatePost}>Create a Post</button>
-          
+          <br></br>
           <input
             type="text"
             placeholder="Find A Post"
@@ -94,7 +95,9 @@ const Blog = () =>
         </div>
         <br></br>
         <div>
+          <Post />
           {displayBlogPosts(posts)}
+          <br></br>
         </div>
         </div>
 
