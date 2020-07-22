@@ -23,15 +23,7 @@ describe('User Registration',function(done) {
         email: 'yurt@gmail.com',
         verified: true
     };
-
-    user2 = {              
-        title: 'unit testing suck',
-        body: 'it really sucks',
-        user: 'ho',
-        county: 'Polk'
-      };
-
-      
+  
     const agent = request.agent(server);
     
     it('Should sign up a user', function(done){
@@ -51,6 +43,26 @@ describe('User Registration',function(done) {
         done();
     })
 
+    user2 = {              
+        title: 'unit testing suck',
+        body: 'it really sucks',
+        user: 'ho',
+        county: 'Polk'
+    };
+
+    it('Creat new post', function(done){
+        
+        agent.post('/api/CreatePost')
+
+        .send(user2)
+        .expect(200)
+        .expect(function(res, err) {
+            if (err) throw err; 
+            expect(res.statusCode == 200);
+        })
+
+        done();
+    })
     
 });
 
