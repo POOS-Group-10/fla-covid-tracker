@@ -187,6 +187,7 @@ app.post('/api/findUser', (req, res) => {
       console.log(data);
       if (data.length > 0)
       {
+        console.log('taken')
         return res.json({
           msg: "That username and/or email is taken",
           taken: "1"
@@ -194,6 +195,7 @@ app.post('/api/findUser', (req, res) => {
       }
       else
       {
+        console.log('not taken')
         return res.json({
           taken: "0"
         });
