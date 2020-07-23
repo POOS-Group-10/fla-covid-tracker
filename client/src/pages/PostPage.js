@@ -2,7 +2,7 @@ import React from 'react';
 import PageTitle from '../components/PageTitle';
 import LoginHub from '../components/LoginHub';
 import CreatePost from '../components/CreatePost';
-import PostFull from '../components/PostFull';
+import Post from '../components/Post';
 
 const PostPage = () =>
 {
@@ -14,9 +14,7 @@ const PostPage = () =>
                 <PageTitle />
                 <LoginHub />
                 </div>
-                <br></br>
-                <PostFull />
-
+                <Post />
             </div>
             </div>
         </div>

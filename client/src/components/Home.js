@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-//import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
@@ -36,18 +36,17 @@ const Home = () =>
     })
 }
 
+const toBlog = () => { 
+    window.location.href = '/Blog'
+}
+const toLogOut = () => {
+window.location.href = '/'
+}
+
     fetchData(); 
 
-const toBlog = () => { 
-        window.location.href = '/Blog'
- }
- const toLogOut = () => {
-    window.location.href = '/'
-  }
-
-
     if (!isLoggedIn) {
-        return <Redirect to='/Login' />
+        //return <Redirect to='/Login' />
         }
 // THIS GOES UNDER LOG OUT LINK:
 /*  
@@ -57,12 +56,11 @@ const toBlog = () => {
         <div >
             <h1 >Welcome {userName}</h1>
             <button onClick={toBlog}>
-           Blog
+            Blog
             </button>
             <button onClick={toLogOut}>
-            Log Out
+            Log out
             </button>
-            <div class="divider"></div>
         </div>
     );
 }

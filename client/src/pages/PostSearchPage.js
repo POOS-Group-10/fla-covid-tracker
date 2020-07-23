@@ -1,23 +1,23 @@
 import React from 'react';
 import PageTitle from '../components/PageTitle';
 import LoginHub from '../components/LoginHub';
-import CreatePost from '../components/CreatePost';
-import Post from '../components/Post';
-const PostPage = () =>
+import PostSearch from '../components/PostSearch';
+
+const PostSearchPage = () =>
 {
     return(
         <div>
-                 <div class="covidBorder">
-            <div class="padding">
-                <div class="textBorder">  
+                 <div className="covidBorder">
+            <div className="padding">
+                <div className="textBorder">  
                 <PageTitle />
                 <LoginHub />
                 </div>
-                <Post />
+                <PostSearch />
             </div>
             </div>
         </div>
     );
 }
 
-export default PostPage;
+export default PostSearchPage;

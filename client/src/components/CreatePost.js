@@ -71,7 +71,7 @@ const CreatePost = () =>
                 <br></br>
                 <div className = "form-input">
                     <textarea
-                    cols="50"
+                    cols="75"
                     rows="20"
                     type="text"
                     placeholder="Post Content"

@@ -15,6 +15,7 @@ import PasswordRecoveryPage from './pages/PasswordRecoveryPage';
 import PasswordResetPage from './pages/PasswordResetPage';
 import EmailVerificationPage from './pages/EmailVerificationPage';
 import PostPage from './pages/PostPage';
+import PostSearchPage from './pages/PostSearchPage';
 import CreatePostPage from './pages/CreatePostPage';
 import BlogPage from './pages/BlogPage';
 
@@ -39,17 +40,20 @@ const App = () => {
         <Route path="/Blog">
           <BlogPage />
         </Route>
-        <Route path="/Post">
-          <PostPage />
-          </Route>
-          <Route path="/CreatePost">
+        <Route path="/CreatePost">
           <CreatePostPage />
-          </Route>
+        </Route>
         <Route path="/PasswordReset/:id" component={PasswordResetPage} exact>
           <PasswordResetPage />
         </Route>
         <Route path="/EmailVerification/:id" component={EmailVerificationPage} exact>
           <EmailVerificationPage />
+        </Route>
+        <Route path="/Posts/:user/:id" component={EmailVerificationPage} exact>
+          <PostPage />
+        </Route>
+        <Route path="/search/:id" component={EmailVerificationPage} exact>
+          <PostSearchPage />
         </Route>
         <Redirect to="/" />
       </Switch>

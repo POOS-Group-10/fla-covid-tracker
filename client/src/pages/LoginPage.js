@@ -5,11 +5,11 @@ import PageTitle from '../components/PageTitle';
 const LoginPage = () =>
 {
     return(
-        <div class="covidBorder">
-        <div class="padding">
-            <div class="textBorder"> 
+        <div className="covidBorder">
+        <div className="padding">
+            <div className="textBorder"> 
             <PageTitle />      
-                 <div class="padding"></div>
+                 <div className="padding"></div>
                  <h1><strong>Login</strong></h1>
                
                  <Login />

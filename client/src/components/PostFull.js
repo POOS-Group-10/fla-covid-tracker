@@ -1,30 +1,35 @@
 import React from 'react';
 import '../App.css';
-import Post from './Post';
+
 const PostFull = () =>
 {
     return(
         <div>
         <br></br>
-        <Post />
+        <div id = "blog">
+            <h1>This is a blog post</h1>
+            <br></br>
+            <p>
+             This is the blog area. weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeew!   
+            </p>
+        </div>
         <br></br>
         <div class = "textBorder">
         <br></br>
-        <div>
-                    <textarea            
-                    cols="50"
-                    rows="20"
-                    type="text"
-                    placeholder="Type a Comment"
-                    name="postBody"
-                    
-                    />
-                </div>
+        <div id="outline">
+        <div className="form-input-left">
+          <input
+            type="text"
+            placeholder="Type a Comment"
+            name="username"
+          />
+        </div>
         <button>Reply</button>
+        </div>
         <h1>Comments:</h1>   
         </div>
         <br></br>
-        <div id = "blogComment">
+        <div id = "blog">
             <p>
              This is a comment   
             </p>

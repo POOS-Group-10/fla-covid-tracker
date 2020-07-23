@@ -9,6 +9,7 @@ const Blog = () =>
 {
   const [posts, setPosts] = useState([]);
   const [userName, setUserName] = useState('');
+  const [search, setSearch] = useState('');
 
   const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
   // const url = 'http://localhost:3000/api/profile'
@@ -35,15 +36,40 @@ const Blog = () =>
     })
   }
 
+  const toPost = async (post, name) =>
+  {
+    console.log('post data is: ' + post + ' ' + name)
+    // const url = 'http://localhost:3000/Posts/' + userName + '/' + name
+    const url = 'https://florida-covid-tracking.herokuapp.com/Posts/' + userName + '/' + name
+    console.log(url)
+    window.location = url;
+  }
+
+  const searchPosts = (event) => {
+    event.preventDefault();
+    if (!search) return null;
+      // var url = 'http://localhost:3000/search/' + search;
+      var url = 'https://florida-covid-tracking.herokuapp.com/search/' + search;
+    console.log('inside search posts: ' + url)
+    window.location.href = '/search/' + search;
+  }
+
   const displayBlogPosts = (posts) => {
     if (!posts.length) return null; // end function if 'posts' is empty.
     console.log('in display blog posts: ' + posts[0]._id)
     return posts.map((post, index) => (
+      // <div>
+      // <div key={index} id="blog">
+      //   <button value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>{post.title}</button>
+      //   <p>{post.body}</p>
+      // </div>
+      // <br></br>
+      // </div>
       <div>
-      <div key={index} id="blog">
-        <h1>{post.title}</h1>
-        <div class="divider"></div>
-        <h3>{post.body}</h3>
+      <div key="index" id = "blog" value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>
+      <h1 class="up">{post.title}</h1>
+      <div class="divider"></div>
+      <h3>{post.body}</h3>
       </div>
       <br></br>
       </div>
@@ -78,6 +104,29 @@ const Blog = () =>
 
     //function for username call goes after "weclome" 
     return(
+        // <div>
+        // <LoginHub />
+        // <div id="outline">
+        // <div className="form-input-left">
+        //   <button onClick={toCreatePost}>Create a Post</button> 
+        // <br></br>
+        // <form onSubmit={searchPosts}>
+        //   <input
+        //     type="text"
+        //     placeholder="Find A Post"
+        //     name="search"
+        //     onChange={e => setSearch(e.target.value)}
+        //   />
+        // <button>Search</button>
+        // </form>
+        // </div>
+        // </div>
+        // <br></br>
+        // <div>
+        //   {displayBlogPosts(posts)}
+        // </div>
+        // </div>
+
         <div>
         <LoginHub />
         <br></br>
@@ -85,21 +134,23 @@ const Blog = () =>
         <div className="form-input-left">
           <button onClick={toCreatePost}>Create a Post</button>
           <br></br>
+          <br></br>
           <input
             type="text"
             placeholder="Find A Post"
             name="username"
+            onChange={e => setSearch(e.target.value)}
           />
         </div>
-        <button>Search</button>
+        <br></br>
+        <button onClick={searchPosts}>Search</button>
         </div>
         <br></br>
         <div>
-          <Post />
           {displayBlogPosts(posts)}
           <br></br>
         </div>
-        </div>
+      </div> 
 
     );
 }

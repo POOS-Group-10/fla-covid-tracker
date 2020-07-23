@@ -11,6 +11,7 @@ const HomePage = () =>
                  <div class="padding">
                 <div class="textBorder">
             <PageTitle />
+            <div className="divider"></div>
                 <Home />
                 <Covid />
                 </div>

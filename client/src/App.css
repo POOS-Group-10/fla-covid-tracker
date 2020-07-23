@@ -186,6 +186,10 @@ margin-bottom: -10px;
     left: 50%;
   }
   
+  .rightAlign{
+  text-align: right;
+  }
+
   #button
   {
     background-color: #d11919;

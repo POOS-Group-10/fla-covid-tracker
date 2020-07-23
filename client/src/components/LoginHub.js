@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-//import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import { Redirect } from "react-router-dom";
 const LoginHub = () =>
 {       // const url = 'http://localhost:3000/api/profile'; 
     
         const url = 'https://florida-covid-tracking.herokuapp.com/api/profile';
+        // const url = 'http://localhost:3000/api/profile';
         const [userName, setUserName] = useState('');
         const [isLoggedIn, setLoggedIn] = useState(true);
         var list = []
@@ -37,19 +38,18 @@ const LoginHub = () =>
             }
     return(
         <div>
-            <div class="right">
+            <div className="right">
             <p styles="white-space: nowrap">Welcome {userName}</p>
             </div>
-            <p>
             <Link to='/Home'>HomePage</Link>
-            </p>
-            <p class="upright">
+            <p className="upright">
             <Link to='/'>Log out</Link>
             </p>
-            <p class="downleft">
+            <p className="downleft">
             <Link to='/Blog'>Blog</Link>
             </p>
-            <div class="divider"></div>
+            <script>
+            </script>
         </div>
     );
 };

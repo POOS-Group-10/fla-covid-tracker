@@ -35,7 +35,7 @@ mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
 // test functions
 
 mongoose.connection.once('open', function(){
-  console.log("connected to mongo db");
+  // console.log("connected to mongo db");
 });
 
 mongoose.connection.on('error', function(error){
@@ -43,8 +43,10 @@ mongoose.connection.on('error', function(error){
 })
 
 mongoose.connection.on('connected', () => {
-  console.log('Mongoose is connected!');
+  // console.log('Mongoose is connected!');
 });
+
+mongoose.set('useFindAndModify', false);
 
 // This is a middleware in express that will parse every json
 // app.use(express.json());
@@ -110,6 +112,7 @@ app.use(session({
   }
 }))
 
+//------------- PROFILE -----------------
 app.post('/api/profile', (req, res) => {
   console.log('session shit: ' + req.session.userCounty + ' ' + req.session.userName)
   console.log('session id ' + req.session._id)
@@ -119,7 +122,7 @@ app.post('/api/profile', (req, res) => {
 })
 
 
-// Login
+//-------------- LOGIN -------------------
 app.post('/api/Login', (req, res) => {
   if (!req.session.userId) {
     req.session.userId = 0;
@@ -177,7 +180,7 @@ app.post('/api/Login', (req, res) => {
     });
 });
 
-// 
+//----------- FIND USER -------------------
 app.post('/api/findUser', (req, res) => {
   console.log("Entered Find User")
   console.log('userName we are looking for: ' + req.body.userName)
@@ -186,6 +189,7 @@ app.post('/api/findUser', (req, res) => {
       console.log(data);
       if (data.length > 0)
       {
+        console.log('taken')
         return res.json({
           msg: "That username and/or email is taken",
           taken: "1"
@@ -193,6 +197,7 @@ app.post('/api/findUser', (req, res) => {
       }
       else
       {
+        console.log('not taken')
         return res.json({
           taken: "0"
         });
@@ -204,6 +209,7 @@ app.post('/api/findUser', (req, res) => {
     });
 });
 
+//------------------ SIGNUP ----------------
 app.post('/api/SignUp', async (req, res) => {
   console.log("Entering api")
   console.log("Paylod is " + req.body)
@@ -312,12 +318,14 @@ app.put('/api/EmailVerification/:token', (req, res) => {
 })
 
 app.put('/api/PasswordReset/:token', async (req, res) => {
+  console.log('the token is' + req.params.token)
   try {
-    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
-    console.log(userId)
+    var decoded = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+    console.log('decoded token is ' + decoded.id)
+   
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     Users.findOneAndUpdate(
-      { _id: userId.id }, { $set: { password: hashedPassword }
+      { _id: decoded.id }, { $set: { password: hashedPassword }
     })
     .then((data) => {
       console.log('success somehow! ' + data)
@@ -343,9 +351,11 @@ app.post('/api/PasswordRecovery', (req, res) =>
   console.log("The email is " + req.body.email);
   Users.find({email: req.body.email})
     .then((data) => {
-      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data.userName)
+      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data[0].userName)
       if (data.length > 0)
       {
+        const code = data[0]._id + 'break' + Date.now()
+        console.log('code is' + code)
         try
         {
 
@@ -355,7 +365,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
             },
             process.env.EMAIL_SECRET,
             {
-              expiresIn: '1d',
+              expiresIn: '100d',
             },
             (err, resetToken) => {
               const url = `https://florida-covid-tracking.herokuapp.com/PasswordReset/${resetToken}`
@@ -368,7 +378,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
                 subject: 'Reset your password',
                 text: 'text',
                 html: `<p>Please click the following link to reset your password:</p>
-                        <a href=${url}">${url}</a>`
+                        <a href=${url}>${url}</a>`
               };
       
               transporter.sendMail(passwordResetData, (error, info) => {
@@ -437,4 +447,68 @@ app.post('/api/getPosts', (req, res) => {
     })
 })
 
+app.post('/api/getUserPost', (req, res) => {
+  console.log('in getUserPost ' + req.body.userName + ' ' + req.body.date)
+  BlogPosts.find({ user: req.body.userName,
+                   date: req.body.date })
+  .then((data) => {
+    console.log('in getUserPosts data is: ' + data)
+    res.status(200).json(data);
+  })
+  .catch((error) => {
+    console.log('in getUserPosts error is: ' + error)
+  })
+})
+
+app.post('/api/postComment', (req, res) => {
+  console.log('inside post comment')
+  const comment = new Comments({              
+    body: req.body.body,
+    user: req.body.user,
+    postid: req.body.postid,
+  })
+
+  Comments.create(comment)
+    .then((data) => {
+      console.log(data + ' successful in api/postComment')
+      return res.status(200).json(data)
+    })
+    .catch((error) => {
+      console.log('error in postComment')
+    })
+
+})
+
+app.post('/api/getComments', (req, res) => {
+  console.log('inside get comments')
+  Comments.find({ postid: req.body.postid })
+    .then((data) => {
+      console.log('in get posts data is ' + data)
+      return res.status(200).json(data);
+    })
+    .catch((error) => {
+      console.log('error getting posts')
+    })
+})
+
+app.post('/api/searchPosts', (req, res) => {
+  console.log('inside searchPosts: ' + req.body.items)
+  var regex = []
+  for (var i = 0; i < req.body.items.length; i++) {
+    regex[i] = new RegExp(req.body.items[i]);
+  }
+  BlogPosts.find({$or:[{user: {$in : req.body.items}}, {county: {$in: req.body.items}}, 
+                       {title: {$in: regex }}  ]})
+  .sort('-date')
+  .limit(10)
+  .then((data) => {
+    console.log('we found data: ' + data)
+    return res.status(200).json(data)
+  })
+  .catch((e) => {
+    console.log('error getting data: ' + e)
+  })
+})
+
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+module.exports = app; 
