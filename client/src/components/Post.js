@@ -147,9 +147,9 @@ const Post = () =>
             <br></br>
             <div class="textBorder">
                 <br></br>
+                <div className="form-submit-left">
                  <form onSubmit={postComment}>
-                 <textarea
-                    className="form-submit-left"            
+                 <textarea           
                     cols="50"
                     rows="20"
                     type="text"
@@ -158,8 +158,9 @@ const Post = () =>
                     onChange={(e) => setCommentBody(e.target.value)}      
                     />                       
                         <br></br>
-                        <button classNane="form-submit-left">Reply</button>
+                        <button>Reply</button>
                     </form>
+                </div>
             </div>
             <br></br>
             <div>

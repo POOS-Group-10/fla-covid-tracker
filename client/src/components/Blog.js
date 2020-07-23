@@ -66,7 +66,7 @@ const Blog = () =>
       // <br></br>
       // </div>
       <div>
-      <div key="index" id = "blog" value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>
+      <div id ="blog" value={post.title} name={post.date} onClick={e => toPost(e.target.value, e.target.name)}>
       <h1 class="up">{post.title}</h1>
       <div class="divider"></div>
       <h3>{post.body}</h3>
