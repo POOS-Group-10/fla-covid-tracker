@@ -2,7 +2,7 @@ import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 import { json } from 'body-parser';
 
 var count = 0
