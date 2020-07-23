@@ -378,7 +378,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
                 subject: 'Reset your password',
                 text: 'text',
                 html: `<p>Please click the following link to reset your password:</p>
-                        <a href=${url}">${url}</a>`
+                        <a href=${url}>${url}</a>`
               };
       
               transporter.sendMail(passwordResetData, (error, info) => {
