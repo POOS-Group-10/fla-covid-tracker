@@ -122,7 +122,7 @@ const Post = () =>
         return comments.map((comment, index) => (
           <div>
           <div key={index} id="blogComment">
-            <h3 className="rightAlign"> From: {comment.user}</h3>]
+            <p class="rightAlign"> From: {comment.user}</p>]
             <div className="divider"></div>
             <h3>{comment.body}</h3>
           </div>
@@ -164,11 +164,6 @@ const Post = () =>
             <div>
                 {displayComments(comments)}
                 <div>
-          <div id="blogComment">
-            <h3 style="rightAlign">From: 123</h3>]
-            <div className="divider"></div>
-            <h3>test</h3>
-          </div>
           <br></br>
           </div>
             </div>
