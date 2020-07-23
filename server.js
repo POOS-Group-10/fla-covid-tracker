@@ -46,6 +46,8 @@ mongoose.connection.on('connected', () => {
   // console.log('Mongoose is connected!');
 });
 
+mongoose.set('useFindAndModify', false);
+
 // This is a middleware in express that will parse every json
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false })); // extended: false means we don't go very deep into the object...?
@@ -318,11 +320,12 @@ app.put('/api/EmailVerification/:token', (req, res) => {
 app.put('/api/PasswordReset/:token', async (req, res) => {
   console.log('the token is' + req.params.token)
   try {
-    const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
-    console.log(userId)
+    var decoded = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
+    console.log('decoded token is ' + decoded.id)
+   
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     Users.findOneAndUpdate(
-      { _id: userId.id }, { $set: { password: hashedPassword }
+      { _id: decoded.id }, { $set: { password: hashedPassword }
     })
     .then((data) => {
       console.log('success somehow! ' + data)
@@ -351,6 +354,8 @@ app.post('/api/PasswordRecovery', (req, res) =>
       console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data[0].userName)
       if (data.length > 0)
       {
+        const code = data[0]._id + 'break' + Date.now()
+        console.log('code is' + code)
         try
         {
 
