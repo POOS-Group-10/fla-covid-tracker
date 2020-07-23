@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
 import { json } from 'body-parser';
 
 var count = 0
@@ -103,8 +103,9 @@ const News = () =>
 	console.log('userCounty is :' + userCounty)
 	async function makeRequest() {
 		//https://gnews.io/api/v3/search?q=Florida&token=9716fdf90959ffffecdf3cc1237c63c7
-		const url ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7'//jack@knights..
+		//const url ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=9716fdf90959ffffecdf3cc1237c63c7'//jack@knights..
 		const url2 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=711ee2ac90c6730fa58a7af453ef7d31'//jack@gmail..
+		const url = url2
 		const url3 = 'https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=235de6daa84373ceef012d8d27560d95'
 		const url4 ='https://gnews.io/api/v3/search?q=Florida covid '+ userCounty +'&token=affa7f570a57ef6a60a097b9d62b4811'//jack@live
 		
