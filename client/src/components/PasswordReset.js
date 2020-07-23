@@ -75,9 +75,7 @@ const PasswordReset = () =>
             </div>
             <button id="isLeft">Submit</button>
           </form>
-          <p>{message}</p><br />
-          <p>{password}</p><br />
-          <p>{confirmPassword}</p>
+          <p>{message}</p>
 
         </div>
       );
