@@ -142,7 +142,7 @@ const Post = () =>
             <div id = "blogComment">
                 <h1>{postTitle}</h1>
                 <div className="divider"></div>
-                <p>{postBody}</p>
+                <h3>{postBody}</h3>
             </div>
             <br></br>
             <div class="textBorder">
