@@ -138,7 +138,7 @@ app.post('/api/Login', (req, res) => {
           message: "UserName not found."
         })
       } 
-      // else if (!data.verified)
+      // else if (!data[0].verified)
       // {
       //   return res.json({
       //     msg: "Please verify your email first."
