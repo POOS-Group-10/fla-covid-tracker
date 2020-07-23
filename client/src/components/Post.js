@@ -123,7 +123,7 @@ const Post = () =>
           <div>
           <div key={index} id="blogComment">
             <h3 style="rightAlign">From:    {comment.user}</h3>]
-            <div style="divider"></div>
+            <div className="divider"></div>
             <h3>{comment.body}</h3>
           </div>
           <br></br>
@@ -138,11 +138,15 @@ const Post = () =>
 
     return(
           <div>
-            <div id = "blog">
+            <br></br>
+            <div id = "blogPost">
                 <h1>{postTitle}</h1>
+                <div class="divider"></div>
                 <p>{postBody}</p>
             </div>
+            <br></br>
             <div class="textBorder">
+                <br></br>
                  <form onSubmit={postComment}>
                  <textarea            
                     cols="50"
@@ -153,7 +157,7 @@ const Post = () =>
                     onChange={(e) => setCommentBody(e.target.value)}      
                     />                       
                         <br></br>
-                        <button>Reply</button>
+                        <button class="center">Reply</button>
                     </form>
             </div>
             <br></br>

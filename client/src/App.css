@@ -190,6 +190,11 @@ margin-bottom: -10px;
   text-align: right;
   }
 
+  .upRight{
+    text-align: right;
+    margin-top: -25px;
+margin-bottom: -10px; 
+  }
   #button
   {
     background-color: #d11919;
@@ -230,6 +235,9 @@ p {
 }
 
 textarea{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   resize: none;  
   border-radius: .5rem;
   border: ridge 2px;
@@ -237,6 +245,9 @@ textarea{
     width: 20em;
     min-height: 5em;
     overflow: auto;
-    font-family: sans-serif;
-    
+    font-family: sans-serif;  
+}
+.center{
+  margin-left: auto;
+  margin-right: auto;  
 }
