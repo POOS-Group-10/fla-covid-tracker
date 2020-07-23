@@ -7,13 +7,13 @@ const PostSearchPage = () =>
 {
     return(
         <div>
-                 <div className="covidBorder">
-            <div className="padding">
-                <div className="textBorder">  
+                 <div class="covidBorder">
+            <div class="padding">
+                <div class="textBorder">  
                 <PageTitle />
                 <LoginHub />
-                </div>
                 <PostSearch />
+            </div>
             </div>
             </div>
         </div>

@@ -111,7 +111,7 @@ const News = () =>
 		
 		console.log('url: ' + url)
 	
-		const response = await fetch(url, {
+		const response = await fetch(url3, {
 			method:'GET',
 			// headers:{'Content-Type': 'application/json'}
 		})

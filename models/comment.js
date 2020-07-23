@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
   body: String,
   user: String,
+  postid: String,
   date: {
     type: String,
     default: Date.now()

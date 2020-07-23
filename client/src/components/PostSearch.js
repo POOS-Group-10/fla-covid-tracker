@@ -24,7 +24,7 @@ const PostSearch = () =>
             data: payload
         })
         .then((response) => {
-            console.log('post search response: ' + response.data[0].body + ' ' + response.data[2].body)
+            console.log('post search response: ' + response + ' ' + response)
             var x;
             for (x in response.data)
                 searchList.push(response.data[x])
@@ -50,13 +50,16 @@ const PostSearch = () =>
         if (!searches.length) return null; // end function if 'posts' is empty.
         console.log('in display searches: ' + searches[0].body)
         return searches.map((search, index) => (
+
           <div>
-          <div key={index} id="blog">
-            <p>{search.user}</p>
-            <button value={search.user} name={search.date} onClick={e => toPost(e.target.value, e.target.name)}>{search.title}</button>
+            <div key={index} id ="blog" onClick={event => toPost(search.user, search.date)}>
+            <h1 class="up">{search.user}</h1>
+            <div className="divider"></div>
+            <h3>{search.title}</h3>
+            </div>
+            <br></br>
           </div>
-          <br></br>
-          </div>
+
         ));
       };
 
@@ -66,9 +69,7 @@ const PostSearch = () =>
 
     return(
         <div>
-            <div id = "blog">
-                <div>{displaySearches()}</div>
-            </div>
+            <div>{displaySearches()}</div>
         </div>
     );
 }
