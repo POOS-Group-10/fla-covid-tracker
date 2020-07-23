@@ -147,20 +147,18 @@ const Post = () =>
             <br></br>
             <div class="textBorder">
                 <br></br>
-                <div className="form-submit">
                  <form onSubmit={postComment}>
                  <textarea           
                     cols="50"
                     rows="20"
                     type="text"
                     placeholder="Type a Comment"
-                    name="postBody"
+                    name="username"
                     onChange={(e) => setCommentBody(e.target.value)}      
                     />                       
                         <br></br>
                         <button>Reply</button>
                     </form>
-                </div>
             </div>
             <br></br>
             <div>
