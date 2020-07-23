@@ -316,6 +316,7 @@ app.put('/api/EmailVerification/:token', (req, res) => {
 })
 
 app.put('/api/PasswordReset/:token', async (req, res) => {
+  console.log('the token is' + req.params.token)
   try {
     const userId = jwt.verify(req.params.token, process.env.EMAIL_SECRET)
     console.log(userId)
@@ -347,7 +348,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
   console.log("The email is " + req.body.email);
   Users.find({email: req.body.email})
     .then((data) => {
-      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data.userName)
+      console.log('password recovery data is ' + data + ' and id is ' + data[0]._id + ' and username is ' + data[0].userName)
       if (data.length > 0)
       {
         try
@@ -359,7 +360,7 @@ app.post('/api/PasswordRecovery', (req, res) =>
             },
             process.env.EMAIL_SECRET,
             {
-              expiresIn: '1d',
+              expiresIn: '100d',
             },
             (err, resetToken) => {
               const url = `https://florida-covid-tracking.herokuapp.com/PasswordReset/${resetToken}`
