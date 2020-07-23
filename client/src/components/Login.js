@@ -66,7 +66,6 @@ const Login = () => {
       <p>{message}</p>
       <Link to="/SignUp">Don't have an account? Sign up.</Link><br />
       <Link to="/PasswordRecovery">Forgot your password?</Link><br />
-      <Link to='/Home'>HomePage</Link>
     </div>
   );
 };
