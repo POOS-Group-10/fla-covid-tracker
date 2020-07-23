@@ -149,6 +149,8 @@ const Blog = () =>
         <div>
           {displayBlogPosts(posts)}
           <br></br>
+          </div>
+          <br></br>
         </div>
       </div> 
 
