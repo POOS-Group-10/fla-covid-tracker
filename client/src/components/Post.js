@@ -122,7 +122,7 @@ const Post = () =>
         return comments.map((comment, index) => (
           <div>
           <div key={index} id="blogComment">
-            <h3 style="rightAlign">From:    {comment.user}</h3>]
+            <h3 style="rightAlign">From: {comment.user}</h3>]
             <div className="divider"></div>
             <h3>{comment.body}</h3>
           </div>
@@ -139,16 +139,17 @@ const Post = () =>
     return(
           <div>
             <br></br>
-            <div id = "blogPost">
+            <div id = "blogComment">
                 <h1>{postTitle}</h1>
-                <div class="divider"></div>
+                <div className="divider"></div>
                 <p>{postBody}</p>
             </div>
             <br></br>
             <div class="textBorder">
                 <br></br>
                  <form onSubmit={postComment}>
-                 <textarea            
+                 <textarea
+                    className="form-submit-left"            
                     cols="50"
                     rows="20"
                     type="text"
@@ -157,7 +158,7 @@ const Post = () =>
                     onChange={(e) => setCommentBody(e.target.value)}      
                     />                       
                         <br></br>
-                        <button class="center">Reply</button>
+                        <button classNane="form-submit-left">Reply</button>
                     </form>
             </div>
             <br></br>
