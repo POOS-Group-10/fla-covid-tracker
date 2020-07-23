@@ -122,7 +122,7 @@ const Post = () =>
         return comments.map((comment, index) => (
           <div>
           <div key={index} id="blogComment">
-            <p class="rightAlign"> From: {comment.user}</p>]
+            <h3 class="rightAlign"> From: {comment.user}</h3>
             <div className="divider"></div>
             <h3>{comment.body}</h3>
           </div>
@@ -147,6 +147,7 @@ const Post = () =>
             <br></br>
             <div class="textBorder">
                 <br></br>
+                <div id="isLeft">
                  <form onSubmit={postComment}>
                  <textarea           
                     cols="50"
@@ -159,6 +160,7 @@ const Post = () =>
                         <br></br>
                         <button>Reply</button>
                     </form>
+                </div>
             </div>
             <br></br>
             <div>
